@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 16:04:06
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-03 16:22:57
+ * @LastEditTime: 2022-03-03 19:37:45
  * @Description: file content
  */
 
@@ -27,5 +27,8 @@ func Init() {
 	app := NewApp(context.Background(), config)
 
 	//  start APP
-	app.Start()
+	err = app.Start()
+	if err != nil {
+		log.Fatal("AppStart failed")
+	}
 }

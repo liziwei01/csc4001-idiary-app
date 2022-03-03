@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 16:04:06
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-03 16:22:52
+ * @LastEditTime: 2022-03-03 19:36:31
  * @Description: file content
  */
 
@@ -10,7 +10,6 @@ package bootstrap
 
 import (
 	"context"
-	"net/http"
 	"path/filepath"
 
 	"gin-idiary-appui/httpapi"
@@ -18,6 +17,8 @@ import (
 	"gin-idiary-appui/library/conf"
 	"gin-idiary-appui/library/env"
 	"gin-idiary-appui/library/logit"
+
+	"github.com/gin-gonic/gin"
 )
 
 const (
@@ -86,14 +87,14 @@ func NewApp(ctx context.Context, c *Config) *App {
 
 // Start start the service
 func (app *App) Start() error {
-	// start distribute routers
-	httpapi.InitRouters()
 	// start record logs
-	logit.Init("ziweiapp")
+	logit.Init("gin-idiary-appui")
 	logit.Logger.Info("APP START")
 	// start listening to port
 	logit.Logger.Info("APP listening at: %s", app.config.HTTPServer.Listen)
-	err := http.ListenAndServe(app.config.HTTPServer.Listen, nil)
+	// start distribute routers
+	gin.SetMode(app.config.RunMode)
+	err := httpapi.InitRouters().Run(app.config.HTTPServer.Listen)
 	if err != nil {
 		return err
 	}

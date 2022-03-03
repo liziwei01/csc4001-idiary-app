@@ -9,4 +9,4 @@
 
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-This is a school project written by Li, Yi, Wu, Zhang from CUHK(SZ)
+This is a school project written by Li, Wu from CUHK(SZ)

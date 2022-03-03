@@ -2,17 +2,18 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 16:04:46
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-03 16:22:41
+ * @LastEditTime: 2022-03-03 19:23:40
  * @Description: file content
  */
 
 package httpapi
 
 import (
-	"io"
 	"net/http"
 
 	userRouters "gin-idiary-appui/modules/user/routers"
+
+	"github.com/gin-gonic/gin"
 )
 
 /**
@@ -20,12 +21,14 @@ import (
  * @param {*}
  * @return {*}
  */
-func InitRouters() {
+func InitRouters() *gin.Engine {
 	// init routers
-	userRouters.Init()
+	router := gin.Default()
+	userRouters.Init(router)
 
 	// safe router
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		io.WriteString(w, "Hello! THis is iDiary. Welcome to our website!")
+	router.GET("/", func(ctx *gin.Context) {
+		ctx.String(http.StatusOK, "Hello! THis is iDiary. Welcome to our website!")
 	})
+	return router
 }

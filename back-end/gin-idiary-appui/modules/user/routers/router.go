@@ -2,14 +2,16 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 16:16:57
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-03 16:23:00
+ * @LastEditTime: 2022-03-03 20:05:48
  * @Description: file content
  */
 
 package routers
 
 import (
-	"net/http"
+	userControllers "gin-idiary-appui/modules/user/controllers"
+
+	"github.com/gin-gonic/gin"
 )
 
 /**
@@ -17,6 +19,9 @@ import (
  * @param {*}
  * @return {*}
  */
-func Init() {
-	http.HandleFunc("/addUser", func(rw http.ResponseWriter, r *http.Request) {})
+func Init(router *gin.Engine) {
+	userGroup := router.Group("/user")
+	{
+		userGroup.GET("/addUser", userControllers.AddUser)
+	}
 }
