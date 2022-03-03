@@ -1,0 +1,6 @@
+github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
+github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
+github.com/baidu/go-lib v0.0.0-20210902034828-42829d4bdecd h1:AQ/hNi9wwj7mm06Zwycxp++X3cKKMAz8mxjNYSIaj8U=
+github.com/baidu/go-lib v0.0.0-20210902034828-42829d4bdecd/go.mod h1:FneHDqz3wLeDGdWfRyW4CzBbCwaqesLGIFb09N80/ww=
+github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869 h1:IPJ3dvxmJ4uczJe5YQdrYB16oTJlGSC/OyZDqUk9xX4=
+github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869/go.mod h1:cJ6Cj7dQo+O6GJNiMx+Pa94qKj+TG8ONdKHgMNIyyag=
