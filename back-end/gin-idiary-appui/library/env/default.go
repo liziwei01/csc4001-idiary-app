@@ -1,3 +1,10 @@
+/*
+ * @Author: liziwei01
+ * @Date: 2022-03-04 15:41:36
+ * @LastEditors: liziwei01
+ * @LastEditTime: 2022-03-04 16:05:23
+ * @Description: 默认环境
+ */
 package env
 
 // Default (全局)默认的环境信息

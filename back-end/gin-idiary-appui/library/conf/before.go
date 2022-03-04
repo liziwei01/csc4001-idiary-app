@@ -1,9 +1,9 @@
 /*
  * @Author: liziwei01
- * @Date: 2022-03-03 15:46:17
+ * @Date: 2022-03-04 15:41:55
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-03 15:46:56
- * @Description: file content
+ * @LastEditTime: 2022-03-04 16:03:38
+ * @Description: 配置文件读取前置处理
  */
 package conf
 

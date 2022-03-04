@@ -2,16 +2,8 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 19:50:47
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-03 19:59:47
- * @Description: file content
- */
-/*
- * @Author: liziwei01
- * @Date: 2021-06-03 21:30:22
- * @LastEditors: liziwei01
- * @LastEditTime: 2021-08-09 14:13:21
+ * @LastEditTime: 2022-03-04 16:06:31
  * @Description: 标准错误函数
- * @FilePath: /gdp-config-platform/library/response/response.go
  */
 package response
 

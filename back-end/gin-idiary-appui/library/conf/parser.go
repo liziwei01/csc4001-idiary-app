@@ -1,9 +1,9 @@
 /*
  * @Author: liziwei01
- * @Date: 2022-03-03 15:46:17
+ * @Date: 2022-03-04 15:41:55
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-03 16:02:18
- * @Description: file content
+ * @LastEditTime: 2022-03-04 16:04:40
+ * @Description: 支持 json 及 toml
  */
 package conf
 

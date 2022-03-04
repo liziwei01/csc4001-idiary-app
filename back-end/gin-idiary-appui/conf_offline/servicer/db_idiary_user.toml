@@ -1,0 +1,6 @@
+Username = "root"
+Password = "123456"
+DbName = "db_idiary_user"
+DbDriver = "mysql"
+Host = "localhost"
+Port = 3306
