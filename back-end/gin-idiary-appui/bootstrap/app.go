@@ -2,8 +2,8 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 16:04:06
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-03 19:36:31
- * @Description: file content
+ * @LastEditTime: 2022-03-04 16:02:40
+ * @Description: app
  */
 
 package bootstrap
@@ -13,10 +13,10 @@ import (
 	"path/filepath"
 
 	"gin-idiary-appui/httpapi"
+	"gin-idiary-appui/library/logit"
 
 	"gin-idiary-appui/library/conf"
 	"gin-idiary-appui/library/env"
-	"gin-idiary-appui/library/logit"
 
 	"github.com/gin-gonic/gin"
 )
