@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 16:04:06
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-04 16:02:40
+ * @LastEditTime: 2022-03-05 00:13:58
  * @Description: app
  */
 
@@ -10,10 +10,12 @@ package bootstrap
 
 import (
 	"context"
+	"fmt"
+	"io"
+	"net/http"
+	"os"
 	"path/filepath"
-
-	"gin-idiary-appui/httpapi"
-	"gin-idiary-appui/library/logit"
+	"time"
 
 	"gin-idiary-appui/library/conf"
 	"gin-idiary-appui/library/env"
@@ -21,15 +23,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-const (
-	appConfPath = "./conf/app.toml"
-)
+var DefaultWriter io.Writer = os.Stdout
 
 // Config app's conf
 // default conf/app.toml
 type Config struct {
 	APPName string
-	IDC     string
 	RunMode string
 
 	Env env.AppEnv
@@ -71,32 +70,37 @@ func ParserAppConfig(filePath string) (*Config, error) {
 type App struct {
 	ctx    context.Context
 	config *Config
+	server *http.Server
 	close  func()
 }
 
 // NewApp establish an APP
-func NewApp(ctx context.Context, c *Config) *App {
+func NewApp(ctx context.Context, c *Config, handler *gin.Engine) *App {
 	ctxRet, cancel := context.WithCancel(ctx)
 	app := &App{
 		ctx:    ctxRet,
 		config: c,
 		close:  cancel,
 	}
+	app.initHTTPServer(handler)
 	return app
+}
+
+func (app *App) initHTTPServer(handler *gin.Engine) {
+	ser := &http.Server{
+		Addr:         app.config.HTTPServer.Listen,
+		Handler:      handler,
+		ReadTimeout:  time.Millisecond * time.Duration(app.config.HTTPServer.ReadTimeout),
+		WriteTimeout: time.Millisecond * time.Duration(app.config.HTTPServer.WriteTimeout),
+		IdleTimeout:  time.Millisecond * time.Duration(app.config.HTTPServer.IdleTimeout),
+	}
+	app.server = ser
 }
 
 // Start start the service
 func (app *App) Start() error {
-	// start record logs
-	logit.Init("gin-idiary-appui")
-	logit.Logger.Info("APP START")
 	// start listening to port
-	logit.Logger.Info("APP listening at: %s", app.config.HTTPServer.Listen)
+	fmt.Fprintf(DefaultWriter, "[APP START] Listening and serving HTTP on %s\n", app.config.HTTPServer.Listen)
 	// start distribute routers
-	gin.SetMode(app.config.RunMode)
-	err := httpapi.InitRouters().Run(app.config.HTTPServer.Listen)
-	if err != nil {
-		return err
-	}
-	return nil
+	return app.server.ListenAndServe()
 }
