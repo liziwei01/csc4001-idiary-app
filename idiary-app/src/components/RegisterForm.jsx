@@ -10,16 +10,14 @@ class RegisterForm extends Component {
     const { data } = this.state;
     if (
       this.validateProperty({ id: "email", value: data.email }) ||
-      this.validateProperty(
-        {
-          id: "password",
-          value: data.password,
-        } ||
-          this.validateProperty({
-            id: "repeatpassword",
-            value: data.repeatpassword,
-          })
-      )
+      this.validateProperty({
+        id: "password",
+        value: data.password,
+      }) ||
+      this.validateProperty({
+        id: "repeatpassword",
+        value: data.repeatpassword,
+      })
     )
       return true;
     else return false;
