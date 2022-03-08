@@ -19,3 +19,6 @@ code {
 .clickable {
   cursor: pointer;
 }
+.form {
+  margin: 0 100px;
+}
