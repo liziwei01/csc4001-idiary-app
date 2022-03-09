@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 16:04:46
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-05 00:07:22
+ * @LastEditTime: 2022-03-09 20:27:25
  * @Description: 路由分发
  */
 
@@ -11,7 +11,6 @@ package httpapi
 import (
 	"net/http"
 
-	"gin-idiary-appui/middleware"
 	userRouters "gin-idiary-appui/modules/user/routers"
 
 	"github.com/gin-gonic/gin"
@@ -23,7 +22,7 @@ import (
  * @return {*}
  */
 func InitRouters(router *gin.Engine) {
-	router.Use(middleware.CheckTokenMiddleware(), middleware.GetFrequencyControlMiddleware(), middleware.PostFrequencyControlMiddleware(), middleware.MailFrequencyControlMiddleware())
+	// router.Use(middleware.CheckTokenMiddleware(), middleware.GetFrequencyControlMiddleware(), middleware.PostFrequencyControlMiddleware(), middleware.MailFrequencyControlMiddleware())
 	// init routers
 	userRouters.Init(router)
 

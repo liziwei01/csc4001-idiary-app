@@ -1,6 +1,28 @@
-Username = "root"
-Password = "123456"
-DbName = "db_idiary_user"
-DbDriver = "mysql"
+# db_idiary_user.toml: mysql数据库db_idiary_user配置文件
+
+# Service的名字, 必选
+Name = "db_idiary_user"
+
+## 各种自定义的参数, 非必选
+# 写数据超时 ms
+WriteTimeOut    = 1000
+# 读数据超时 ms
+ReadTimeOut     = 500
+# 请求失败后的重试次数: 总请求次数 = Retry + 1; database/sql 自带两次 retry
+# Retry = 2
+
+# 资源定位: 手动配置 - 使用IP、端口
+[Resource.Manual]
 Host = "localhost"
 Port = 3306
+
+# mysql组件配置
+[MySQL]
+Username        = "root"
+Password        = "railgun"
+DBName          = "db_idiary_user"
+DBDriver        = "mysql"
+Charset         = "utf8"
+Collation       = "utf8_unicode_ci"
+Timeout         = "90000"
+SQLLogLen       = -1    # 打印sql内容, 为0不打印, -1 为全部

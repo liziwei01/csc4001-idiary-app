@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-04 15:43:21
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-04 15:45:04
+ * @LastEditTime: 2022-03-09 21:37:59
  * @Description: file content
  */
 package mysql
@@ -12,6 +12,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"sync"
 
 	"gin-idiary-appui/library/conf"
 	"gin-idiary-appui/library/env"
@@ -28,6 +29,8 @@ var (
 	configPath = env.Default.ConfDir()
 	// mysql client map, client use single instance mode
 	clients map[string]Client
+	// 初始化互斥锁
+	initMux sync.Mutex
 )
 
 /**
