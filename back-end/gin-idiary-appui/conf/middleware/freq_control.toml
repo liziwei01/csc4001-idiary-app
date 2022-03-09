@@ -1,0 +1,12 @@
+# freq_control.toml 接口频控配置
+
+Enable = false
+
+GetLimit = 10
+PostLimit = 1
+PutLimit = 1
+DeleteLimit = 1
+
+EmailLimit = 1
+
+IpLimit = 10

@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-04 23:32:56
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-05 15:13:28
+ * @LastEditTime: 2022-03-05 16:08:03
  * @Description: 接口token校验
  */
 
@@ -28,7 +28,7 @@ func CheckTokenMiddleware() gin.HandlerFunc {
 		} else if checkNoTokenPath(path) == true {
 			// 不需要token校验的接口.
 			c.Next()
-		} else if !ok || config.Token.Token != inputToken {
+		} else if !ok || tokenConf.Token != inputToken {
 			// token校验失败.
 			response.StdTokenCheckFailed(c)
 			c.Abort()
@@ -41,7 +41,7 @@ func CheckTokenMiddleware() gin.HandlerFunc {
 
 // 判断是否是不需要经过token校验的接口.
 func checkNoTokenPath(path string) bool {
-	for _, preSetPath := range config.Token.NoTokenPath {
+	for _, preSetPath := range tokenConf.NoTokenPath {
 		if strings.Contains(path, preSetPath) {
 			return true
 		}

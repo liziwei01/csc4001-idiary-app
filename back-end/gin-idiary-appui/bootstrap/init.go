@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-04 22:06:10
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-05 00:24:59
+ * @LastEditTime: 2022-03-05 15:33:33
  * @Description: file content
  */
 package bootstrap
@@ -22,6 +22,10 @@ func InitMust(ctx context.Context) {
 
 func InitLog(ctx context.Context) {
 	logit.Init(ctx, "gin-idiary-appui")
+}
+
+func InitRedis() {
+
 }
 
 func InitMiddleware(ctx context.Context) {

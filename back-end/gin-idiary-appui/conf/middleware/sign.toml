@@ -1,0 +1,6 @@
+# sign.toml 接口md5签名校验配置
+
+# 不走签名校验的特殊sign
+Sign = "fsdfgasdgf34578348jiren"
+# 不走签名校验的特殊接口
+NoSignPath = ["/cms"]
