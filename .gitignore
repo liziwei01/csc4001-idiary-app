@@ -1,4 +1,9 @@
 
+### output ###
+# output
+/output/
+/bin/
+
 ### log ###
 # Logs
 /log/
