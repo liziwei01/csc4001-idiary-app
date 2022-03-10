@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 19:50:47
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-04 16:06:31
+ * @LastEditTime: 2022-03-10 20:49:39
  * @Description: 标准错误函数
  */
 package response
@@ -18,11 +18,6 @@ import (
 // 简单方法—请求时成功返回.
 func StdSuccess(ctx *gin.Context, data ...interface{}) {
 	StdResponse(ctx, Success, CodeMsgMap[Success], data...)
-}
-
-// data可不传.
-func StdAlertSuccess(ctx *gin.Context, data ...interface{}) {
-	StdResponse(ctx, Success, CodeMsgMap[Alert], data...)
 }
 
 // data可不传.

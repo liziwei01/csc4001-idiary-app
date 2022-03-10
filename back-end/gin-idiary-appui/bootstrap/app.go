@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 16:04:06
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-10 16:37:33
+ * @LastEditTime: 2022-03-10 20:34:59
  * @Description: app
  */
 
@@ -38,6 +38,7 @@ type Config struct {
 		Listen       string
 		ReadTimeout  int // ms
 		WriteTimeout int // ms
+		IdleTimeout  int // ms
 	}
 }
 
@@ -91,6 +92,7 @@ func (app *App) initHTTPServer(handler *gin.Engine) {
 		Handler:      handler,
 		ReadTimeout:  time.Millisecond * time.Duration(app.config.HTTPServer.ReadTimeout),
 		WriteTimeout: time.Millisecond * time.Duration(app.config.HTTPServer.WriteTimeout),
+		IdleTimeout:  time.Millisecond * time.Duration(app.config.HTTPServer.IdleTimeout),
 	}
 	app.server = ser
 }

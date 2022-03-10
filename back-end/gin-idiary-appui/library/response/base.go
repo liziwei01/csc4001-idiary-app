@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 19:55:32
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-03 20:01:12
+ * @LastEditTime: 2022-03-10 20:49:12
  * @Description: 通过错误码表示错误
  */
 package response
@@ -23,8 +23,6 @@ const (
 	TokenCheckFailed = -5
 	// Insufficient authority.
 	ERR_NO_AUTH = -6
-	// Alert.
-	Alert = -7
 )
 
 // 接口错误信息.
@@ -55,8 +53,5 @@ var CodeMsgMap = map[int]string{
 	TokenCheckFailed: MsgTokenCheckFailed,
 
 	// Authority.
-	ERR_NO_AUTH: "权限不足: 请hi超级管理员操作或联系本配置的创建人",
-
-	// Alert.
-	Alert: "此接口仅供监控、配置Review等离线流量使用, 严禁接入线上流量！",
+	ERR_NO_AUTH: "权限不足",
 }

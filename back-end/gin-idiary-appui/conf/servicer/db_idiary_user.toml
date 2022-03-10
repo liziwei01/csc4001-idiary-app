@@ -24,5 +24,5 @@ DBName          = "db_idiary_user"
 DBDriver        = "mysql"
 Charset         = "utf8"
 Collation       = "utf8_unicode_ci"
-Timeout         = "90000"
+Timeout         = "90000" # ms
 SQLLogLen       = -1    # 打印sql内容, 为0不打印, -1 为全部

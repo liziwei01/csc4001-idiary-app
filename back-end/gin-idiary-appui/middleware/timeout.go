@@ -2,74 +2,66 @@
  * @Author: liziwei01
  * @Date: 2022-03-10 16:16:18
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-10 16:36:27
+ * @LastEditTime: 2022-03-10 20:39:28
  * @Description: file content
  */
 package middleware
 
-import (
-	"context"
-	"net/http"
-	"time"
+// // timeout middleware wraps the request context with a timeout
+// func GetTimeoutMiddleware(timeout time.Duration) func(c *gin.Context) {
+// 	return func(c *gin.Context) {
+// 		if c.Request.Method == http.MethodGet {
 
-	"github.com/gin-gonic/gin"
-)
+// 			// wrap the request context with a timeout
+// 			ctx, cancel := context.WithTimeout(c.Request.Context(), timeout)
 
-// timeout middleware wraps the request context with a timeout
-func ReadTimeoutMiddleware(timeout time.Duration) func(c *gin.Context) {
-	return func(c *gin.Context) {
-		if c.Request.Method == http.MethodGet {
+// 			defer func() {
+// 				// check if context timeout was reached
+// 				if ctx.Err() == context.DeadlineExceeded {
 
-			// wrap the request context with a timeout
-			ctx, cancel := context.WithTimeout(c.Request.Context(), timeout)
+// 					// write response and abort the request
+// 					c.Writer.WriteHeader(http.StatusGatewayTimeout)
+// 					c.Abort()
+// 				}
 
-			defer func() {
-				// check if context timeout was reached
-				if ctx.Err() == context.DeadlineExceeded {
+// 				//cancel to clear resources after finished
+// 				cancel()
+// 			}()
 
-					// write response and abort the request
-					c.Writer.WriteHeader(http.StatusGatewayTimeout)
-					c.Abort()
-				}
+// 			// replace request with context wrapped request
+// 			c.Request = c.Request.WithContext(ctx)
+// 			c.Next()
+// 		} else {
+// 			c.Next()
+// 		}
+// 	}
+// }
 
-				//cancel to clear resources after finished
-				cancel()
-			}()
+// func PostTimeoutMiddleware(timeout time.Duration) func(c *gin.Context) {
+// 	return func(c *gin.Context) {
+// 		if c.Request.Method == http.MethodPost {
 
-			// replace request with context wrapped request
-			c.Request = c.Request.WithContext(ctx)
-			c.Next()
-		} else {
-			c.Next()
-		}
-	}
-}
+// 			// wrap the request context with a timeout
+// 			ctx, cancel := context.WithTimeout(c.Request.Context(), timeout)
 
-func WriteTimeoutMiddleware(timeout time.Duration) func(c *gin.Context) {
-	return func(c *gin.Context) {
-		if c.Request.Method == http.MethodPost {
+// 			defer func() {
+// 				// check if context timeout was reached
+// 				if ctx.Err() == context.DeadlineExceeded {
 
-			// wrap the request context with a timeout
-			ctx, cancel := context.WithTimeout(c.Request.Context(), timeout)
+// 					// write response and abort the request
+// 					c.Writer.WriteHeader(http.StatusGatewayTimeout)
+// 					c.Abort()
+// 				}
 
-			defer func() {
-				// check if context timeout was reached
-				if ctx.Err() == context.DeadlineExceeded {
+// 				//cancel to clear resources after finished
+// 				cancel()
+// 			}()
 
-					// write response and abort the request
-					c.Writer.WriteHeader(http.StatusGatewayTimeout)
-					c.Abort()
-				}
-
-				//cancel to clear resources after finished
-				cancel()
-			}()
-
-			// replace request with context wrapped request
-			c.Request = c.Request.WithContext(ctx)
-			c.Next()
-		} else {
-			c.Next()
-		}
-	}
-}
+// 			// replace request with context wrapped request
+// 			c.Request = c.Request.WithContext(ctx)
+// 			c.Next()
+// 		} else {
+// 			c.Next()
+// 		}
+// 	}
+// }
