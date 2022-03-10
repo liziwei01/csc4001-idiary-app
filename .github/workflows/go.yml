@@ -19,7 +19,7 @@ jobs:
         go-version: 1.17
 
     - name: Build
-      run: go build -v ./back-end/gin-idiary-appui/...
+      run: go mod tidy && go build -v ./back-end/gin-idiary-appui/
 
     - name: Test
-      run: go test -v ./back-end/gin-idiary-appui/...
+      run: go mod tidy && go test -v ./back-end/gin-idiary-appui/
