@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 16:16:57
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-04 16:03:25
+ * @LastEditTime: 2022-03-10 17:23:01
  * @Description: 路由
  */
 
@@ -20,7 +20,7 @@ import (
  * @return {*}
  */
 func Init(router *gin.Engine) {
-	userGroup := router.Group("/user")
+	userGroup := router.Group("/diary")
 	{
 		userGroup.GET("/addUser", userControllers.AddUser)
 	}
