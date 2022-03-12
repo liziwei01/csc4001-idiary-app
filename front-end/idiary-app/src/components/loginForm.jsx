@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 class LoginForm extends Component {
-  state = { data: { email: "", password: "" }, errors: {} };
+  state = { data: { username: "", password: "" }, errors: {} };
   handleSubmit = (e) => {
     e.preventDefault();
     //server
@@ -9,7 +9,7 @@ class LoginForm extends Component {
   validate = () => {
     const { data } = this.state;
     if (
-      this.validateProperty({ id: "email", value: data.email }) ||
+      this.validateProperty({ id: "username", value: data.username }) ||
       this.validateProperty({
         id: "password",
         value: data.password,
@@ -19,7 +19,7 @@ class LoginForm extends Component {
     else return false;
   };
   validateProperty = ({ id, value }) => {
-    if (id === "email") {
+    if (id === "username") {
       if (value.trim() === "") return "Username is required!";
     }
     if (id === "password") {
@@ -43,22 +43,18 @@ class LoginForm extends Component {
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="email" className="form-label">
-              Email address
+            <label htmlFor="username" className="form-label">
+              Username
             </label>
             <input
               onChange={this.handleChange}
-              value={data.email}
-              type="email"
+              value={data.username}
+              type="username"
               className="form-control"
-              id="email"
-              aria-describedby="emailHelp"
+              id="username"
             />
-            <div id="emailHelp" className="form-text">
-              We'll never share your email with anyone else.
-            </div>
-            {errors.email && (
-              <div className="alert alert-danger">{errors.email}</div>
+            {errors.username && (
+              <div className="alert alert-danger">{errors.username}</div>
             )}
           </div>
           <div className="mb-3">
@@ -90,7 +86,7 @@ class LoginForm extends Component {
             type="submit"
             className="btn btn-primary"
           >
-            Submit
+            Login in
           </button>
         </form>
       </div>
