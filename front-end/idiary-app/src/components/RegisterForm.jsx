@@ -1,10 +1,17 @@
 import React, { Component } from "react";
+import * as userService from "./../service/userService";
 
 class RegisterForm extends Component {
-  state = { data: { email: "", password: "", repeatpassword: "" }, errors: {} };
-  handleSubmit = (e) => {
+  state = {
+    data: { email: "", username: "", password: "", repeatpassword: "" },
+    errors: {},
+  };
+  handleSubmit = async (e) => {
     e.preventDefault();
     //server
+    const data = { ...this.state.data };
+    delete data.repeatpassword;
+    await userService.register(data);
   };
   validate = () => {
     const { data } = this.state;
@@ -17,6 +24,10 @@ class RegisterForm extends Component {
       this.validateProperty({
         id: "repeatpassword",
         value: data.repeatpassword,
+      }) ||
+      this.validateProperty({
+        id: "username",
+        value: data.username,
       })
     )
       return true;
@@ -36,6 +47,11 @@ class RegisterForm extends Component {
     }
     if (id === "repeatpassword") {
       if (value !== this.state.data.password) return "Different!";
+    }
+    if (id === "username") {
+      if (value.trim() === "") return "Username is required!";
+      if (value.length < 6 || value.length > 20)
+        return "Your username should between 6 and 20 characters!";
     }
   };
   handleChange = ({ currentTarget: input }) => {
@@ -71,6 +87,21 @@ class RegisterForm extends Component {
             </div>
             {errors.email && (
               <div className="alert alert-danger">{errors.email}</div>
+            )}
+          </div>
+          <div className="mb-3">
+            <label htmlFor="username" className="form-label">
+              Username
+            </label>
+            <input
+              onChange={this.handleChange}
+              value={data.username}
+              type="text"
+              className="form-control"
+              id="username"
+            />
+            {errors.username && (
+              <div className="alert alert-danger">{errors.username}</div>
             )}
           </div>
           <div className="mb-3">
@@ -117,7 +148,7 @@ class RegisterForm extends Component {
             type="submit"
             className="btn btn-primary"
           >
-            Submit
+            Register
           </button>
         </form>
       </div>
