@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-04 23:32:56
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-05 16:08:03
+ * @LastEditTime: 2022-03-10 20:52:39
  * @Description: 接口token校验
  */
 
@@ -24,6 +24,9 @@ func CheckTokenMiddleware() gin.HandlerFunc {
 		inputToken, ok := utils.Request.Header(c.Request, "token")
 		if isRealease() != true {
 			// 线下无限制.
+			c.Next()
+		} else if !tokenConf.Enable {
+			// token校验未开启.
 			c.Next()
 		} else if checkNoTokenPath(path) == true {
 			// 不需要token校验的接口.
