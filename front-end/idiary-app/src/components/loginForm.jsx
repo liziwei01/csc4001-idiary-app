@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Input from "./common/input";
 
 class LoginForm extends Component {
   state = { data: { username: "", password: "" }, errors: {} };
@@ -26,7 +27,7 @@ class LoginForm extends Component {
       if (value.trim() === "") return "Password is required!";
     }
   };
-  handleChange = ({ currentTarget: input }) => {
+  handleChange = ({ target: input }) => {
     const errors = { ...this.state.errors };
     const errorMessage = this.validateProperty(input);
     if (errorMessage) errors[input.id] = errorMessage;
@@ -42,36 +43,22 @@ class LoginForm extends Component {
       <div className="form">
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="username" className="form-label">
-              Username
-            </label>
-            <input
-              onChange={this.handleChange}
-              value={data.username}
-              type="username"
-              className="form-control"
-              id="username"
-            />
-            {errors.username && (
-              <div className="alert alert-danger">{errors.username}</div>
-            )}
-          </div>
-          <div className="mb-3">
-            <label htmlFor="password" className="form-label">
-              Password
-            </label>
-            <input
-              onChange={this.handleChange}
-              value={data.password}
-              type="password"
-              className="form-control"
-              id="password"
-            />
-            {errors.password && (
-              <div className="alert alert-danger">{errors.password}</div>
-            )}
-          </div>
+          <Input
+            onChange={this.handleChange}
+            value={data.username}
+            type="text"
+            id="username"
+            errors={errors}
+            label="Username"
+          />
+          <Input
+            onChange={this.handleChange}
+            value={data.password}
+            type="password"
+            id="password"
+            errors={errors}
+            label="Password"
+          />
           <button
             disabled={this.validate()}
             type="submit"

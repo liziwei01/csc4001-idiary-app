@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import * as userService from "./../service/userService";
+import InputWithButton from "./common/inputWithButton";
+import InputWithDesc from "./common/inputWithDesc";
 
 class RegisterForm extends Component {
   state = {
@@ -81,7 +83,7 @@ class RegisterForm extends Component {
         return "Answer is required!";
     }
   };
-  handleChange = ({ currentTarget: input }) => {
+  handleChange = ({ target: input }) => {
     const errors = { ...this.state.errors };
     const errorMessage = this.validateProperty(input);
     if (errorMessage) errors[input.id] = errorMessage;
@@ -98,94 +100,43 @@ class RegisterForm extends Component {
       <div className="form">
         <h1 className="mb-3">Register</h1>
         <form onSubmit={this.handleSubmit}>
-          <div className="mb-3 row">
-            <div className="form-floating col">
-              <input
-                onChange={this.handleChange}
-                value={data.email}
-                type="email"
-                className={
-                  errors.email ? "form-control is-invalid" : "form-control"
-                }
-                id="email"
-                placeholder="name@example.com"
-              />
-              <label htmlFor="email">Email address</label>
-            </div>
-            <div className="col">
-              <button type="submit" class="btn btn-primary mb-3">
-                Confirm identity
-              </button>
-            </div>
-          </div>
+          <InputWithButton
+            onChange={this.handleChange}
+            value={data.email}
+            type="email"
+            id="email"
+            errors={errors}
+            text="Send"
+            label="Email Address"
+          />
 
-          <div className="mb-3 row">
-            <div className="form-floating col">
-              <input
-                onChange={this.handleChange}
-                value={data.username}
-                type="text"
-                className={
-                  errors.username ? "form-control is-invalid" : "form-control"
-                }
-                id="username"
-                aria-describedby="usernameHelpInline"
-                placeholder="Username"
-              />
-              <label htmlFor="username">Username</label>
-            </div>
-            <div class="col">
-              <span id="usernameHelpInline" class="form-text">
-                Must be 6-20 characters long.
-              </span>
-            </div>
-          </div>
-
-          <div className="mb-3 row">
-            <div class="form-floating col">
-              <input
-                onChange={this.handleChange}
-                value={data.password}
-                type="password"
-                className={
-                  errors.password ? "form-control is-invalid" : "form-control"
-                }
-                id="password"
-                aria-describedby="passwordHelpInline"
-                placeholder="Password"
-              />
-              <label htmlfor="password">Password</label>
-            </div>
-            <div class="col">
-              <span id="passwordHelpInline" class="form-text">
-                Must be 8-20 characters long.
-              </span>
-            </div>
-          </div>
-
-          <div className="mb-3 row">
-            <div className="form-floating col">
-              <input
-                onChange={this.handleChange}
-                value={data.repeatpassword}
-                type="password"
-                className={
-                  errors.repeatpassword
-                    ? "form-control is-invalid"
-                    : "form-control"
-                }
-                id="repeatpassword"
-                placeholder="Repeat Password"
-                aria-describedby="repeatPasswordHelpInline"
-              />
-              <label htmlFor="repeatpassword">Repeat Your Password</label>
-            </div>
-            <div class="col">
-              <span id="repeatPasswordHelpInline" class="form-text">
-                Please repeat your password.
-              </span>
-            </div>
-          </div>
+          <InputWithDesc
+            onChange={this.handleChange}
+            value={data.username}
+            type="text"
+            id="username"
+            errors={errors}
+            text="Must be 6-20 characters long."
+            label="Username"
+          />
+          <InputWithDesc
+            onChange={this.handleChange}
+            value={data.password}
+            type="password"
+            id="password"
+            errors={errors}
+            text="Must be 8-20 characters long."
+            label="Password"
+          />
+          <InputWithDesc
+            onChange={this.handleChange}
+            value={data.repeatpassword}
+            type="repeatpassword"
+            id="repeatpassword"
+            errors={errors}
+            text="Please repeat your password."
+            label="Repeat Password"
+          />
 
           <div className="row g-2 mb-3">
             <div className="col-md">
@@ -230,13 +181,8 @@ class RegisterForm extends Component {
                 this.handlechecked(e);
               }}
             />
-            <label
-              className="form-check-label"
-              htmlFor="check"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-            >
-              <a href="./common/modal"> Agree with the agreement.</a>
+            <label className="form-check-label" htmlFor="check">
+              <a href="#"> Agree with the agreement.</a>
             </label>
           </div>
           <button
