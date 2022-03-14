@@ -9,7 +9,7 @@
 package routers
 
 import (
-	userControllers "gin-idiary-appui/modules/user/controllers"
+	userControllers "gin-idiary-appui/modules/diary/controllers"
 
 	"github.com/gin-gonic/gin"
 )
@@ -23,5 +23,11 @@ func Init(router *gin.Engine) {
 	userGroup := router.Group("/diary")
 	{
 		userGroup.GET("/addUser", userControllers.AddUser)
+		userGroup.GET("/addDiary", userControllers.AddDiary)
+		userGroup.GET("/allDiary", userControllers.AllDiary)
+		userGroup.GET("/modifyDiary", userControllers.ModifyDiary)
+		userGroup.GET("/deleteDiary", userControllers.DeleteDiary)
+		userGroup.GET("/searchDiary", userControllers.SearchDiary)
+		userGroup.GET("setPrivacy", userControllers.SetPrivacy)
 	}
 }

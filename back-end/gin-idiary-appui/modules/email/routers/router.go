@@ -9,7 +9,7 @@
 package routers
 
 import (
-	userControllers "gin-idiary-appui/modules/user/controllers"
+	userControllers "gin-idiary-appui/modules/email/controllers"
 
 	"github.com/gin-gonic/gin"
 )
@@ -23,5 +23,6 @@ func Init(router *gin.Engine) {
 	userGroup := router.Group("/email")
 	{
 		userGroup.GET("/addUser", userControllers.AddUser)
+		userGroup.GET("/modifyPassword", userControllers.ModifyPassword)
 	}
 }
