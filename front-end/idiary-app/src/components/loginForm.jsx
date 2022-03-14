@@ -72,15 +72,6 @@ class LoginForm extends Component {
               <div className="alert alert-danger">{errors.password}</div>
             )}
           </div>
-          <div className="mb-3 form-check">
-            <input type="checkbox" className="form-check-input" id="check" />
-            <label className="form-check-label" htmlFor="check">
-              Check me out
-            </label>
-            {errors.check && (
-              <div className="alert alert-danger">{errors.check}</div>
-            )}
-          </div>
           <button
             disabled={this.validate()}
             type="submit"
