@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Input from "./common/input";
 import Button from "./common/button";
+import { Link } from "react-router-dom";
 
 class LoginForm extends Component {
   state = { data: { username: "", password: "" }, errors: {} };
@@ -61,7 +62,12 @@ class LoginForm extends Component {
             label="Password"
           />
           <Button disabled={this.validate()} label="Log in" />
-          
+          <Link className="ms-4 mt-4" to="/register">
+            Register
+          </Link>
+          <Link className="ms-4 mt-4" to="/register">
+            Forget Password
+          </Link>
         </form>
       </div>
     );
