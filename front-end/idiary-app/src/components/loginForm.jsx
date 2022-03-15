@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Input from "./common/input";
+import Button from "./common/button";
 
 class LoginForm extends Component {
   state = { data: { username: "", password: "" }, errors: {} };
@@ -59,13 +60,8 @@ class LoginForm extends Component {
             errors={errors}
             label="Password"
           />
-          <button
-            disabled={this.validate()}
-            type="submit"
-            className="btn btn-primary"
-          >
-            Login in
-          </button>
+          <Button disabled={this.validate()} label="Log in" />
+          
         </form>
       </div>
     );

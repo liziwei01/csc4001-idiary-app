@@ -13,7 +13,7 @@ const InputWithButton = ({ text, errors, label, id, ...rest }) => {
         <label htmlFor={id}>{label}</label>
       </div>
       <div className="col">
-        <button type="submit" class="btn btn-primary mb-3">
+        <button type="submit" className="btn btn-primary mb-3">
           {text}
         </button>
       </div>

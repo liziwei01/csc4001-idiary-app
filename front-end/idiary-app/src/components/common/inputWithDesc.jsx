@@ -15,8 +15,8 @@ const InputWithDesc = ({ text, errors, label, id, ...rest }) => {
         />
         <label htmlFor={id}>{label}</label>
       </div>
-      <div class="col">
-        <span id={help} class="form-text">
+      <div className="col">
+        <span id={help} className="form-text">
           {text}
         </span>
       </div>

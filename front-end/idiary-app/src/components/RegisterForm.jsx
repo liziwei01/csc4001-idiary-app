@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as userService from "./../service/userService";
 import InputWithButton from "./common/inputWithButton";
 import InputWithDesc from "./common/inputWithDesc";
+import Button from "./common/button";
 
 class RegisterForm extends Component {
   state = {
@@ -22,16 +23,6 @@ class RegisterForm extends Component {
     const data = { ...this.state.data };
     delete data.repeatpassword;
     await userService.register(data);
-  };
-  handlechecked = (e) => {
-    const checked = e.target.checked;
-    const data = { ...this.state.data };
-    if (checked) {
-      data.checked = true;
-    } else {
-      data.checked = false;
-    }
-    this.setState({ data });
   };
   validate = () => {
     const { data } = this.state;
@@ -82,6 +73,16 @@ class RegisterForm extends Component {
       if (value.trim() === "" && this.state.data.problem !== "Disabled")
         return "Answer is required!";
     }
+  };
+  handlechecked = (e) => {
+    const checked = e.target.checked;
+    const data = { ...this.state.data };
+    if (checked) {
+      data.checked = true;
+    } else {
+      data.checked = false;
+    }
+    this.setState({ data });
   };
   handleChange = ({ target: input }) => {
     const errors = { ...this.state.errors };
@@ -152,7 +153,7 @@ class RegisterForm extends Component {
                   onChange={this.handleChange}
                   disabled={data.problem === "Disabled" ? true : false}
                 />
-                <label htmlfor="answer">Your answer</label>
+                <label htmlFor="answer">Your answer</label>
               </div>
             </div>
             <div className="col-md">
@@ -167,7 +168,7 @@ class RegisterForm extends Component {
                   <option value="2">What's your birth day?</option>
                   <option value="3">What's your favourite color?</option>
                 </select>
-                <label htmlfor="problem">Optional secret problem</label>
+                <label htmlFor="problem">Optional secret problem</label>
               </div>
             </div>
           </div>
@@ -177,21 +178,58 @@ class RegisterForm extends Component {
               type="checkbox"
               className="form-check-input"
               id="check"
-              onClick={(e) => {
-                this.handlechecked(e);
-              }}
+              onClick={this.handlechecked}
             />
-            <label className="form-check-label" htmlFor="check">
-              <a href="#"> Agree with the agreement.</a>
+            <label
+              className="form-check-label"
+              htmlFor="check"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+            >
+              Agree with the agreement.
             </label>
           </div>
-          <button
-            disabled={this.validate()}
-            type="submit"
-            className="btn btn-primary"
+
+          <div
+            className="modal fade"
+            id="staticBackdrop"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabIndex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
           >
-            Register
-          </button>
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="staticBackdropLabel">
+                    Modal title
+                  </h5>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div className="modal-body">...</div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="button" className="btn btn-primary">
+                    Understood
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <Button disabled={this.validate()} label="Register" />
         </form>
       </div>
     );
