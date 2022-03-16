@@ -3,17 +3,21 @@ import * as userService from "./../service/userService";
 import InputWithButton from "./common/inputWithButton";
 import InputWithDesc from "./common/inputWithDesc";
 import Button from "./common/button";
+import Input from "./common/input";
 
 class RegisterForm extends Component {
   state = {
     data: {
       email: "",
+      verification: "",
       username: "",
       password: "",
       repeatpassword: "",
-      answer: "",
-      problem: "Disabled",
-      checked: false,
+      answer1: "",
+      answer2: "",
+      answer3: "",
+      agreement: false,
+      secretproblem: false,
     },
     errors: {},
   };
@@ -41,10 +45,18 @@ class RegisterForm extends Component {
         value: data.username,
       }) ||
       this.validateProperty({
-        id: "answer",
-        value: data.answer,
+        id: "answer1",
+        value: data.answer1,
       }) ||
-      data.checked === false
+      this.validateProperty({
+        id: "answer2",
+        value: data.answer2,
+      }) ||
+      this.validateProperty({
+        id: "answer3",
+        value: data.answer3,
+      }) ||
+      data.agreement === false
     )
       return true;
     else return false;
@@ -69,18 +81,23 @@ class RegisterForm extends Component {
       if (value.length < 6 || value.length > 20)
         return "Your username should between 6 and 20 characters!";
     }
-    if (id === "answer") {
-      if (value.trim() === "" && this.state.data.problem !== "Disabled")
-        return "Answer is required!";
+    if (id === "answer1" && this.state.data.secretproblem === true) {
+      if (value.trim() === "") return "Answer is required!";
+    }
+    if (id === "answer2" && this.state.data.secretproblem === true) {
+      if (value.trim() === "") return "Answer is required!";
+    }
+    if (id === "answer3" && this.state.data.secretproblem === true) {
+      if (value.trim() === "") return "Answer is required!";
     }
   };
   handlechecked = (e) => {
     const checked = e.target.checked;
     const data = { ...this.state.data };
     if (checked) {
-      data.checked = true;
+      data[e.target.id] = true;
     } else {
-      data.checked = false;
+      data[e.target.id] = false;
     }
     this.setState({ data });
   };
@@ -93,6 +110,10 @@ class RegisterForm extends Component {
     const data = { ...this.state.data };
     data[input.id] = input.value;
     this.setState({ data, errors });
+  };
+  handleClicked = async () => {
+    console.log("send");
+    const response = await userService.send(this.state.data);
   };
 
   render() {
@@ -109,6 +130,16 @@ class RegisterForm extends Component {
             errors={errors}
             text="Send"
             label="Email Address"
+            onClick={this.handleClicked}
+          />
+          <InputWithDesc
+            onChange={this.handleChange}
+            value={data.verification}
+            type="text"
+            id="verification"
+            errors={errors}
+            text=""
+            label="Verification Code"
           />
 
           <InputWithDesc
@@ -139,94 +170,63 @@ class RegisterForm extends Component {
             label="Repeat Password"
           />
 
-          <div className="row g-2 mb-3">
-            <div className="col-md">
-              <div className="form-floating">
-                <input
-                  type="text"
-                  className={
-                    errors.answer ? "form-control is-invalid" : "form-control"
-                  }
-                  id="answer"
-                  placeholder="..."
-                  value={data.problem === "Disabled" ? "" : data.answer}
-                  onChange={this.handleChange}
-                  disabled={data.problem === "Disabled" ? true : false}
-                />
-                <label htmlFor="answer">Your answer</label>
-              </div>
-            </div>
-            <div className="col-md">
-              <div className="form-floating">
-                <select
-                  className="form-select"
-                  id="problem"
-                  onChange={this.handleChange}
-                >
-                  <option selected>Disabled</option>
-                  <option value="1">What's your mother's name?</option>
-                  <option value="2">What's your birth day?</option>
-                  <option value="3">What's your favourite color?</option>
-                </select>
-                <label htmlFor="problem">Optional secret problem</label>
-              </div>
-            </div>
+          <div className="form-check form-switch mb-3">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="secretproblem"
+              onClick={this.handlechecked}
+            />
+            <label className="form-check-label" htmlFor="secretproblem">
+              Answer Secret Protect Problems
+            </label>
           </div>
+
+          {data.secretproblem && (
+            <div>
+              <Input
+                onChange={this.handleChange}
+                value={data.answer1}
+                type="text"
+                id="answer1"
+                errors={errors}
+                label="What's your birth day?"
+              />
+              <Input
+                onChange={this.handleChange}
+                value={data.answer2}
+                type="text"
+                id="answer2"
+                errors={errors}
+                label="What's your mother's name?"
+              />
+              <Input
+                onChange={this.handleChange}
+                value={data.answer3}
+                type="text"
+                id="answer3"
+                errors={errors}
+                label="What's your favorite color?"
+              />
+            </div>
+          )}
 
           <div className="mb-3 form-check">
             <input
               type="checkbox"
               className="form-check-input"
-              id="check"
+              id="agreement"
               onClick={this.handlechecked}
             />
             <label
               className="form-check-label"
-              htmlFor="check"
+              htmlFor="agreement"
               data-bs-toggle="modal"
               data-bs-target="#staticBackdrop"
             >
               Agree with the agreement.
             </label>
-          </div>
-
-          <div
-            className="modal fade"
-            id="staticBackdrop"
-            data-bs-backdrop="static"
-            data-bs-keyboard="false"
-            tabIndex="-1"
-            aria-labelledby="staticBackdropLabel"
-            aria-hidden="true"
-          >
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title" id="staticBackdropLabel">
-                    Modal title
-                  </h5>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div className="modal-body">...</div>
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button type="button" className="btn btn-primary">
-                    Understood
-                  </button>
-                </div>
-              </div>
-            </div>
           </div>
 
           <Button disabled={this.validate()} label="Register" />

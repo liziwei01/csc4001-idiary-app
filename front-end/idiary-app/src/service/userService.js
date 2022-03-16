@@ -10,3 +10,9 @@ export function register(user) {
     name: user.username,
   });
 }
+
+export function send(user) {
+  return http.post(apiEndpoint, {
+    email: user.email,
+  });
+}
