@@ -9,12 +9,22 @@ import NavBar from "./components/navBar";
 import "./App.css";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/RegisterForm";
+import ForgetPasswordByEmail from "./components/forgetPasswordByEmail";
+import ForgetPasswordByProblem from "./components/forgetPasswordByProblem";
 
 function App() {
   return (
     <React.Fragment>
       <NavBar />
       <Routes>
+        <Route
+          path="/forgetPasswordByProblem"
+          element={<ForgetPasswordByProblem />}
+        />
+        <Route
+          path="/forgetPasswordByEmail"
+          element={<ForgetPasswordByEmail />}
+        />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/myDiary/*" element={<MyDiary />} />

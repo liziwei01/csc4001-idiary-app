@@ -11,8 +11,24 @@ export function register(user) {
   });
 }
 
-export function send(user) {
+export function login(user) {
+  return http.post(apiEndpoint, {
+    password: user.password,
+    name: user.username,
+  });
+}
+
+export function send_email(user) {
   return http.post(apiEndpoint, {
     email: user.email,
+  });
+}
+
+export function send_problem(user) {
+  return http.post(apiEndpoint, {
+    username: user.username,
+    answer1: user.answer1,
+    answer2: user.answer2,
+    answer3: user.answer3,
   });
 }
