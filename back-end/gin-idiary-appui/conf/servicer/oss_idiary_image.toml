@@ -6,5 +6,5 @@ Name = "oss_idiary_image"
 # oss组件配置
 [OSS]
 Endpoint = "http://oss-cn-shenzhen.aliyuncs.com"
-AccessKeyID = "LTAI5t5aAtu5xRwFfrsSSa4r"
-AccessKeySecret = "M5vdpvuZMzSGTmv6C8mm6PZHLiwapF"
+AccessKeyID = ""
+AccessKeySecret = ""
