@@ -4,14 +4,17 @@ go 1.17
 
 require (
 	github.com/BurntSushi/toml v0.3.1
+	github.com/aliyun/aliyun-oss-go-sdk v2.2.1+incompatible
 	github.com/baidu/go-lib v0.0.0-20210902034828-42829d4bdecd
 	github.com/didi/gendry v1.7.0
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-sql-driver/mysql v1.6.0
+	github.com/satori/go.uuid v1.2.0
 	github.com/wallstreetcn/rate v0.0.0-20170602052110-062ff4817e93
 )
 
 require (
+	github.com/baiyubin/aliyun-sts-go-sdk v0.0.0-20180326062324-cfa1a18b161f // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-playground/locales v0.13.0 // indirect
 	github.com/go-playground/universal-translator v0.17.0 // indirect
@@ -32,6 +35,7 @@ require (
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9 // indirect
 	golang.org/x/net v0.0.0-20210520170846-37e1c6afe023 // indirect
 	golang.org/x/sys v0.0.0-20211216021012-1d35b9e2eb4e // indirect
+	golang.org/x/time v0.0.0-20220224211638-0e9765cccd65 // indirect
 	google.golang.org/protobuf v1.26.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
