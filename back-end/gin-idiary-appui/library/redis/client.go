@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-04 13:52:11
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-04 14:33:15
+ * @LastEditTime: 2022-03-21 22:40:27
  * @Description: file content
  */
 package redis
@@ -23,4 +23,19 @@ type Client interface {
 	Del(ctx context.Context, k ...string) error
 	// Determine if a key exists
 	Exists(ctx context.Context, keys ...string) (bool, error)
+}
+
+type client struct {
+	conf *Config
+}
+
+func New(config *Config) Client {
+	c := &client{
+		conf: config,
+	}
+	return c
+}
+
+func (c *client) connect(ctx context.Context) error {
+	return nil
 }

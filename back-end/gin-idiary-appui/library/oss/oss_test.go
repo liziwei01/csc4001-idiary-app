@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-21 21:22:39
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-21 21:34:41
+ * @LastEditTime: 2022-03-21 22:38:21
  * @Description: file content
  */
 package oss
@@ -18,7 +18,7 @@ import (
 
 func TestPut(t *testing.T) {
 	ctx := context.Background()
-	client, err := GetOSSClient(ctx, "oss_idiary_image")
+	client, err := GetClient(ctx, "oss_idiary_image")
 	if err != nil {
 		t.Error(err)
 	}
@@ -31,7 +31,7 @@ func TestPut(t *testing.T) {
 
 func TestGet(t *testing.T) {
 	ctx := context.Background()
-	client, err := GetOSSClient(ctx, "oss_idiary_image")
+	client, err := GetClient(ctx, "oss_idiary_image")
 	if err != nil {
 		t.Error(err)
 	}
@@ -51,7 +51,7 @@ func TestGet(t *testing.T) {
 
 func TestGetURL(t *testing.T) {
 	ctx := context.Background()
-	client, err := GetOSSClient(ctx, "oss_idiary_image")
+	client, err := GetClient(ctx, "oss_idiary_image")
 	if err != nil {
 		t.Error(err)
 	}
@@ -64,7 +64,7 @@ func TestGetURL(t *testing.T) {
 
 func TestDel(t *testing.T) {
 	ctx := context.Background()
-	client, err := GetOSSClient(ctx, "oss_idiary_image")
+	client, err := GetClient(ctx, "oss_idiary_image")
 	if err != nil {
 		t.Error(err)
 	}
