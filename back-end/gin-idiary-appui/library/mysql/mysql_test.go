@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-21 20:25:23
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-21 22:28:26
+ * @LastEditTime: 2022-03-21 22:41:36
  * @Description: file content
  */
 package mysql
@@ -27,12 +27,12 @@ func TestQuery(t *testing.T) {
 		ctx        = context.Background()
 		returnData []UserPrivateInfo
 	)
-	client, err := GetMysqlClient(ctx, "db_idiary_user")
+	client, err := GetClient(ctx, "db_idiary_user")
 	if err != nil {
 		t.Error(err)
 	}
 	where := map[string]interface{}{
-		"user_id": "1",
+		"user_id": 1,
 	}
 	columns := []string{"user_id", "nickname", "email"}
 	err = client.Query(ctx, test_table_name, where, columns, &returnData)
@@ -46,7 +46,7 @@ func TestInsert(t *testing.T) {
 	var (
 		ctx = context.Background()
 	)
-	client, err := GetMysqlClient(ctx, "db_idiary_user")
+	client, err := GetClient(ctx, "db_idiary_user")
 	if err != nil {
 		t.Error(err)
 	}
@@ -75,7 +75,7 @@ func TestUpdate(t *testing.T) {
 		returnData  []UserPrivateInfo
 		updatedNick = "test user 1 updated"
 	)
-	client, err := GetMysqlClient(ctx, "db_idiary_user")
+	client, err := GetClient(ctx, "db_idiary_user")
 	if err != nil {
 		t.Error(err)
 	}
@@ -102,7 +102,7 @@ func TestDelete(t *testing.T) {
 	var (
 		ctx = context.Background()
 	)
-	client, err := GetMysqlClient(ctx, "db_idiary_user")
+	client, err := GetClient(ctx, "db_idiary_user")
 	if err != nil {
 		t.Error(err)
 	}

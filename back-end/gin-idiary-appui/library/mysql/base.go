@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-04 15:43:21
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-09 21:37:59
+ * @LastEditTime: 2022-03-21 22:37:46
  * @Description: file content
  */
 package mysql
@@ -39,7 +39,7 @@ var (
  * @param {string} serviceName
  * @return {*}
  */
-func GetMysqlClient(ctx context.Context, serviceName string) (Client, error) {
+func GetClient(ctx context.Context, serviceName string) (Client, error) {
 	// try to get from single instance map
 	if client, hasSet := clients[serviceName]; hasSet {
 		if client != nil {

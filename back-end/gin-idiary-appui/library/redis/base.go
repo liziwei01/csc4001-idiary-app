@@ -2,10 +2,10 @@
  * @Author: liziwei01
  * @Date: 2022-03-04 15:43:21
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-21 22:38:12
+ * @LastEditTime: 2022-03-09 21:37:59
  * @Description: file content
  */
-package oss
+package redis
 
 import (
 	"context"
@@ -19,9 +19,9 @@ import (
 )
 
 const (
-	// oss conf file path
-	ossPath = "/servicer/"
-	prefix  = ".toml"
+	// mysql conf file path
+	mysqlPath = "/servicer/"
+	prefix    = ".toml"
 )
 
 var (
@@ -55,7 +55,7 @@ func GetClient(ctx context.Context, serviceName string) (Client, error) {
 }
 
 /**
- * @description: init oss client，considering concurrent set, lock
+ * @description: init mysql client，considering concurrent set, lock
  * @param {string} serviceName
  * @return {*}
  */
@@ -77,13 +77,13 @@ func setClient(serviceName string) (Client, error) {
 }
 
 /**
- * @description: according to conf service, read conf from conf file to init oss client
+ * @description: according to conf service, read conf from conf file to init mysql client
  * @param {string} serviceName
  * @return {*}
  */
 func initClient(serviceName string) (Client, error) {
 	var config *Config
-	fileAbs, err := filepath.Abs(filepath.Join(configPath, ossPath, serviceName+prefix))
+	fileAbs, err := filepath.Abs(filepath.Join(configPath, mysqlPath, serviceName+prefix))
 	if err != nil {
 		return nil, err
 	}
@@ -92,5 +92,5 @@ func initClient(serviceName string) (Client, error) {
 		client := New(config)
 		return client, nil
 	}
-	return nil, fmt.Errorf("oss conf not exist")
+	return nil, fmt.Errorf("mysql conf not exist")
 }
