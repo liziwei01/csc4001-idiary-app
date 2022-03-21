@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-09 19:26:42
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-09 21:29:00
+ * @LastEditTime: 2022-03-21 22:26:45
  * @Description: file content
  */
 package mysql
@@ -101,8 +101,8 @@ func NewUpdateBuilder(table string, where map[string]interface{}, update map[str
 	}
 }
 
-func NewDeleteBuilder(table string, where map[string]interface{}) *UpdateBuilder {
-	return &UpdateBuilder{
+func NewDeleteBuilder(table string, where map[string]interface{}) *DeleteBuilder {
+	return &DeleteBuilder{
 		table: table,
 		where: where,
 	}

@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-04 15:41:55
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-04 16:04:33
+ * @LastEditTime: 2022-03-21 21:55:08
  * @Description: 配置文件读取
  */
 package conf
@@ -77,9 +77,8 @@ var relPathPre = "." + string(filepath.Separator)
 
 // 将文件名组装为文件实际所在目录
 func (c *conf) confFileRealPath(confName string) string {
-	// 若文件名已经是绝对路径或以./开头或以./开头，视为找到了绝对路径
+	// 若文件名已经是绝对路径或以./开头，视为找到了绝对路径
 	if filepath.IsAbs(confName) ||
-		strings.HasPrefix(confName, "./") ||
 		strings.HasPrefix(confName, relPathPre) {
 		return confName
 	}

@@ -2,15 +2,14 @@
  * @Author: liziwei01
  * @Date: 2022-03-04 23:38:24
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-09 21:31:17
+ * @LastEditTime: 2022-03-21 21:58:56
  * @Description: file content
  */
 package middleware
 
 import (
 	"context"
-	"gin-idiary-appui/library/env"
-	"gin-idiary-appui/library/utils"
+	"gin-idiary-appui/library/conf"
 	"path/filepath"
 
 	rate "github.com/wallstreetcn/rate/redis"
@@ -69,9 +68,9 @@ func Init(ctx context.Context) {
 	}
 }
 
-func getConfig(confName string, conf interface{}) {
-	confPath := filepath.Join(env.Default.ConfDir(), middlewareConfPath, confName)
-	utils.Config.Get(confPath, conf)
+func getConfig(confName string, confStruct interface{}) {
+	confPath := filepath.Join(middlewareConfPath, confName)
+	conf.Parse(confPath, confStruct)
 }
 
 func initFreqControl() {

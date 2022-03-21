@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-21 17:48:04
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-21 18:08:53
+ * @LastEditTime: 2022-03-21 21:20:55
  * @Description: file content
  */
 package email
@@ -18,7 +18,9 @@ func TestEmail(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	err = client.Send(ctx, "118010160@link.cuhk.edu.cn", "testsub", "testbody")
+	subject := "iDiary Support"
+	body := "Hello, your security code is: 123456"
+	err = client.Send(ctx, "118010160@link.cuhk.edu.cn", subject, body)
 	if err != nil {
 		t.Error(err)
 	}
