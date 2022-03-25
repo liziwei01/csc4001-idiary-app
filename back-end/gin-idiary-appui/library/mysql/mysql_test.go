@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-21 20:25:23
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-21 22:41:36
+ * @LastEditTime: 2022-03-22 17:31:13
  * @Description: file content
  */
 package mysql
@@ -56,13 +56,13 @@ func TestInsert(t *testing.T) {
 		"nickname": "test user 1",
 		"email":    "testemail1@163.com",
 	}
-	// user2 := map[string]interface{}{
-	// 	"user_id":  2,
-	// 	"nickname": "test user 2",
-	// 	"email":    "testemail2@163.com",
-	// }
+	user2 := map[string]interface{}{
+		"user_id":  2,
+		"nickname": "test user 2",
+		"email":    "testemail2@163.com",
+	}
 	data = append(data, user1)
-	// data = append(data, user2)
+	data = append(data, user2)
 	_, err = client.Insert(ctx, test_table_name, data)
 	if err != nil {
 		t.Error(err)
@@ -112,6 +112,27 @@ func TestDelete(t *testing.T) {
 		"email":    "testemail1@163.com",
 	}
 	res, err := client.Delete(ctx, test_table_name, where)
+	if err != nil {
+		t.Error(err)
+	}
+	affectedNum, err := res.RowsAffected()
+	if err != nil {
+		t.Error(err)
+	}
+	if affectedNum != 1 {
+		t.Errorf("affectedNum = %d", affectedNum)
+	}
+}
+
+func TestExecRaw(t *testing.T) {
+	var (
+		ctx = context.Background()
+	)
+	client, err := GetClient(ctx, "db_idiary_user")
+	if err != nil {
+		t.Error(err)
+	}
+	res, err := client.ExecRaw(ctx, "delete from tb_user_privare_info where user_id = ? and nickname = ? and email = ?", "2", "test user 2", "testemail2@163.com")
 	if err != nil {
 		t.Error(err)
 	}

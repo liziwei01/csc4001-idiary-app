@@ -3,6 +3,7 @@ package mysql
 import (
 	"context"
 	"database/sql"
+	"gin-idiary-appui/library/logit"
 
 	"github.com/didi/gendry/scanner"
 	_ "github.com/go-sql-driver/mysql"
@@ -12,11 +13,10 @@ func (dao *client) Query(ctx context.Context, tableName string, where map[string
 	builder := NewSelectBuilder(tableName, where, columns)
 	err := QueryWithBuilder(ctx, dao, builder, data)
 	if err != nil {
-		// err := fmt.Errorf("Query Failed, err: %s", err.Error())
-		// logit.Logger.Error(err.Error())
+		logit.Logger.Error("mysql.Query error: %+v", err)
 		return err
 	}
-	// logit.Logger.Info("Query Success")
+	logit.Logger.Info("mysql.Query success")
 	return nil
 }
 
@@ -24,8 +24,10 @@ func (dao *client) Insert(ctx context.Context, tableName string, data []map[stri
 	builder := NewInsertBuilder(tableName, data, insertCommon)
 	res, err := ExecWithBuilder(ctx, dao, builder)
 	if err != nil {
+		logit.Logger.Error("mysql.Insert error: %+v", err)
 		return nil, err
 	}
+	logit.Logger.Info("mysql.Insert success")
 	return res, nil
 }
 
@@ -33,8 +35,10 @@ func (dao *client) InsertIgnore(ctx context.Context, tableName string, data []ma
 	builder := NewInsertBuilder(tableName, data, insertIgnore)
 	res, err := ExecWithBuilder(ctx, dao, builder)
 	if err != nil {
+		logit.Logger.Error("mysql.InsertIgnore error: %+v", err)
 		return nil, err
 	}
+	logit.Logger.Info("mysql.InsertIgnore success")
 	return res, nil
 }
 
@@ -42,8 +46,10 @@ func (dao *client) InsertReplace(ctx context.Context, tableName string, data []m
 	builder := NewInsertBuilder(tableName, data, insertReplace)
 	res, err := ExecWithBuilder(ctx, dao, builder)
 	if err != nil {
+		logit.Logger.Error("mysql.InsertReplace error: %+v", err)
 		return nil, err
 	}
+	logit.Logger.Info("mysql.InsertReplace success")
 	return res, nil
 }
 
@@ -51,8 +57,10 @@ func (dao *client) Update(ctx context.Context, tableName string, where map[strin
 	builder := NewUpdateBuilder(tableName, where, update)
 	res, err := ExecWithBuilder(ctx, dao, builder)
 	if err != nil {
+		logit.Logger.Error("mysql.Update error: %+v", err)
 		return nil, err
 	}
+	logit.Logger.Info("mysql.Update success")
 	return res, nil
 }
 
@@ -60,8 +68,10 @@ func (dao *client) Delete(ctx context.Context, tableName string, where map[strin
 	builder := NewDeleteBuilder(tableName, where)
 	res, err := ExecWithBuilder(ctx, dao, builder)
 	if err != nil {
+		logit.Logger.Error("mysql.Delete error: %+v", err)
 		return nil, err
 	}
+	logit.Logger.Info("mysql.Delete success")
 	return res, nil
 }
 
@@ -69,8 +79,10 @@ func (dao *client) ExecRaw(ctx context.Context, sql string, args ...interface{})
 	builder := NewRawBuilder(sql, args)
 	res, err := ExecWithBuilder(ctx, dao, builder)
 	if err != nil {
+		logit.Logger.Error("mysql.ExecRaw error: %+v", err)
 		return nil, err
 	}
+	logit.Logger.Info("mysql.ExecRaw success")
 	return res, nil
 }
 
