@@ -8,6 +8,7 @@ require (
 	github.com/baidu/go-lib v0.0.0-20210902034828-42829d4bdecd
 	github.com/didi/gendry v1.7.0
 	github.com/gin-gonic/gin v1.7.7
+	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/gogf/gf v1.16.6
 	github.com/satori/go.uuid v1.2.0
@@ -21,7 +22,6 @@ require (
 	github.com/go-playground/locales v0.13.0 // indirect
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
-	github.com/go-redis/redis v6.15.9+incompatible // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869 // indirect
 	github.com/json-iterator/go v1.1.9 // indirect

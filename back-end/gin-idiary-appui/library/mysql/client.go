@@ -40,6 +40,7 @@ type Client interface {
 	ExecRaw(ctx context.Context, sql string, args ...interface{}) (sql.Result, error)
 
 	connect(ctx context.Context) (*sql.DB, error)
+	open() (*sql.DB, error)
 
 	name() string
 	writeTimeOut() int
