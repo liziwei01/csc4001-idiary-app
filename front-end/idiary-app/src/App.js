@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, Switch } from "react-router-dom";
 import MyDiary from "./components/myDiary";
 import React from "react";
 import World from "./components/world";
@@ -9,12 +9,15 @@ import NavBar from "./components/navBar";
 import "./App.css";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/RegisterForm";
+import PersonalDiary from "./components/personalDiary";
+import FriendsDiary from "./components/friendsDiary";
 
 function App() {
   return (
     <React.Fragment>
       <NavBar />
       <Routes>
+        <Route path="/" exact element={<Navigate replace to="/about" />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/myDiary/*" element={<MyDiary />} />
@@ -22,17 +25,7 @@ function App() {
         <Route path="/personalCenter" element={<PersonalCenter />} />
         <Route path="/about" element={<About />} />
         <Route path="/not-found" element={<NotFound />} />
-        <Route
-          path="/"
-          exact
-          element={<Navigate replace to="/myDiary/personalDiary" />}
-        />
         <Route path="*" element={<Navigate replace to="/not-found" />} />
-        <Route
-          path="/myDiary"
-          exact
-          element={<Navigate replace to="/myDiary/personalDiary" />}
-        />
       </Routes>
     </React.Fragment>
   );
