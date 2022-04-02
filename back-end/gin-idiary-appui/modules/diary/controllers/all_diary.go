@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"csc4001-idiary-app/back-end/gin-idiary-appui/library/response"
-	diaryModel "csc4001-idiary-app/back-end/gin-idiary-appui/modules/diary/model"
-	diaryService "csc4001-idiary-app/back-end/gin-idiary-appui/modules/diary/services"
+	"gin-idiary-appui/library/response"
+	diaryModel "gin-idiary-appui/modules/diary/model"
+	diaryService "gin-idiary-appui/modules/diary/services"
 
 	"github.com/gin-gonic/gin"
 )

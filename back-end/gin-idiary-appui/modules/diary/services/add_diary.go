@@ -7,5 +7,5 @@ import (
 )
 
 func AddDiary(ctx context.Context, pars diaryModel.DiaryRegisterPars) error {
-	return diaryData.AllDiary(ctx, pars)
+	return diaryData.AddDiary(ctx, pars)
 }

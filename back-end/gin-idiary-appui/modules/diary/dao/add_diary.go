@@ -2,13 +2,13 @@ package dao
 
 import (
 	"context"
-	"csc4001-idiary-app/back-end/gin-idiary-appui/library/mysql"
-	"csc4001-idiary-app/back-end/gin-idiary-appui/modules/diary/constant"
-	diaryModel "csc4001-idiary-app/back-end/gin-idiary-appui/modules/diary/model"
+	"gin-idiary-appui/library/mysql"
+	"gin-idiary-appui/modules/diary/constant"
+	diaryModel "gin-idiary-appui/modules/diary/model"
 )
 
 func AddDiary(ctx context.Context, pars diaryModel.DiaryRegisterPars) error {
-	client, err := mysql.GetMysqlClient(ctx, constant.MYSQL_DB_IDIARY_DIARY)
+	client, err := mysql.GetClient(ctx, constant.MYSQL_DB_IDIARY_DIARY)
 	if err != nil {
 		return err
 	}

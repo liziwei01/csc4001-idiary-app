@@ -4,6 +4,7 @@ import (
 	"gin-idiary-appui/library/response"
 	userService "gin-idiary-appui/modules/email/services"
 	userModel "gin-idiary-appui/modules/user/model"
+
 	"github.com/gin-gonic/gin"
 )
 

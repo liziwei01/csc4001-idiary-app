@@ -2,10 +2,8 @@ package dao
 
 import (
 	"context"
-	"csc4001-idiary-app/back-end/gin-idiary-appui/modules/diary/constant"
-	diaryModel "csc4001-idiary-app/back-end/gin-idiary-appui/modules/diary/model"
 	"gin-idiary-appui/library/mysql"
-	"testing"
+	diaryModel "gin-idiary-appui/modules/diary/model"
 )
 
 func AllDiary(ctx context.Context, pars diaryModel.DiaryRegisterPars) []diaryModel.DiaryInfo {
@@ -19,7 +17,7 @@ func AllDiary(ctx context.Context, pars diaryModel.DiaryRegisterPars) []diaryMod
 	}
 
 	where := map[string]interface{}{
-		"user_id": pars.UserID
+		"user_id": pars.UserID,
 	}
 	columns := []string{"*"}
 
@@ -31,6 +29,3 @@ func AllDiary(ctx context.Context, pars diaryModel.DiaryRegisterPars) []diaryMod
 	}
 	return diary
 }
-
-
-
