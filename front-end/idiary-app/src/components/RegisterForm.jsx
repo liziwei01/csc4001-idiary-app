@@ -113,7 +113,7 @@ class RegisterForm extends Component {
   };
   handleClicked = async () => {
     console.log("send");
-    const response = await userService.send(this.state.data);
+    const response = await userService.send_email(this.state.data);
   };
 
   render() {

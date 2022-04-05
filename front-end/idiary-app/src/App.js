@@ -9,6 +9,8 @@ import NavBar from "./components/navBar";
 import "./App.css";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/RegisterForm";
+import ForgetPasswordByProblem from "./components/forgetPasswordByProblem";
+import ForgetPasswordByEmail from "./components/forgetPasswordByEmail";
 import PersonalDiary from "./components/personalDiary";
 import FriendsDiary from "./components/friendsDiary";
 
@@ -17,6 +19,14 @@ function App() {
     <React.Fragment>
       <NavBar />
       <Routes>
+        <Route
+          path="/forgetPasswordByProblem"
+          element={<ForgetPasswordByProblem />}
+        />
+        <Route
+          path="/forgetPasswordByEmail"
+          element={<ForgetPasswordByEmail />}
+        />
         <Route path="/" exact element={<Navigate replace to="/about" />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/login" element={<LoginForm />} />

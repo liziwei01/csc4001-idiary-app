@@ -2,12 +2,15 @@ import React, { Component } from "react";
 import Input from "./common/input";
 import Button from "./common/button";
 import { Link } from "react-router-dom";
+import * as userService from "./../service/userService";
 
 class LoginForm extends Component {
   state = { data: { username: "", password: "" }, errors: {} };
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     //server
+    const data = { ...this.state.data };
+    await userService.login(data);
   };
   validate = () => {
     const { data } = this.state;
@@ -65,7 +68,7 @@ class LoginForm extends Component {
           <Link className="ms-4 mt-4" to="/register">
             Register
           </Link>
-          <Link className="ms-4 mt-4" to="/register">
+          <Link className="ms-4 mt-4" to="/forgetPasswordByEmail">
             Forget Password
           </Link>
         </form>
