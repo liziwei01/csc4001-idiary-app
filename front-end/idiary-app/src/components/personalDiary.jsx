@@ -7,11 +7,12 @@ import threePic from "./3.jpg";
 import Pagination from "./common/pagination.jsx";
 import _ from "lodash";
 import { paginate } from "../utils/paginate";
-
+import ListGroup from "./common/listgroup.jsx";
 var dataList = [
   {
     myUrl: onePic,
     headUrl: onePic,
+    privacy: { name: "private", _id: 1 },
     nickName: "Robin",
     content:
       "test1111111111111111111111111111111111111111111111111111111111111111111111111",
@@ -19,7 +20,7 @@ var dataList = [
     NoForward: 202, //点赞
     NoComment: 142, //评论
     NoPointGreat: 423, //转发
-    sendTime: "11月2日",
+    sendTime: "11.2",
     contentImgUrls: [twoPic, threePic],
     isShowComment: false,
     isTransfer: false,
@@ -38,13 +39,14 @@ var dataList = [
   {
     myUrl: onePic,
     headUrl: onePic,
+    privacy: { name: "protected", _id: 2 },
     nickName: "Robin",
     content: "test22222222222222222222222222222222222",
     NoCollect: 132,
     NoForward: 202,
     NoComment: 142,
     NoPointGreat: 423,
-    sendTime: "11月2日",
+    sendTime: "11.2",
     contentImgUrls: [twoPic, threePic],
     isShowComment: false,
     id: 2,
@@ -57,12 +59,42 @@ var dataList = [
   },
 ];
 
+for (let i = 0; i < 10; i++) {
+  let web = {
+    myUrl: onePic,
+    headUrl: onePic,
+    privacy: { name: "public", _id: 3 },
+    nickName: "Daduo",
+    content: "test333333333333333333333333333333",
+    NoCollect: 132,
+    NoForward: 202,
+    NoComment: 142,
+    NoPointGreat: 423,
+    sendTime: "11.1",
+    contentImgUrls: [twoPic, threePic],
+    isShowComment: false,
+    id: 2,
+    commentList: [
+      {
+        name: "xxx",
+        age: 18,
+      },
+    ],
+  };
+  dataList.push(web);
+}
+
 class personalDiary extends React.Component {
   state = {
+    privacy: [
+      { name: "public", _id: 3 },
+      { name: "protected", _id: 2 },
+      { name: "private", _id: 1 },
+    ],
     list: [...dataList],
     currentPage: 1,
-    pageSize: 1,
-    selectedGenre: null,
+    pageSize: 4,
+    selectedPrivacy: null,
     sortColumn: { path: "sendTime", order: "asc" },
   };
 
@@ -75,10 +107,19 @@ class personalDiary extends React.Component {
     // })
   }
   getPagedData = () => {
-    const { pageSize, currentPage, sortColumn, list: allDiaries } = this.state;
+    const {
+      pageSize,
+      selectedPrivacy,
+      currentPage,
+      sortColumn,
+      list: allDiaries,
+    } = this.state;
 
     let filtered = allDiaries;
-
+    if (selectedPrivacy && selectedPrivacy._id)
+      filtered = allDiaries.filter(
+        (m) => m.privacy._id === selectedPrivacy._id
+      );
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
     const diaries = paginate(sorted, currentPage, pageSize);
@@ -88,23 +129,37 @@ class personalDiary extends React.Component {
   handlePageChange = (page) => {
     this.setState({ currentPage: page });
   };
+  handlePrivacySelect = (privacy) => {
+    this.setState({ selectedPrivacy: privacy, currentPage: 1 });
+  };
   render() {
     const { pageSize, currentPage } = this.state;
     const { totalCount, data: diaries } = this.getPagedData();
     return (
       <div>
-        <WeiBoList
-          data={diaries}
-          update={(list) => {
-            this.setState({ list });
-          }}
-        />
-        <Pagination
-          itemsCount={totalCount}
-          pageSize={pageSize}
-          currentPage={currentPage}
-          onPageChange={this.handlePageChange}
-        />
+        <div className="row">
+          <div className="col-3">
+            <ListGroup
+              items={this.state.privacy}
+              selectedItem={this.state.selectedPrivacy}
+              onItemSelect={this.handlePrivacySelect}
+            />
+          </div>
+          <div className="col">
+            <WeiBoList
+              data={diaries}
+              update={(list) => {
+                this.setState({ list });
+              }}
+            />
+            <Pagination
+              itemsCount={totalCount}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              onPageChange={this.handlePageChange}
+            />
+          </div>
+        </div>
       </div>
     );
   }

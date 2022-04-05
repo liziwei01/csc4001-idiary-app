@@ -6,7 +6,7 @@ export default class WeiBoList extends Component {
     super(props);
     this.state = {
       inputVal: "",
-      transferVal:""
+      transferVal: "",
     };
   }
 
@@ -39,14 +39,14 @@ export default class WeiBoList extends Component {
     );
   }
 
-  like = (id,number) => {
+  like = (id, number) => {
     const arr = this.props.data.map((ele) => {
-        if (ele.id === id) {
-          return { ...ele, NoForward: number+1 };
-        }
-        return { ...ele };
-      });
-      this.props.update(arr);
+      if (ele.id === id) {
+        return { ...ele, NoForward: number + 1 };
+      }
+      return { ...ele };
+    });
+    this.props.update(arr);
   };
 
   comment = (id) => {
@@ -65,32 +65,35 @@ export default class WeiBoList extends Component {
     });
   };
 
-  btnSure = (id,name) => {
+  btnSure = (id, name) => {
     // 拿到后发送给服务端
     const arr = this.props.data.map((ele) => {
-        if (ele.id === id) {
-          return { ...ele, 
-            commentList: [...ele.commentList,
+      if (ele.id === id) {
+        return {
+          ...ele,
+          commentList: [
+            ...ele.commentList,
             {
               name: name,
-              comment: this.state.inputVal
-            }]
-          };
-        }
-        return { ...ele };
-      });
-      this.props.update(arr);
+              comment: this.state.inputVal,
+            },
+          ],
+        };
+      }
+      return { ...ele };
+    });
+    this.props.update(arr);
   };
- 
+
   transferdata = (id) => {
     const arr = this.props.data.map((ele) => {
-        if (ele.id === id) {
-          return { ...ele, isTransfer: true };
-        }
-        return { ...ele };
-      });
-      this.props.update(arr);
-  }
+      if (ele.id === id) {
+        return { ...ele, isTransfer: true };
+      }
+      return { ...ele };
+    });
+    this.props.update(arr);
+  };
 
   transferChange = (e) => {
     this.setState({
@@ -98,16 +101,16 @@ export default class WeiBoList extends Component {
     });
   };
 
-  transfer = (id,number) => {
+  transfer = (id, number) => {
     // 增加转发数量
     const arr = this.props.data.map((ele) => {
-        if (ele.id === id) {
-          return { ...ele, NoPointGreat: number+1 };
-        }
-        return { ...ele };
-      });
-      this.props.update(arr);
-    
+      if (ele.id === id) {
+        return { ...ele, NoPointGreat: number + 1 };
+      }
+      return { ...ele };
+    });
+    this.props.update(arr);
+
     //自己发送日记
   };
 
@@ -123,9 +126,11 @@ export default class WeiBoList extends Component {
               {/* footer */}
               <div className="commentViewStyle">
                 <ul className="ulStyle">
-                  
                   <div className="shuxian"></div>
-                  <li className="liStyle" onClick={() => this.like(ele.id,ele.NoForward)}>
+                  <li
+                    className="liStyle"
+                    onClick={() => this.like(ele.id, ele.NoForward)}
+                  >
                     点赞:{ele.NoForward}
                   </li>
 
@@ -135,42 +140,50 @@ export default class WeiBoList extends Component {
                   </li>
 
                   <div className="shuxian"></div>
-                  <li className="liStyle" onClick={() => this.transferdata(ele.id)}>
+                  <li
+                    className="liStyle"
+                    onClick={() => this.transferdata(ele.id)}
+                  >
                     转发:{ele.NoPointGreat}
                   </li>
                 </ul>
-                
+
                 {ele.isTransfer && (
                   <div>
-
-                    <input style={{width:'1000px'}}
+                    <input
+                      style={{ width: "1000px" }}
                       type="text"
                       onChange={this.transferChange}
                       value={this.state.transferVal}
                     />
                     <pre></pre>
-                    <button onClick={()=>this.transfer(ele.id,ele.NoPointGreat)}>转发</button>
+                    <button
+                      onClick={() => this.transfer(ele.id, ele.NoPointGreat)}
+                    >
+                      转发
+                    </button>
                   </div>
                 )}
 
-
                 {ele.isShowComment && (
                   <div>
-
-                    <input style={{width:'1000px'}}
+                    <input
+                      style={{ width: "1000px" }}
                       type="text"
                       onChange={this.intChange}
                       value={this.state.inputVal}
                     />
                     <pre></pre>
-                    <button onClick={()=>this.btnSure(ele.id,ele.nickName)}>评论</button>
+                    <button onClick={() => this.btnSure(ele.id, ele.nickName)}>
+                      评论
+                    </button>
                   </div>
                 )}
                 {ele.isShowComment &&
                   ele.commentList.map((subEle, subIndex) => {
                     return (
                       <div key={subIndex}>
-                         {subEle.name} : {subEle.comment}
+                        {subEle.name} : {subEle.comment}
                       </div>
                     );
                   })}
