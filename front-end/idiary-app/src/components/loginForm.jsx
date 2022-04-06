@@ -45,9 +45,9 @@ class LoginForm extends Component {
   render() {
     const { data, errors } = this.state;
     return (
-      <div className="form">
-        <h1>Login</h1>
+      <div className="form-signin">
         <form onSubmit={this.handleSubmit}>
+          <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
           <Input
             onChange={this.handleChange}
             value={data.username}
@@ -64,13 +64,23 @@ class LoginForm extends Component {
             errors={errors}
             label="Password"
           />
-          <Button disabled={this.validate()} label="Log in" />
-          <Link className="ms-4 mt-4" to="/register">
-            Register
-          </Link>
-          <Link className="ms-4 mt-4" to="/forgetPasswordByEmail">
-            Forget Password
-          </Link>
+          <Button disabled={this.validate()} label="Sign in" />
+          <div className="row justify-content-center my-2">
+            <Link className="links" to="/forgetPasswordByEmail">
+              <small className="text-muted">Forget Password?</small>
+            </Link>
+          </div>
+
+          <hr class="my-4"></hr>
+          <div class="text2 mt-4 d-flex flex-row align-items-center">
+            {" "}
+            <span>
+              Don't have an account?
+              <span class="register">
+                <Link to="/register">Register here</Link>
+              </span>
+            </span>{" "}
+          </div>
         </form>
       </div>
     );

@@ -64,8 +64,10 @@ class ForgetPasswordByProblem extends Component {
   render() {
     const { data, errors } = this.state;
     return (
-      <div className="form">
-        <h1 className="mb-3">We need to verify your identity</h1>
+      <div className="form-register">
+        <h1 className="h3 mb-3 fw-normal">
+          We need to verify your identity ...
+        </h1>
         <form onSubmit={this.handleSubmit}>
           <InputWithDesc
             onChange={this.handleChange}
@@ -101,10 +103,14 @@ class ForgetPasswordByProblem extends Component {
             label="What's your favorite color?"
           />
           <Button disabled={this.validate()} label="Continue" />
-          <Link className="ms-4 mt-4" to="/forgetPasswordByEmail">
-            By email
-          </Link>
         </form>
+        <hr class="my-4"></hr>
+        <h2 class="fs-5 fw-bold mb-3">Or you can choose</h2>
+        <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-4">
+          <Link className="links" to="/forgetPasswordByEmail">
+            By Email
+          </Link>
+        </button>
       </div>
     );
   }
