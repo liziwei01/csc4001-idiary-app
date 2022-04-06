@@ -119,8 +119,8 @@ class RegisterForm extends Component {
   render() {
     const { data, errors } = this.state;
     return (
-      <div className="form">
-        <h1 className="mb-3">Register</h1>
+      <div class="form-register">
+        <h1 className="h3 mb-3 fw-normal">Please sign up</h1>
         <form onSubmit={this.handleSubmit}>
           <InputWithButton
             onChange={this.handleChange}
@@ -225,12 +225,57 @@ class RegisterForm extends Component {
               data-bs-toggle="modal"
               data-bs-target="#staticBackdrop"
             >
-              Agree with the agreement.
+              I agree all statements in{" "}
+              <a
+                href="#!"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"
+              >
+                Terms of service
+              </a>
             </label>
           </div>
 
-          <Button disabled={this.validate()} label="Register" />
+          <Button disabled={this.validate()} label="Create your account!" />
         </form>
+        <div
+          class="modal fade"
+          id="staticBackdrop"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">
+                  Modal title
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">...</div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="button" class="btn btn-primary">
+                  Understood
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
