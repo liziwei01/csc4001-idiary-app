@@ -2,15 +2,11 @@ import React from "react";
 
 const Input = ({ label, errors, id, ...rest }) => {
   return (
-    <div className="mb-3">
-      <label htmlFor={id} className="form-label">
-        {label}
+    <div className="form-group">
+      <label htmlFor={id}>
+        <i className={label}></i>
       </label>
-      <input
-        {...rest}
-        className={errors[id] ? "form-control is-invalid" : "form-control"}
-        id={id}
-      />
+      <input {...rest} id={id} />
     </div>
   );
 };

@@ -50,40 +50,47 @@ class ForgetPasswordByEmail extends Component {
   render() {
     const { data, errors } = this.state;
     return (
-      <div className="form-register">
-        <h1 className="h3 mb-3 fw-normal">
-          We need to verify your identity ...
-        </h1>
-        <form onSubmit={this.handleSubmit}>
-          <InputWithButton
-            onChange={this.handleChange}
-            value={data.email}
-            type="email"
-            id="email"
-            errors={errors}
-            text="Send"
-            label="Email Address"
-            onClick={this.handleClicked}
-          />
-          <InputWithDesc
-            onChange={this.handleChange}
-            value={data.verification}
-            type="text"
-            id="verification"
-            errors={errors}
-            text=""
-            label="Verification Code"
-          />
-          <Button disabled={this.validate()} label="Continue" />
-          <hr class="my-4"></hr>
-          <h2 class="fs-5 fw-bold mb-3">Or you can choose</h2>
-          <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-4">
-            <Link className="links" to="/forgetPasswordByProblem">
-              By Secret Protection Problem
-            </Link>
-          </button>
-        </form>
-      </div>
+      <section class="signup">
+        <div class="container">
+          <div class="signup-content">
+            <div className="form-register">
+              <h1 className="h3 mb-3 fw-normal">
+                We need to verify your identity ...
+              </h1>
+              <form onSubmit={this.handleSubmit}>
+                <InputWithButton
+                  onChange={this.handleChange}
+                  value={data.email}
+                  type="email"
+                  id="email"
+                  errors={errors}
+                  text="Send"
+                  label="fa fa-envelope"
+                  placeholder="email"
+                  onClick={this.handleClicked}
+                />
+                <InputWithDesc
+                  onChange={this.handleChange}
+                  value={data.verification}
+                  type="text"
+                  id="verification"
+                  errors={errors}
+                  placeholder="Verification Code"
+                  label="fa fa-keyboard-o"
+                />
+                <Button disabled={this.validate()} label="Continue" />
+                <hr class="my-4"></hr>
+                <h2 class="fs-5 fw-bold mb-3">Or you can choose</h2>
+                <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-4">
+                  <Link className="links" to="/forgetPasswordByProblem">
+                    By Secret Protection Problem
+                  </Link>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
     );
   }
 }
