@@ -4,18 +4,14 @@ const InputWithDesc = ({ text, errors, label, id, ...rest }) => {
   let help = { id };
   help += "HelpInline";
   return (
-    <div className="mb-3 row">
-      <div className="form-floating col">
-        <input
-          {...rest}
-          className={errors[id] ? "form-control is-invalid" : "form-control"}
-          id={id}
-          aria-describedby={help}
-          placeholder={label}
-        />
-        <label htmlFor={id}>{label}</label>
+    <div className="mb-3">
+      <div className="form-group mb-0">
+        <input {...rest} id={id} aria-describedby={help} />
+        <label htmlFor={id}>
+          <i className={label}></i>
+        </label>
       </div>
-      <div className="col">
+      <div>
         <span id={help} className="form-text">
           {text}
         </span>

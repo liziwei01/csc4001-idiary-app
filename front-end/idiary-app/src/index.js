@@ -5,7 +5,9 @@ import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "font-awesome/css/font-awesome.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
+import "./style.css";
 import App from "./App";
 
 ReactDOM.render(

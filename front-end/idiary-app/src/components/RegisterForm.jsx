@@ -4,7 +4,7 @@ import InputWithButton from "./common/inputWithButton";
 import InputWithDesc from "./common/inputWithDesc";
 import Button from "./common/button";
 import Input from "./common/input";
-
+import { Link } from "react-router-dom";
 class RegisterForm extends Component {
   state = {
     data: {
@@ -119,164 +119,194 @@ class RegisterForm extends Component {
   render() {
     const { data, errors } = this.state;
     return (
-      <div class="form-register">
-        <h1 className="h3 mb-3 fw-normal">Please sign up</h1>
-        <form onSubmit={this.handleSubmit}>
-          <InputWithButton
-            onChange={this.handleChange}
-            value={data.email}
-            type="email"
-            id="email"
-            errors={errors}
-            text="Send"
-            label="Email Address"
-            onClick={this.handleClicked}
-          />
-          <InputWithDesc
-            onChange={this.handleChange}
-            value={data.verification}
-            type="text"
-            id="verification"
-            errors={errors}
-            text=""
-            label="Verification Code"
-          />
-
-          <InputWithDesc
-            onChange={this.handleChange}
-            value={data.username}
-            type="text"
-            id="username"
-            errors={errors}
-            text="Must be 6-20 characters long."
-            label="Username"
-          />
-          <InputWithDesc
-            onChange={this.handleChange}
-            value={data.password}
-            type="password"
-            id="password"
-            errors={errors}
-            text="Must be 8-20 characters long."
-            label="Password"
-          />
-          <InputWithDesc
-            onChange={this.handleChange}
-            value={data.repeatpassword}
-            type="repeatpassword"
-            id="repeatpassword"
-            errors={errors}
-            text="Please repeat your password."
-            label="Repeat Password"
-          />
-
-          <div className="form-check form-switch mb-3">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="secretproblem"
-              onClick={this.handlechecked}
-            />
-            <label className="form-check-label" htmlFor="secretproblem">
-              Answer Secret Protect Problems
-            </label>
-          </div>
-
-          {data.secretproblem && (
-            <div>
-              <Input
-                onChange={this.handleChange}
-                value={data.answer1}
-                type="text"
-                id="answer1"
-                errors={errors}
-                label="What's your birth day?"
-              />
-              <Input
-                onChange={this.handleChange}
-                value={data.answer2}
-                type="text"
-                id="answer2"
-                errors={errors}
-                label="What's your mother's name?"
-              />
-              <Input
-                onChange={this.handleChange}
-                value={data.answer3}
-                type="text"
-                id="answer3"
-                errors={errors}
-                label="What's your favorite color?"
-              />
-            </div>
-          )}
-
-          <div className="mb-3 form-check">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              id="agreement"
-              onClick={this.handlechecked}
-            />
-            <label
-              className="form-check-label"
-              htmlFor="agreement"
-              data-bs-toggle="modal"
-              data-bs-target="#staticBackdrop"
-            >
-              I agree all statements in{" "}
-              <a
-                href="#!"
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
+      <section class="signup">
+        <div class="container">
+          <div class="signup-content">
+            <div class="signup-form">
+              <h2 class="form-title">Sign up</h2>
+              <form
+                onSubmit={this.handleSubmit}
+                method="POST"
+                class="register-form"
+                id="register-form"
               >
-                Terms of service
-              </a>
-            </label>
-          </div>
+                <InputWithButton
+                  onChange={this.handleChange}
+                  value={data.email}
+                  type="email"
+                  id="email"
+                  errors={errors}
+                  text="Send"
+                  onClick={this.handleClicked}
+                  label="fa fa-envelope"
+                  placeholder="email"
+                />
+                <Input
+                  onChange={this.handleChange}
+                  value={data.verification}
+                  type="text"
+                  id="verification"
+                  errors={errors}
+                  label="fa fa-keyboard-o"
+                  placeholder="verifaction code"
+                />
 
-          <Button disabled={this.validate()} label="Create your account!" />
-        </form>
-        <div
-          class="modal fade"
-          id="staticBackdrop"
-          data-bs-backdrop="static"
-          data-bs-keyboard="false"
-          tabindex="-1"
-          aria-labelledby="staticBackdropLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">
-                  Modal title
-                </h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
+                <InputWithDesc
+                  onChange={this.handleChange}
+                  value={data.username}
+                  type="text"
+                  id="username"
+                  errors={errors}
+                  text="Must be 6-20 characters long."
+                  label="fa fa-user"
+                  placeholder="username"
+                />
+                <InputWithDesc
+                  onChange={this.handleChange}
+                  value={data.password}
+                  type="password"
+                  id="password"
+                  errors={errors}
+                  text="Must be 8-20 characters long."
+                  label="fa fa-unlock-alt"
+                  placeholder="password"
+                />
+                <InputWithDesc
+                  onChange={this.handleChange}
+                  value={data.repeatpassword}
+                  type="repeatpassword"
+                  id="repeatpassword"
+                  errors={errors}
+                  text="Please repeat your password."
+                  label="fa fa-repeat"
+                  placeholder="repeat password"
+                />
+
+                <div className="form-group mb-3">
+                  <input
+                    type="checkbox"
+                    class="agree-term"
+                    id="secretproblem"
+                    onClick={this.handlechecked}
+                  />
+                  <label htmlFor="secretproblem" class="label-agree-term">
+                    <span>
+                      <span></span>
+                    </span>
+                    Answer Secret Protect Problems
+                  </label>
+                </div>
+
+                {data.secretproblem && (
+                  <div>
+                    <Input
+                      onChange={this.handleChange}
+                      value={data.answer1}
+                      type="text"
+                      id="answer1"
+                      errors={errors}
+                      placeholder="What's your birth day?"
+                      label="fa fa-question"
+                    />
+                    <Input
+                      onChange={this.handleChange}
+                      value={data.answer2}
+                      type="text"
+                      id="answer2"
+                      errors={errors}
+                      placeholder="What's your mother's name?"
+                      label="fa fa-question"
+                    />
+                    <Input
+                      onChange={this.handleChange}
+                      value={data.answer3}
+                      type="text"
+                      id="answer3"
+                      errors={errors}
+                      placeholder="What's your favorite color?"
+                      label="fa fa-question"
+                    />
+                  </div>
+                )}
+
+                <div className="form-group">
+                  <input
+                    type="checkbox"
+                    class="agree-term"
+                    id="agreement"
+                    onClick={this.handlechecked}
+                  />
+                  <label class="label-agree-term" htmlFor="agreement">
+                    <span>
+                      <span></span>
+                    </span>
+                    I agree all statements in{" "}
+                    <a
+                      href="#!"
+                      data-bs-toggle="modal"
+                      data-bs-target="#staticBackdrop"
+                      class="term-service"
+                    >
+                      Terms of service
+                    </a>
+                  </label>
+                </div>
+
+                <Button
+                  disabled={this.validate()}
+                  label="Create your account!"
+                />
+              </form>
+              <div
+                class="modal fade"
+                id="staticBackdrop"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabindex="-1"
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">
+                        Modal title
+                      </h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">...</div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="modal-body">...</div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="button" class="btn btn-primary">
-                  Understood
-                </button>
-              </div>
+            </div>
+            <div class="signup-image">
+              <figure>
+                <img
+                  src={require("../img/signup-image.jpg")}
+                  alt="sing up image"
+                />
+              </figure>
+              <Link to="/login" class="signup-image-link">
+                I am already member
+              </Link>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     );
   }
 }

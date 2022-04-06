@@ -45,44 +45,65 @@ class LoginForm extends Component {
   render() {
     const { data, errors } = this.state;
     return (
-      <div className="form-signin">
-        <form onSubmit={this.handleSubmit}>
-          <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
-          <Input
-            onChange={this.handleChange}
-            value={data.username}
-            type="text"
-            id="username"
-            errors={errors}
-            label="Username"
-          />
-          <Input
-            onChange={this.handleChange}
-            value={data.password}
-            type="password"
-            id="password"
-            errors={errors}
-            label="Password"
-          />
-          <Button disabled={this.validate()} label="Sign in" />
-          <div className="row justify-content-center my-2">
-            <Link className="links" to="/forgetPasswordByEmail">
-              <small className="text-muted">Forget Password?</small>
-            </Link>
-          </div>
+      <section class="sign-in">
+        <div class="container">
+          <div class="signin-content">
+            <div class="signin-image">
+              <figure>
+                <img
+                  src={require("../img/signin-image.jpg")}
+                  alt="sing up image"
+                />
+              </figure>
+            </div>
+            <div className="signin-form">
+              <h2 class="form-title">Sign up</h2>
+              <form
+                onSubmit={this.handleSubmit}
+                method="POST"
+                class="register-form"
+                id="login-form"
+              >
+                <Input
+                  onChange={this.handleChange}
+                  value={data.username}
+                  type="text"
+                  id="username"
+                  errors={errors}
+                  label="fa fa-user"
+                  placeholder="username"
+                />
+                <Input
+                  onChange={this.handleChange}
+                  value={data.password}
+                  type="password"
+                  id="password"
+                  errors={errors}
+                  label="fa fa-unlock-alt"
+                  placeholder="password"
+                />
+                <Button disabled={this.validate()} label="Sign in" />
+                <div className="row justify-content-center my-2">
+                  <Link className="links" to="/forgetPasswordByEmail">
+                    <small className="text-muted">Forget Password?</small>
+                  </Link>
+                </div>
 
-          <hr class="my-4"></hr>
-          <div class="text2 mt-4 d-flex flex-row align-items-center">
-            {" "}
-            <span>
-              Don't have an account?
-              <span class="register">
-                <Link to="/register">Register here</Link>
-              </span>
-            </span>{" "}
+                <hr class="my-4"></hr>
+                <div class="text2 mt-4 d-flex flex-row align-items-center">
+                  {" "}
+                  <span>
+                    Don't have an account?
+                    <span class="register ">
+                      <Link to="/register">Register here</Link>
+                    </span>
+                  </span>{" "}
+                </div>
+              </form>
+            </div>
           </div>
-        </form>
-      </div>
+        </div>
+      </section>
     );
   }
 }
