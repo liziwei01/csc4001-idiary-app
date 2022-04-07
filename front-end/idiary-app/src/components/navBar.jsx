@@ -2,54 +2,50 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
 const NavBar = () => {
+  var width = "280px";
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container-fluid">
-        <Link className="navbar-brand" to="/about">
-          iDiary
-        </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="/myDiary">
-                MyDiary
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/world">
-                World
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/personalCenter">
-                PersonalCenter
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/login">
-                Login
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/register">
-                Register
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <div class="container" style={{ width: width }}>
+      <nav>
+        <ul class="mcd-menu">
+          <li>
+            <Link to="/about">
+              <i class="fa fa-home"></i>
+              <strong>iDiary</strong>
+            </Link>
+          </li>
+          <li>
+            <NavLink className="nav-link" aria-current="page" to="/myDiary">
+              <i class="fa fa-edit"></i>
+              <strong>My diary</strong>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink className="nav-link" to="/world">
+              <i class="fa fa-gift"></i>
+              <strong>World</strong>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/personalCenter" className="nav-link">
+              <i class="fa fa-globe"></i>
+              <strong>PersonalCenter</strong>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/login" className="nav-link">
+              <i class="fa fa-comments-o"></i>
+              <strong>Login</strong>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/register" className="nav-link">
+              <i class="fa fa-picture-o"></i>
+              <strong>Register</strong>
+            </NavLink>
+          </li>
+        </ul>
+      </nav>
+    </div>
   );
 };
 
