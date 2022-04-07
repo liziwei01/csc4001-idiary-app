@@ -23,7 +23,12 @@ code {
   margin: 0 100px;
 }
 
-
+.form-register {
+  width: 100%;
+  max-width: 730px;
+  padding: 15px;
+  margin: auto;
+}
 
 .links{
   text-decoration: none;
