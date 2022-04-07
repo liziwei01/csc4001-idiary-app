@@ -13,6 +13,7 @@ import ForgetPasswordByProblem from "./components/forgetPasswordByProblem";
 import ForgetPasswordByEmail from "./components/forgetPasswordByEmail";
 import PersonalDiary from "./components/personalDiary";
 import FriendsDiary from "./components/friendsDiary";
+import ResetPassword from "./components/resetPassword";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           path="/forgetPasswordByEmail"
           element={<ForgetPasswordByEmail />}
         />
+        <Route path="/resetPassword" element={<ResetPassword />} />
         <Route path="/" exact element={<Navigate replace to="/about" />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/login" element={<LoginForm />} />

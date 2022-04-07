@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const PersonalCenter = () => {
   return (
@@ -89,23 +90,20 @@ const PersonalCenter = () => {
         <div class="row">
           <div class="col-md-4">
             <div class="profile-work">
-              <p>WORK LINK</p>
-              <a href="">Website Link</a>
-              <br />
-              <a href="">Bootsnipp Profile</a>
-              <br />
-              <a href="">Bootply Profile</a>
-              <p>SKILLS</p>
-              <a href="">Web Designer</a>
-              <br />
-              <a href="">Web Developer</a>
-              <br />
-              <a href="">WordPress</a>
-              <br />
-              <a href="">WooCommerce</a>
-              <br />
-              <a href="">PHP, .Net</a>
-              <br />
+              <div className="mb-3">
+                <a href="#" class="set_1_btn Vbtn-1 btn-block">
+                  <svg>
+                    <rect
+                      x="0"
+                      y="0"
+                      fill="none"
+                      width="100%"
+                      height="100%"
+                    ></rect>
+                  </svg>{" "}
+                  Follow
+                </a>
+              </div>
             </div>
           </div>
           <div class="col-md-8">
@@ -163,9 +161,64 @@ const PersonalCenter = () => {
                 role="tabpanel"
                 aria-labelledby="profile-tab"
               >
-                <div class="actions">
-                  <button class="btn">Follow</button>
-                  <button class="btn">Message</button>
+                <div class="container_odd">
+                  <div class="set_container">
+                    <div className="mb-3">
+                      <Link to="/resetPassword" class="links set_1_btn Vbtn-2">
+                        Reset Password
+                      </Link>
+                    </div>
+
+                    <hr class="my-4"></hr>
+                    <div className="mb-3">
+                      <a
+                        href="#"
+                        class="set_1_btn Vbtn-4"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                      >
+                        Log Out
+                      </a>
+                      <div
+                        class="modal fade"
+                        id="exampleModal"
+                        tabindex="-1"
+                        aria-labelledby="exampleModalLabel"
+                        aria-hidden="true"
+                      >
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">
+                                Warning
+                              </h5>
+                              <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                              ></button>
+                            </div>
+                            <div class="modal-body">
+                              Are your sure you want to log out? Any unsaved
+                              changes will be cleaned!
+                            </div>
+                            <div class="modal-footer">
+                              <button
+                                type="button"
+                                class="btn btn-primary"
+                                data-bs-dismiss="modal"
+                              >
+                                <Link to="/about" className="links text-light">
+                                  Log Out
+                                </Link>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
