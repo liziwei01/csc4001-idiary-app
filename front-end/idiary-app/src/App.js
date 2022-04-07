@@ -17,29 +17,33 @@ import ResetPassword from "./components/resetPassword";
 
 function App() {
   return (
-    <React.Fragment>
-      <NavBar />
-      <Routes>
-        <Route
-          path="/forgetPasswordByProblem"
-          element={<ForgetPasswordByProblem />}
-        />
-        <Route
-          path="/forgetPasswordByEmail"
-          element={<ForgetPasswordByEmail />}
-        />
-        <Route path="/resetPassword" element={<ResetPassword />} />
-        <Route path="/" exact element={<Navigate replace to="/about" />} />
-        <Route path="/register" element={<RegisterForm />} />
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/myDiary/*" element={<MyDiary />} />
-        <Route path="/world" element={<World />} />
-        <Route path="/personalCenter" element={<PersonalCenter />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/not-found" element={<NotFound />} />
-        <Route path="*" element={<Navigate replace to="/not-found" />} />
-      </Routes>
-    </React.Fragment>
+    <div>
+      <div className="navbar">
+        <NavBar />
+      </div>
+      <div className="mainpart">
+        <Routes>
+          <Route
+            path="/forgetPasswordByProblem"
+            element={<ForgetPasswordByProblem />}
+          />
+          <Route
+            path="/forgetPasswordByEmail"
+            element={<ForgetPasswordByEmail />}
+          />
+          <Route path="/resetPassword" element={<ResetPassword />} />
+          <Route path="/" exact element={<Navigate replace to="/about" />} />
+          <Route path="/register" element={<RegisterForm />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/myDiary/*" element={<MyDiary />} />
+          <Route path="/world" element={<World />} />
+          <Route path="/personalCenter" element={<PersonalCenter />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/not-found" element={<NotFound />} />
+          <Route path="*" element={<Navigate replace to="/not-found" />} />
+        </Routes>
+      </div>
+    </div>
   );
 }
 

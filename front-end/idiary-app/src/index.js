@@ -9,6 +9,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
 import "./css/profile.css";
 import "./css/style.css";
+import "./css/nav.css";
 import App from "./App";
 
 ReactDOM.render(
