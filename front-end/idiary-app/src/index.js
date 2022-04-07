@@ -7,7 +7,8 @@ import "bootstrap/dist/js/bootstrap.bundle";
 import "font-awesome/css/font-awesome.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
-import "./style.css";
+import "./css/profile.css";
+import "./css/style.css";
 import App from "./App";
 
 ReactDOM.render(

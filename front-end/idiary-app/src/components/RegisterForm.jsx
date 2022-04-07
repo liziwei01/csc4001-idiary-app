@@ -5,6 +5,7 @@ import InputWithDesc from "./common/inputWithDesc";
 import Button from "./common/button";
 import Input from "./common/input";
 import { Link } from "react-router-dom";
+
 class RegisterForm extends Component {
   state = {
     data: {

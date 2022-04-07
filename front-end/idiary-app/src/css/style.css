@@ -63,11 +63,6 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
   figure {
     margin: 0; }
   
-  p {
-    margin-bottom: 0px;
-    font-size: 15px;
-    color: #777; }
-  
   h2 {
     line-height: 1.66;
     margin: 0;
@@ -289,7 +284,7 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
     display: inline-block;
     width: auto; }
   
-  label {
+  .form-group label {
     position: absolute;
     left: 0;
     top: 50%;
@@ -329,7 +324,7 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
       font-size: 16px;
       color: green; }
   
-  .label-agree-term {
+  .form-group .label-agree-term {
     position: relative;
     top: 0%;
     transform: translateY(0);
