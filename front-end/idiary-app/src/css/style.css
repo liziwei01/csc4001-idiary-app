@@ -56,9 +56,10 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
     -o-appearance: radio !important;
     -ms-appearance: radio !important; }
   
-  img {
+  .sign img {
     max-width: 100%;
     height: auto; }
+
   
   figure {
     margin: 0; }
@@ -87,7 +88,7 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
     font-weight: 400;
     font-family: Arial, Helvetica, sans-serif; }
   
-  .container {
+  .sign .container {
     width: 900px;
     background: #fff;
     margin: 0 auto;
@@ -101,6 +102,8 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
     -webkit-border-radius: 20px;
     -o-border-radius: 20px;
     -ms-border-radius: 20px; }
+
+    
   
   .display-flex {
     justify-content: space-between;

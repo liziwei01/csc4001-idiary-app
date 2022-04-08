@@ -10,7 +10,14 @@ import "./index.css";
 import "./css/profile.css";
 import "./css/style.css";
 import "./css/nav.css";
+import "./css/aos.css";
+import "./css/glightbox.min.css";
+import "./css/swiper-bundle.min.css";
+import "./css/style.min.css";
+import "./css/materialdesignicons.min.css";
+import "./css/bootstrap.min.css";
 import App from "./App";
+import Landing from "./landing";
 
 ReactDOM.render(
   <BrowserRouter>

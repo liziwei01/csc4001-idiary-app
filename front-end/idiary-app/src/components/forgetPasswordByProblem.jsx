@@ -64,7 +64,7 @@ class ForgetPasswordByProblem extends Component {
   render() {
     const { data, errors } = this.state;
     return (
-      <section class="signup">
+      <section class="signup sign">
         <div class="container">
           <div class="signup-content">
             <div className="form-register">

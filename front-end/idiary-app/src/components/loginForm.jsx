@@ -45,7 +45,7 @@ class LoginForm extends Component {
   render() {
     const { data, errors } = this.state;
     return (
-      <section class="sign-in">
+      <section class="sign-in sign">
         <div class="container">
           <div class="signin-content">
             <div class="signin-image">

@@ -8,13 +8,13 @@ const Tab = () => {
         <NavLink
           className="nav-link"
           aria-current="page"
-          to="/myDiary/personalDiary"
+          to="/idiary/myDiary/personalDiary"
         >
           My Diary
         </NavLink>
       </li>
       <li className="nav-item">
-        <NavLink className="nav-link" to="/myDiary/friendsDiary">
+        <NavLink className="nav-link" to="/idiary/myDiary/friendsDiary">
           Friends
         </NavLink>
       </li>
