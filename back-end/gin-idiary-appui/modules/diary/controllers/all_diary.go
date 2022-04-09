@@ -9,15 +9,15 @@ import (
 )
 
 func AllDiary(ctx *gin.Context) {
-	inputs, hasError := getAddDiaryPars(ctx)
+	inputs, hasError := getAllDiaryPars(ctx)
 	if hasError {
 		response.StdInvalidParams(ctx)
 	}
-	err := diaryService.AddDiary(ctx, inputs)
+	diary, err := diaryService.AllDiary(ctx, inputs)
 	if err != nil {
 		response.StdFailed(ctx, err.Error())
 	}
-	response.StdSuccess(ctx)
+	response.StdSuccess(ctx, diary)
 }
 
 func getAllDiaryPars(ctx *gin.Context) (diaryModel.DiaryShowPars, bool) {

@@ -8,12 +8,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func ModifyPassword(ctx *gin.Context, password string) {
+func ModifyPassword(ctx *gin.Context) {
 	inputs, hasError := getUserPars(ctx)
 	if hasError {
 		response.StdInvalidParams(ctx)
 	}
-	err := emailService.ModifyPassword(ctx, inputs, password)
+	err := emailService.ModifyPassword(ctx, inputs)
 	if err != nil {
 		response.StdFailed(ctx, err.Error())
 	}

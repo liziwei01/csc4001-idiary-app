@@ -11,6 +11,8 @@ package httpapi
 import (
 	"net/http"
 
+	diaryRouters "gin-idiary-appui/modules/diary/routers"
+	emailRouters "gin-idiary-appui/modules/email/routers"
 	userRouters "gin-idiary-appui/modules/user/routers"
 
 	"github.com/gin-gonic/gin"
@@ -25,6 +27,8 @@ func InitRouters(router *gin.Engine) {
 	// router.Use(middleware.CheckTokenMiddleware(), middleware.GetFrequencyControlMiddleware(), middleware.PostFrequencyControlMiddleware(), middleware.MailFrequencyControlMiddleware())
 	// init routers
 	userRouters.Init(router)
+	diaryRouters.Init(router)
+	emailRouters.Init(router)
 
 	// safe router
 	router.GET("/", func(ctx *gin.Context) {

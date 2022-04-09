@@ -6,7 +6,7 @@ import (
 	emailModel "gin-idiary-appui/modules/email/model"
 )
 
-func ModifyPassword(ctx context.Context, pars emailModel.UserPars, password string) error {
+func ModifyPassword(ctx context.Context, pars emailModel.UserPars) error {
 
 	// 数据库名字，之后替换
 	client, err := mysql.GetClient(ctx, "idiary")
@@ -16,7 +16,7 @@ func ModifyPassword(ctx context.Context, pars emailModel.UserPars, password stri
 	}
 
 	update_password := map[string]interface{}{
-		"password": password,
+		"password": pars.NewPassword,
 	}
 
 	// "idiary_diary"是表名，之后替换

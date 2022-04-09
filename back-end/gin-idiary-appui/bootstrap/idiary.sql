@@ -16,7 +16,7 @@ create table `idiary_user`(
     `password` varchar(255) NOT NULL,
     `nickname` varchar(255) NOT NULL,
     `city` varchar(255) NOT NULL,
-    `picture` varchar(255) DEFAULT NULL COMMENT '头像，不知道用什么格式'
+    `picture` varchar(255) DEFAULT NULL COMMENT '头像，不知道用什么格式',
     primary key (`user_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
