@@ -1,0 +1,144 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.one-wb {
+  width: 800px;
+  height: 500px;
+  background-color: #61dafb;
+}
+
+.clearfix {
+  display: flex;
+  justify-content: baseline;
+}
+
+.ow_left {
+  border-radius: 10%;
+  border-top-left-radius: 10px;
+}
+.ow-right {
+  height: 50px;
+  width: 50px;
+}
+
+.row_extra-content_clearfix {
+  width: 50px;
+  border-radius: 10px;
+}
+
+.ow-content_row {
+  width: 1000px;
+}
+
+#j_pic70 {
+  width: 50px;
+  margin: 0 0 0 5px;
+  display: block;
+}
+
+.listRootViewStyle {
+  background-color: bisque;
+  padding: 10px;
+}
+
+.item {
+  display: flex;
+  background-color: #fff;
+  padding: 20px;
+}
+
+/*顶部view样式*/
+.topRightView {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+/*昵称和发送时间样式*/
+.nickNameAndSendTime {
+  display: flex;
+  justify-content: space-between; /**主轴的对齐方式*/
+}
+
+/*横线样式*/
+.hrStyle {
+  margin-top: -1px;
+}
+.ulStyle {
+  display: flex;
+  align-items: center;
+  margin-left: -40px;
+}
+.ulStyle li {
+  height: 30px;
+}
+/*点赞 转发*/
+.liStyle {
+  display: flex;
+  color: orange;
+  flex: 1;
+  font-size: 16px;
+  justify-content: center;
+}
+.commentViewStyle {
+  background-color: #fff;
+  margin-top: -17px;
+}
+
+.shuxian {
+  height: 20px;
+  width: 1px;
+  background-color: grey;
+}
+
+.nick-img {
+  border-radius: 20px;
+  height: 30px;
+  width: 30px;
+}
+.outerViewStyle {
+  width: 30px;
+
+  justify-content: flex-start;
+}
+
+.viewStyle {
+  align-items: "center";
+
+  padding: 10px;
+}
