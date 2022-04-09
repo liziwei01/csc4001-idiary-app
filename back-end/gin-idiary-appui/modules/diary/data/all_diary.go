@@ -6,6 +6,6 @@ import (
 	diaryModel "gin-idiary-appui/modules/diary/model"
 )
 
-func AllDiary(ctx context.Context, pars diaryModel.DiaryRegisterPars) error {
+func AllDiary(ctx context.Context, pars diaryModel.DiaryRegisterPars) ([]diaryModel.DiaryInfo, error) {
 	return diaryDao.AllDiary(ctx, pars)
 }

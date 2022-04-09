@@ -6,14 +6,14 @@ import (
 	diaryModel "gin-idiary-appui/modules/diary/model"
 )
 
-func AllDiary(ctx context.Context, pars diaryModel.DiaryRegisterPars) []diaryModel.DiaryInfo {
+func AllDiary(ctx context.Context, pars diaryModel.DiaryRegisterPars) ([]diaryModel.DiaryInfo, error) {
 
 	var diary []diaryModel.DiaryInfo
 
 	// 数据库名字，之后替换
 	client, err := mysql.GetClient(ctx, "idiary")
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	where := map[string]interface{}{
@@ -23,9 +23,9 @@ func AllDiary(ctx context.Context, pars diaryModel.DiaryRegisterPars) []diaryMod
 
 	// "idiary_diary"是表名，之后替换
 	// diary是一个list
-	_, err = client.Query(ctx, "idiary_diary", where, columns, &diary)
+	_ = client.Query(ctx, "idiary_diary", where, columns, &diary)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	return diary
+	return diary, err
 }
