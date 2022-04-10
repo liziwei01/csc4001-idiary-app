@@ -22,6 +22,8 @@ import (
 func Init(router *gin.Engine) {
 	userGroup := router.Group("/user")
 	{
-		userGroup.GET("/addUser", userControllers.AddUser)
+		userGroup.GET("/login", userControllers.Login)
+		userGroup.GET("/register", userControllers.Register)
+		userGroup.GET("/addFriend", userControllers.AddFriend)
 	}
 }
