@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-12 14:22:28
+ * @LastEditTime: 2022-04-12 22:45:52
  * @Description: file content
  */
 package services
@@ -10,6 +10,7 @@ package services
 import (
 	"context"
 	"fmt"
+	"gin-idiary-appui/library/logit"
 	emailData "gin-idiary-appui/modules/email/data"
 	emailModel "gin-idiary-appui/modules/email/model"
 )
@@ -23,7 +24,9 @@ func VerificationCode(ctx context.Context, pars emailModel.EmailPars) error {
 
 	// 如果存在, 则报错
 	if exists {
-		return fmt.Errorf("该邮箱60s内已发送过验证码")
+		err = fmt.Errorf("该邮箱60s内已发送过验证码")
+		logit.Logger.Info(err.Error())
+		return err
 	}
 
 	// 如果不存在, 发送验证码
