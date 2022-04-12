@@ -42,6 +42,7 @@ post: /upload/image
 upload image
 
 |postParams|comment|require|
+| --------- | --------- | --------- |
 |user_id|user id|yes|
 |file|file|yes|
 
