@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 15:20:51
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-12 16:11:17
+ * @LastEditTime: 2022-04-12 19:54:21
  * @Description: README
 -->
 # gin-idiary-appui
@@ -29,7 +29,7 @@ eg
 {
     "data": null,
     "errno": 0,
-    "errmsg": "success"
+    "errmsg": "Success"
 }
 
 {

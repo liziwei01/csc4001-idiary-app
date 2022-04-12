@@ -1,3 +1,10 @@
+/*
+ * @Author: liziwei01
+ * @Date: 2022-04-12 10:45:14
+ * @LastEditors: liziwei01
+ * @LastEditTime: 2022-04-12 19:51:29
+ * @Description: file content
+ */
 package routers
 
 import (
@@ -15,6 +22,6 @@ func Init(router *gin.Engine) {
 	userGroup := router.Group("/diary")
 	{
 		userGroup.GET("/allDiary", diaryControllers.AllDiary)
-		userGroup.GET("/addDiary", diaryControllers.AddDiary)
+		userGroup.POST("/addDiary", diaryControllers.AddDiary)
 	}
 }

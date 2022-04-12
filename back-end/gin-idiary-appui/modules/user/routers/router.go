@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 16:16:57
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-12 10:57:59
+ * @LastEditTime: 2022-04-12 19:51:00
  * @Description: 路由
  */
 
@@ -22,9 +22,9 @@ import (
 func Init(router *gin.Engine) {
 	userGroup := router.Group("/user")
 	{
-		userGroup.GET("/login", userControllers.Login)
-		userGroup.GET("/register", userControllers.Register)
-		userGroup.GET("/addFriend", userControllers.AddFriend)
-		userGroup.GET("/modifyPassword", userControllers.ModifyPassword)
+		userGroup.POST("/login", userControllers.Login)
+		userGroup.POST("/register", userControllers.Register)
+		userGroup.POST("/addFriend", userControllers.AddFriend)
+		userGroup.POST("/modifyPassword", userControllers.ModifyPassword)
 	}
 }
