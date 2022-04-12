@@ -49,6 +49,7 @@ upload image
 |file|file|yes|
 
 |returnParams|comment|require|
+| --------- | --------- | --------- |
 |fileName|file name|yes|
 
 eg
