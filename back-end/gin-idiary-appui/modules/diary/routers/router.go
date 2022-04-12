@@ -23,5 +23,6 @@ func Init(router *gin.Engine) {
 	{
 		userGroup.GET("/allDiary", diaryControllers.AllDiary)
 		userGroup.POST("/addDiary", diaryControllers.AddDiary)
+		userGroup.POST("/world", diaryControllers.World)
 	}
 }
