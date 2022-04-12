@@ -18,9 +18,9 @@ const InputWithButton = ({ onClick, text, errors, label, id, ...rest }) => {
       </div>
       <div className="mt-3">
         <button
-          type="submit"
           className="w-100 btn btn-secondary mb-3"
           onClick={onClick}
+          type="button"
         >
           {text}
         </button>
