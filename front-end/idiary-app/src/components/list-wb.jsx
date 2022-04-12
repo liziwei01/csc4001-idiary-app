@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from "react";
 import ContentImg from "./content-img.jsx";
+import "../css/listWb.css";
 
 export default class WeiBoList extends Component {
   constructor(props) {
@@ -7,6 +8,7 @@ export default class WeiBoList extends Component {
     this.state = {
       inputVal: "",
       transferVal: "",
+      writeVal: "",
     };
   }
 
@@ -52,17 +54,22 @@ export default class WeiBoList extends Component {
   comment = (id) => {
     const arr = this.props.data.map((ele) => {
       if (ele.id === id) {
-        return { ...ele, isShowComment: true };
+          var isshow = ele.isShowComment;
+        return { ...ele, isShowComment: !isshow };
       }
       return { ...ele };
     });
     this.props.update(arr);
   };
 
-  intChange = (e) => {
-    this.setState({
-      inputVal: e.target.value,
+  intChange = (e, id) => {
+    const arr = this.props.data.map((ele) => {
+      if (ele.id === id) {
+        return { ...ele, inputValue: e.target.value };
+      }
+      return { ...ele };
     });
+    this.props.update(arr);
   };
 
   btnSure = (id, name) => {
@@ -71,11 +78,12 @@ export default class WeiBoList extends Component {
       if (ele.id === id) {
         return {
           ...ele,
+          inputValue: "",
           commentList: [
             ...ele.commentList,
             {
               name: name,
-              comment: this.state.inputVal,
+              comment: ele.inputValue,
             },
           ],
         };
@@ -88,36 +96,59 @@ export default class WeiBoList extends Component {
   transferdata = (id) => {
     const arr = this.props.data.map((ele) => {
       if (ele.id === id) {
-        return { ...ele, isTransfer: true };
+        var istransfer = ele.isTransfer;
+        return { 
+            ...ele, 
+            isTransfer: !istransfer };
       }
       return { ...ele };
     });
     this.props.update(arr);
   };
 
-  transferChange = (e) => {
-    this.setState({
-      transferVal: e.target.value,
-    });
+  transferChange = (e,id) => {
+    const arr = this.props.data.map((ele) => {
+        if (ele.id === id) {
+          return { ...ele, transferValue: e.target.value };
+        }
+        return { ...ele };
+      });
+      this.props.update(arr);
+    
   };
 
   transfer = (id, number) => {
     // 增加转发数量
     const arr = this.props.data.map((ele) => {
       if (ele.id === id) {
-        return { ...ele, NoPointGreat: number + 1 };
+        return { 
+            ...ele, 
+            transferValue:"",
+            NoPointGreat: number + 1 };
       }
       return { ...ele };
     });
+    console.log(arr);
     this.props.update(arr);
 
     //自己发送日记
+  };
+
+  writeChange = (e) => {
+    this.setState({
+      writeVal: e.target.value,
+    });
+  };
+
+  write = () => {
+    // 拿到后发送给服务端
   };
 
   render() {
     //渲染列表
     return (
       <div className="listRootViewStyle">
+        
         {this.props.data.map((ele, index) => {
           return (
             <div key={index} style={{ marginTop: 20 }}>
@@ -129,8 +160,7 @@ export default class WeiBoList extends Component {
                   <div className="shuxian"></div>
                   <li
                     className="liStyle"
-                    onClick={() => this.like(ele.id, ele.NoForward)}
-                  >
+                    onClick={() => this.like(ele.id, ele.NoForward)}>
                     点赞:{ele.NoForward}
                   </li>
 
@@ -151,10 +181,10 @@ export default class WeiBoList extends Component {
                 {ele.isTransfer && (
                   <div>
                     <input
-                      style={{ width: "1000px" }}
+                      style={{ width: "500px" }}
                       type="text"
-                      onChange={this.transferChange}
-                      value={this.state.transferVal}
+                      onChange={(e) => this.transferChange(e, ele.id)}
+                      value={ele.transferValue}
                     />
                     <pre></pre>
                     <button
@@ -168,11 +198,11 @@ export default class WeiBoList extends Component {
                 {ele.isShowComment && (
                   <div>
                     <input
-                      style={{ width: "1000px" }}
+                      style={{ width: "500px" }}
                       type="text"
-                      onChange={this.intChange}
-                      value={this.state.inputVal}
-                    />
+                      onChange={(e) => this.intChange(e, ele.id)}
+                      value={ele.inputValue}
+                    ></input>
                     <pre></pre>
                     <button onClick={() => this.btnSure(ele.id, ele.nickName)}>
                       评论
@@ -197,5 +227,3 @@ export default class WeiBoList extends Component {
 }
 
 WeiBoList.propTypes = {};
-
-//export default ListWB;

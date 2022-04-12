@@ -21,7 +21,7 @@ var dataList = [
     NoComment: 142, //评论
     NoPointGreat: 423, //转发
     sendTime: "11.2",
-    contentImgUrls: [twoPic, threePic],
+    contentImgUrls: [twoPic, threePic, threePic,threePic,threePic,],
     isShowComment: false,
     isTransfer: false,
     id: 1,
@@ -49,6 +49,117 @@ var dataList = [
     sendTime: "11.2",
     contentImgUrls: [twoPic, threePic],
     isShowComment: false,
+    isTransfer: false,
+    id: 2,
+    commentList: [
+      {
+        name: "xxx",
+        age: 18,
+      },
+    ],
+  },
+  {
+    myUrl: onePic,
+    headUrl: onePic,
+    privacy: { name: "protected", _id: 2 },
+    nickName: "Robin",
+    content: "test22222222222222222222222222222222222",
+    NoCollect: 132,
+    NoForward: 202,
+    NoComment: 142,
+    NoPointGreat: 423,
+    sendTime: "11.2",
+    contentImgUrls: [twoPic, threePic],
+    isShowComment: false,
+    isTransfer: false,
+    id: 2,
+    commentList: [
+      {
+        name: "xxx",
+        age: 18,
+      },
+    ],
+  },
+  {
+    myUrl: onePic,
+    headUrl: onePic,
+    privacy: { name: "protected", _id: 2 },
+    nickName: "Robin",
+    content: "test22222222222222222222222222222222222",
+    NoCollect: 132,
+    NoForward: 202,
+    NoComment: 142,
+    NoPointGreat: 423,
+    sendTime: "11.2",
+    contentImgUrls: [twoPic, threePic],
+    isShowComment: false,
+    isTransfer: false,
+    id: 2,
+    commentList: [
+      {
+        name: "xxx",
+        age: 18,
+      },
+    ],
+  },
+  {
+    myUrl: onePic,
+    headUrl: onePic,
+    privacy: { name: "protected", _id: 2 },
+    nickName: "Robin",
+    content: "test22222222222222222222222222222222222",
+    NoCollect: 132,
+    NoForward: 202,
+    NoComment: 142,
+    NoPointGreat: 423,
+    sendTime: "11.2",
+    contentImgUrls: [twoPic, threePic],
+    isShowComment: false,
+    isTransfer: false,
+    id: 2,
+    commentList: [
+      {
+        name: "xxx",
+        age: 18,
+      },
+    ],
+  },
+  {
+    myUrl: onePic,
+    headUrl: onePic,
+    privacy: { name: "protected", _id: 2 },
+    nickName: "Robin",
+    content: "test22222222222222222222222222222222222",
+    NoCollect: 132,
+    NoForward: 202,
+    NoComment: 142,
+    NoPointGreat: 423,
+    sendTime: "11.2",
+    contentImgUrls: [twoPic, threePic],
+    isShowComment: false,
+    isTransfer: false,
+    id: 2,
+    commentList: [
+      {
+        name: "xxx",
+        age: 18,
+      },
+    ],
+  },
+  {
+    myUrl: onePic,
+    headUrl: onePic,
+    privacy: { name: "protected", _id: 2 },
+    nickName: "Robin",
+    content: "test22222222222222222222222222222222222",
+    NoCollect: 132,
+    NoForward: 202,
+    NoComment: 142,
+    NoPointGreat: 423,
+    sendTime: "11.2",
+    contentImgUrls: [twoPic, threePic],
+    isShowComment: false,
+    isTransfer: false,
     id: 2,
     commentList: [
       {
@@ -59,30 +170,31 @@ var dataList = [
   },
 ];
 
-for (let i = 0; i < 10; i++) {
-  let web = {
-    myUrl: onePic,
-    headUrl: onePic,
-    privacy: { name: "public", _id: 3 },
-    nickName: "Daduo",
-    content: "test333333333333333333333333333333",
-    NoCollect: 132,
-    NoForward: 202,
-    NoComment: 142,
-    NoPointGreat: 423,
-    sendTime: "11.1",
-    contentImgUrls: [twoPic, threePic],
-    isShowComment: false,
-    id: 2,
-    commentList: [
-      {
-        name: "xxx",
-        age: 18,
-      },
-    ],
-  };
-  dataList.push(web);
-}
+// for (let i = 0; i < 10; i++) {
+//   let web = {
+//     myUrl: onePic,
+//     headUrl: onePic,
+//     privacy: { name: "public", _id: 3 },
+//     nickName: "Daduo",
+//     content: "test333333333333333333333333333333",
+//     NoCollect: 132,
+//     NoForward: 202,
+//     NoComment: 142,
+//     NoPointGreat: 423,
+//     sendTime: "11.1",
+//     contentImgUrls: [twoPic, threePic, threePic,threePic,threePic,threePic,threePic,],
+//     isShowComment: false,
+//     isTransfer: false,
+//     id: i + 3,
+//     commentList: [
+//       {
+//         name: "xxx",
+//         age: 18,
+//       },
+//     ],
+//   };
+//   dataList.push(web);
+// }
 
 class personalDiary extends React.Component {
   state = {
@@ -137,7 +249,7 @@ class personalDiary extends React.Component {
     const { totalCount, data: diaries } = this.getPagedData();
     return (
       <div>
-        <div className="row">
+        <div className="row" style={{ flexWrap: "inherit" }}>
           <div className="col-3">
             <ListGroup
               items={this.state.privacy}
@@ -145,7 +257,7 @@ class personalDiary extends React.Component {
               onItemSelect={this.handlePrivacySelect}
             />
           </div>
-          <div className="col">
+          <div className="col-10">
             <WeiBoList
               data={diaries}
               update={(list) => {
@@ -153,7 +265,7 @@ class personalDiary extends React.Component {
               }}
             />
             <Pagination
-              itemsCount={totalCount}
+              itemsCount={dataList.length}
               pageSize={pageSize}
               currentPage={currentPage}
               onPageChange={this.handlePageChange}

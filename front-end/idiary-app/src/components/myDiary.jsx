@@ -1,29 +1,55 @@
-import React from "react";
+
 import { Route, Routes } from "react-router-dom";
 import PersonalDiary from "./personalDiary";
 import FriendsDiary from "./friendsDiary";
 import Tab from "./common/tab";
+import React, { Component, PropTypes } from "react";
+export default class MyDiary extends Component {
+    state = {
+        writeVal:""
+      };
+      writeChange = (e) => {
+        this.setState({
+          writeVal: e.target.value,
+        });
+      };
+    
+      write = () => {
+        // 拿到后发送给服务端
+      };
+  render(){
 
-const MyDiary = () => {
-  return (
-    <React.Fragment>
-      <div className="content">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum nisi
-          vitae nesciunt ipsa maiores eum labore consectetur vel quam,
-          voluptates, sunt voluptatibus optio placeat nulla ullam debitis
-          blanditiis inventore eius officia possimus ipsum ea. Repellendus
-          molestiae enim iste a optio error, voluptate, facere dolorum adipisci
-          porro rerum corrupti, architecto labore.
-        </p>
-      </div>
-      <Tab />
-      <Routes>
-        <Route path="personalDiary" element={<PersonalDiary />} />
-        <Route path="friendsDiary" element={<FriendsDiary />} />
-      </Routes>
-    </React.Fragment>
-  );
+    return (
+        <React.Fragment>
+          
+          <div className="wrap">
+              <div className="says">
+                <h4>write a new diary</h4>
+                <textarea
+                  style={{ width: "500px", height: "150px" }}
+                  type="text"
+                  onChange={this.writeChange}
+                  value={this.state.writeVal}
+                />
+                <div>
+                  <button
+                    onClick={() => this.write()}
+                    style={{ marginTop: "10px" }}>
+                    publish
+                  </button>
+                </div>
+              </div>
+          </div>
+          
+          <Tab />
+          <Routes>
+            <Route path="personalDiary" element={<PersonalDiary />} />
+            <Route path="friendsDiary" element={<FriendsDiary />} />
+          </Routes>
+        </React.Fragment>
+      );
+  }  
+  
 };
 
-export default MyDiary;
+
