@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-04 15:43:21
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-12 14:12:41
+ * @LastEditTime: 2022-04-12 15:19:09
  * @Description: file content
  */
 package redis
@@ -16,6 +16,7 @@ import (
 
 	"gin-idiary-appui/library/conf"
 	"gin-idiary-appui/library/env"
+	"gin-idiary-appui/library/logit"
 )
 
 const (
@@ -51,6 +52,9 @@ func GetClient(ctx context.Context, serviceName string) (Client, error) {
 	if client != nil {
 		return client, nil
 	}
+
+	logit.Logger.Error("redis client init err: %s", err.Error())
+
 	return nil, err
 }
 

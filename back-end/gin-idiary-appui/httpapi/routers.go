@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 16:04:46
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-21 22:41:14
+ * @LastEditTime: 2022-04-12 15:47:39
  * @Description: 路由分发
  */
 
@@ -13,6 +13,7 @@ import (
 
 	diaryRouters "gin-idiary-appui/modules/diary/routers"
 	emailRouters "gin-idiary-appui/modules/email/routers"
+	uploadRouters "gin-idiary-appui/modules/upload/routers"
 	userRouters "gin-idiary-appui/modules/user/routers"
 
 	"github.com/gin-gonic/gin"
@@ -29,6 +30,7 @@ func InitRouters(router *gin.Engine) {
 	userRouters.Init(router)
 	diaryRouters.Init(router)
 	emailRouters.Init(router)
+	uploadRouters.Init(router)
 
 	// safe router
 	router.GET("/", func(ctx *gin.Context) {
