@@ -19,7 +19,7 @@ export function login(user) {
 }
 
 export function send_email(user) {
-  return http.post("http://120.78.134.104:8080/email/verificationCode", {
+  return http.post("http://localhost:8080/email/verificationCode", {
     email: user.email,
   });
 }
