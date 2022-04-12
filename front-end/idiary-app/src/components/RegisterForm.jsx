@@ -136,7 +136,7 @@ class RegisterForm extends Component {
                   value={data.email}
                   type="email"
                   id="email"
-                  errors={errors}
+                  errors={errors.email}
                   text="Send"
                   onClick={this.handleClicked}
                   label="fa fa-envelope"
@@ -147,7 +147,7 @@ class RegisterForm extends Component {
                   value={data.verification}
                   type="text"
                   id="verification"
-                  errors={errors}
+                  errors={errors.verification}
                   label="fa fa-keyboard-o"
                   placeholder="verifaction code"
                 />
@@ -157,7 +157,7 @@ class RegisterForm extends Component {
                   value={data.username}
                   type="text"
                   id="username"
-                  errors={errors}
+                  errors={errors.username}
                   text="Must be 6-20 characters long."
                   label="fa fa-user"
                   placeholder="username"
@@ -167,7 +167,7 @@ class RegisterForm extends Component {
                   value={data.password}
                   type="password"
                   id="password"
-                  errors={errors}
+                  errors={errors.password}
                   text="Must be 8-20 characters long."
                   label="fa fa-unlock-alt"
                   placeholder="password"
@@ -177,7 +177,7 @@ class RegisterForm extends Component {
                   value={data.repeatpassword}
                   type="repeatpassword"
                   id="repeatpassword"
-                  errors={errors}
+                  errors={errors.repeatpassword}
                   text="Please repeat your password."
                   label="fa fa-repeat"
                   placeholder="repeat password"
@@ -205,7 +205,7 @@ class RegisterForm extends Component {
                       value={data.answer1}
                       type="text"
                       id="answer1"
-                      errors={errors}
+                      errors={errors.answer1}
                       placeholder="What's your birth day?"
                       label="fa fa-question"
                     />
@@ -214,7 +214,7 @@ class RegisterForm extends Component {
                       value={data.answer2}
                       type="text"
                       id="answer2"
-                      errors={errors}
+                      errors={errors.answer2}
                       placeholder="What's your mother's name?"
                       label="fa fa-question"
                     />
@@ -223,7 +223,7 @@ class RegisterForm extends Component {
                       value={data.answer3}
                       type="text"
                       id="answer3"
-                      errors={errors}
+                      errors={errors.answer3}
                       placeholder="What's your favorite color?"
                       label="fa fa-question"
                     />

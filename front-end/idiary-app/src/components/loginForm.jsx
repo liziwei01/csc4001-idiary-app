@@ -70,7 +70,7 @@ class LoginForm extends Component {
                   value={data.username}
                   type="text"
                   id="username"
-                  errors={errors}
+                  errors={errors.username}
                   label="fa fa-user"
                   placeholder="username"
                 />
@@ -79,7 +79,7 @@ class LoginForm extends Component {
                   value={data.password}
                   type="password"
                   id="password"
-                  errors={errors}
+                  errors={errors.password}
                   label="fa fa-unlock-alt"
                   placeholder="password"
                 />
