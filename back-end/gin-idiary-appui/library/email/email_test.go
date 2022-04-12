@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-21 17:48:04
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-21 21:20:55
+ * @LastEditTime: 2022-04-12 13:57:12
  * @Description: file content
  */
 package email
@@ -14,7 +14,7 @@ import (
 
 func TestEmail(t *testing.T) {
 	ctx := context.Background()
-	client, err := GetEmailClient(ctx, "email_idiary_user")
+	client, err := GetClient(ctx, "email_idiary_user")
 	if err != nil {
 		t.Error(err)
 	}

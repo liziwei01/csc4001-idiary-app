@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-12 10:55:50
+ * @LastEditTime: 2022-04-12 10:54:27
  * @Description: file content
  */
 package dao
@@ -10,11 +10,11 @@ package dao
 import (
 	"context"
 	"gin-idiary-appui/library/mysql"
-	"gin-idiary-appui/modules/diary/constant"
-	diaryModel "gin-idiary-appui/modules/diary/model"
+	"gin-idiary-appui/modules/user/constant"
+	userModel "gin-idiary-appui/modules/user/model"
 )
 
-func AddDiary(ctx context.Context, pars diaryModel.DiaryRegisterPars) error {
+func AddFriend(ctx context.Context, pars userModel.FriendsPars) error {
 	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY)
 	if err != nil {
 		return err
@@ -23,15 +23,10 @@ func AddDiary(ctx context.Context, pars diaryModel.DiaryRegisterPars) error {
 	mapSliceInsertData := []map[string]interface{}{}
 	mapSliceInsertData = append(mapSliceInsertData, map[string]interface{}{
 		"user_id":   pars.UserID,
-		"diary_id":  pars.DiaryID,
-		"title":     pars.Title,
-		"content":   pars.Content,
-		"timestamp": pars.Timestamp,
-		"authority": pars.Authority,
-		"address":   pars.Address,
+		"friend_id": pars.FriendID,
 	})
 
-	_, err = client.Insert(ctx, "idiary_diary", mapSliceInsertData)
+	_, err = client.Insert(ctx, "idiary_friends", mapSliceInsertData)
 	if err != nil {
 		return err
 	}

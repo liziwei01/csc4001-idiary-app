@@ -1,9 +1,9 @@
 /*
  * @Author: liziwei01
- * @Date: 2022-03-03 16:19:03
+ * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-21 22:38:49
- * @Description: 数据库操作
+ * @LastEditTime: 2022-04-12 10:50:51
+ * @Description: file content
  */
 package dao
 
@@ -14,17 +14,25 @@ import (
 	userModel "gin-idiary-appui/modules/user/model"
 )
 
-func AddUser(ctx context.Context, pars userModel.UserRegisterPars) error {
-	client, err := mysql.GetClient(ctx, constant.MYSQL_DB_IDIARY_USER)
+func Register(ctx context.Context, pars userModel.RegisterPars) error {
+	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY)
 	if err != nil {
 		return err
 	}
+
 	mapSliceInsertData := []map[string]interface{}{}
 	mapSliceInsertData = append(mapSliceInsertData, map[string]interface{}{
 		"user_id":  pars.UserID,
+		"password": pars.Password,
+		"city":     pars.City,
 		"nickname": pars.Nickname,
-		"email":    pars.Email,
+		"picture":  pars.Picture,
 	})
-	_, err = client.Insert(ctx, constant.MYSQL_USER_PRIVATE_TABLE_NAME, mapSliceInsertData)
+
+	_, err = client.Insert(ctx, "idiary_user", mapSliceInsertData)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }

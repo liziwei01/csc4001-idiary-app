@@ -1,3 +1,10 @@
+/*
+ * @Author: liziwei01
+ * @Date: 2022-04-12 11:14:30
+ * @LastEditors: liziwei01
+ * @LastEditTime: 2022-04-12 14:08:42
+ * @Description: file content
+ */
 package controllers
 
 import (
@@ -8,20 +15,20 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func ModifyPassword(ctx *gin.Context) {
-	inputs, hasError := getUserPars(ctx)
+func VerificationCode(ctx *gin.Context) {
+	inputs, hasError := getVerificationCodePars(ctx)
 	if hasError {
 		response.StdInvalidParams(ctx)
 	}
-	err := emailService.ModifyPassword(ctx, inputs)
+	err := emailService.VerificationCode(ctx, inputs)
 	if err != nil {
 		response.StdFailed(ctx, err.Error())
 	}
 	response.StdSuccess(ctx)
 }
 
-func getUserPars(ctx *gin.Context) (emailModel.UserPars, bool) {
-	var inputs emailModel.UserPars
+func getVerificationCodePars(ctx *gin.Context) (emailModel.EmailPars, bool) {
+	var inputs emailModel.EmailPars
 	err := ctx.ShouldBind(&inputs)
 	if err != nil {
 		return inputs, true

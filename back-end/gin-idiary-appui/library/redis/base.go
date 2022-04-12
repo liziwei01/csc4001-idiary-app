@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-04 15:43:21
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-09 21:37:59
+ * @LastEditTime: 2022-04-12 14:12:41
  * @Description: file content
  */
 package redis
@@ -92,5 +92,5 @@ func initClient(serviceName string) (Client, error) {
 		client := New(config)
 		return client, nil
 	}
-	return nil, fmt.Errorf("mysql conf not exist")
+	return nil, fmt.Errorf("redis conf not exist")
 }
