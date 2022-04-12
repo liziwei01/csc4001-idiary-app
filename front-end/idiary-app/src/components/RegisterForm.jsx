@@ -115,6 +115,9 @@ class RegisterForm extends Component {
   handleClicked = async () => {
     const response = await userService.send_email(this.state.data);
     console.log(response);
+    let obj = JSON.parse(response.data);
+
+    console.log(obj);
   };
 
   render() {
