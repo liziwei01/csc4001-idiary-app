@@ -17,7 +17,7 @@ post: /email/verificationCode
 
 get verification code
 
-|postParams|comment|require|
+|getParams|comment|require|
 | --------- | --------- | --------- |
 |email|user email address|yes|
 
@@ -66,7 +66,7 @@ get image url
 
 Note that the returned image URL is only valid for a short period
 
-|postParams|comment|require|
+|getParams|comment|require|
 | --------- | --------- | --------- |
 |file_name|file_name|yes|
 
