@@ -15,7 +15,7 @@ import (
 )
 
 func AddFriend(ctx context.Context, pars userModel.FriendsPars) error {
-	client, err := mysql.GetClient(ctx, constant.MYSQL_DB_IDIARY)
+	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY)
 	if err != nil {
 		return err
 	}

@@ -16,7 +16,7 @@ import (
 
 func ModifyPassword(ctx context.Context, pars userModel.UserPars) error {
 	// 数据库名字，之后替换
-	client, err := mysql.GetClient(ctx, constant.MYSQL_DB_IDIARY)
+	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY)
 
 	where := map[string]interface{}{
 		"user_id": pars.UserID,

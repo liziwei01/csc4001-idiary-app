@@ -18,7 +18,7 @@ func Login(ctx context.Context, pars userModel.LoginPars) (string, error) {
 	var password string
 
 	// 数据库名字，之后替换
-	client, err := mysql.GetClient(ctx, constant.MYSQL_DB_IDIARY)
+	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY)
 	if err != nil {
 		return "", err
 	}
