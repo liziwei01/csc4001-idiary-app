@@ -17,7 +17,7 @@ post: /email/verificationCode
 
 get verification code
 
-|getParams|comment|require|
+|postParams|comment|require|
 | --------- | --------- | --------- |
 |email|user email address|yes|
 
