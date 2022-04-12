@@ -18,9 +18,11 @@ post: /email/verificationCode
 get verification code
 
 |postParams|comment|require|
+| --------- | --------- | --------- |
 |email|user email address|yes|
 
 |returnParams|comment|require|
+| --------- | --------- | --------- |
 
 eg
 ```bash
@@ -65,9 +67,11 @@ get image url
 Note that the returned image URL is only valid for a short period
 
 |postParams|comment|require|
+| --------- | --------- | --------- |
 |file_name|file_name|yes|
 
 |returnParams|comment|require|
+| --------- | --------- | --------- |
 |file_url|file url|yes|
 
 eg
