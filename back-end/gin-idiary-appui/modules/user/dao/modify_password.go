@@ -1,15 +1,22 @@
+/*
+ * @Author: liziwei01
+ * @Date: 2022-04-12 10:45:14
+ * @LastEditors: liziwei01
+ * @LastEditTime: 2022-04-12 11:02:31
+ * @Description: file content
+ */
 package dao
 
 import (
 	"context"
 	"gin-idiary-appui/library/mysql"
-	emailModel "gin-idiary-appui/modules/email/model"
+	"gin-idiary-appui/modules/user/constant"
+	userModel "gin-idiary-appui/modules/user/model"
 )
 
-func ModifyPassword(ctx context.Context, pars emailModel.UserPars) error {
-
+func ModifyPassword(ctx context.Context, pars userModel.UserPars) error {
 	// 数据库名字，之后替换
-	client, err := mysql.GetClient(ctx, "idiary")
+	client, err := mysql.GetClient(ctx, constant.MYSQL_DB_IDIARY)
 
 	where := map[string]interface{}{
 		"user_id": pars.UserID,
@@ -25,5 +32,6 @@ func ModifyPassword(ctx context.Context, pars emailModel.UserPars) error {
 	if err != nil {
 		return err
 	}
-	return err
+
+	return nil
 }

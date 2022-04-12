@@ -1,8 +1,13 @@
+/*
+ * @Author: liziwei01
+ * @Date: 2022-04-12 10:45:14
+ * @LastEditors: liziwei01
+ * @LastEditTime: 2022-04-12 10:59:28
+ * @Description: file content
+ */
 package routers
 
 import (
-	emailControllers "gin-idiary-appui/modules/email/controllers"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -12,8 +17,8 @@ import (
  * @return {*}
  */
 func Init(router *gin.Engine) {
-	userGroup := router.Group("/email")
+	// userGroup := router.Group("/email")
 	{
-		userGroup.GET("/modifyPassword", emailControllers.ModifyPassword)
+
 	}
 }

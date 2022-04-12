@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-12 10:58:49
+ * @LastEditTime: 2022-04-12 11:00:04
  * @Description: file content
  */
 package controllers
@@ -15,20 +15,20 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func AddFriend(ctx *gin.Context) {
-	inputs, hasError := getAddFriendPars(ctx)
+func ModifyPassword(ctx *gin.Context) {
+	inputs, hasError := getModifyPasswordPars(ctx)
 	if hasError {
 		response.StdInvalidParams(ctx)
 	}
-	err := userService.AddFriend(ctx, inputs)
+	err := userService.ModifyPassword(ctx, inputs)
 	if err != nil {
 		response.StdFailed(ctx, err.Error())
 	}
 	response.StdSuccess(ctx)
 }
 
-func getAddFriendPars(ctx *gin.Context) (userModel.FriendsPars, bool) {
-	var inputs userModel.FriendsPars
+func getModifyPasswordPars(ctx *gin.Context) (userModel.UserPars, bool) {
+	var inputs userModel.UserPars
 	err := ctx.ShouldBind(&inputs)
 	if err != nil {
 		return inputs, true

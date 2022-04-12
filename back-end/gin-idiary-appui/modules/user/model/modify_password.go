@@ -1,3 +1,10 @@
+/*
+ * @Author: liziwei01
+ * @Date: 2022-04-12 10:45:14
+ * @LastEditors: liziwei01
+ * @LastEditTime: 2022-04-12 11:01:21
+ * @Description: file content
+ */
 package model
 
 type UserPars struct {
@@ -7,12 +14,4 @@ type UserPars struct {
 	Nickname    string `form:"nickname" json:"nickname" binding:"required"`
 	City        string `form:"city" json:"city" binding:"required"`
 	Picture     string `form:"picture" json:"picture" binding:"required"`
-}
-
-type UserInfo struct {
-	UserID   string `ddb:"user_id" json:"user_id" `
-	Password string `ddb:"password" json:"password" `
-	Nickname string `ddb:"nickname" json:"nickname" `
-	City     string `ddb:"city" json:"city" `
-	Picture  string `ddb:"picture" json:"picture" `
 }

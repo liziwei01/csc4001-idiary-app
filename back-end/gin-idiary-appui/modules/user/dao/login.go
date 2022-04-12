@@ -1,16 +1,27 @@
+/*
+ * @Author: liziwei01
+ * @Date: 2022-04-12 10:45:14
+ * @LastEditors: liziwei01
+ * @LastEditTime: 2022-04-12 10:51:23
+ * @Description: file content
+ */
 package dao
 
 import (
 	"context"
 	"gin-idiary-appui/library/mysql"
+	"gin-idiary-appui/modules/user/constant"
 	userModel "gin-idiary-appui/modules/user/model"
 )
 
-func Login(ctx context.Context, pars userModel.LoginPars) (bool, error) {
+func Login(ctx context.Context, pars userModel.LoginPars) (string, error) {
 	var password string
 
 	// 数据库名字，之后替换
-	client, err := mysql.GetClient(ctx, "idiary")
+	client, err := mysql.GetClient(ctx, constant.MYSQL_DB_IDIARY)
+	if err != nil {
+		return "", err
+	}
 
 	where := map[string]interface{}{
 		"user_id": pars.UserID,
@@ -20,16 +31,10 @@ func Login(ctx context.Context, pars userModel.LoginPars) (bool, error) {
 
 	// "idiary_diary"是表名，之后替换
 	// diary是一个list
-	_ = client.Query(ctx, "idiary_user", where, columns, password)
-
+	err = client.Query(ctx, "idiary_user", where, columns, &password)
 	if err != nil {
-		return false, err
+		return "", err
 	}
 
-	if password == pars.Password {
-		return true, err
-	} else {
-		return false, err
-	}
-
+	return password, nil // 密码验证
 }

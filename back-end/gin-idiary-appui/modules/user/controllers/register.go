@@ -1,3 +1,10 @@
+/*
+ * @Author: liziwei01
+ * @Date: 2022-04-12 10:45:14
+ * @LastEditors: liziwei01
+ * @LastEditTime: 2022-04-12 10:59:06
+ * @Description: file content
+ */
 package controllers
 
 import (
@@ -9,7 +16,7 @@ import (
 )
 
 func Register(ctx *gin.Context) {
-	inputs, hasError := register(ctx)
+	inputs, hasError := getRegisterPars(ctx)
 	if hasError {
 		response.StdInvalidParams(ctx)
 	}
@@ -20,7 +27,7 @@ func Register(ctx *gin.Context) {
 	response.StdSuccess(ctx)
 }
 
-func register(ctx *gin.Context) (userModel.RegisterPars, bool) {
+func getRegisterPars(ctx *gin.Context) (userModel.RegisterPars, bool) {
 	var inputs userModel.RegisterPars
 	err := ctx.ShouldBind(&inputs)
 	if err != nil {

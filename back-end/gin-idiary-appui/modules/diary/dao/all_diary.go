@@ -1,8 +1,16 @@
+/*
+ * @Author: liziwei01
+ * @Date: 2022-04-12 10:45:14
+ * @LastEditors: liziwei01
+ * @LastEditTime: 2022-04-12 10:56:16
+ * @Description: file content
+ */
 package dao
 
 import (
 	"context"
 	"gin-idiary-appui/library/mysql"
+	"gin-idiary-appui/modules/diary/constant"
 	diaryModel "gin-idiary-appui/modules/diary/model"
 )
 
@@ -11,7 +19,7 @@ func AllDiary(ctx context.Context, pars diaryModel.DiaryShowPars) ([]diaryModel.
 	var diary []diaryModel.DiaryInfo
 
 	// 数据库名字，之后替换
-	client, err := mysql.GetClient(ctx, "idiary")
+	client, err := mysql.GetClient(ctx, constant.MYSQL_DB_IDIARY)
 	if err != nil {
 		return nil, err
 	}
@@ -19,6 +27,7 @@ func AllDiary(ctx context.Context, pars diaryModel.DiaryShowPars) ([]diaryModel.
 	where := map[string]interface{}{
 		"user_id": pars.UserID,
 	}
+
 	columns := []string{"*"}
 
 	// "idiary_diary"是表名，之后替换
@@ -27,5 +36,6 @@ func AllDiary(ctx context.Context, pars diaryModel.DiaryShowPars) ([]diaryModel.
 	if err != nil {
 		return nil, err
 	}
-	return diary, err
+
+	return diary, nil
 }
