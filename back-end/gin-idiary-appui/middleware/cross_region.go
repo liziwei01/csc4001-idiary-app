@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 21:54:39
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-12 22:30:14
+ * @LastEditTime: 2022-04-12 22:42:17
  * @Description: file content
  */
 package middleware
@@ -21,6 +21,7 @@ func CrossRegionMiddleware() gin.HandlerFunc {
 		c.Header("Access-Control-Max-Age", "1728000")
 		if c.Request.Method == "OPTIONS" {
 			c.JSON(http.StatusOK, "ok")
+			c.Abort()
 		}
 		c.Next()
 	}
