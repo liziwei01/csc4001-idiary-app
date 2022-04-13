@@ -2,3 +2,10 @@
   display: flex;
   flex-direction: column;
 } */
+
+.nameandtime {
+    display: flex;
+    /* border: 1px solid skyblue; */
+    flex-wrap: wrap;
+    align-content: flex-start;
+}

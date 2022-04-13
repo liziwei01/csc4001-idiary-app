@@ -1,7 +1,8 @@
-import React, { Component, PropTypes } from "react";
+import React, { Component, PropTypes} from "react";
 import ContentImg from "./content-img.jsx";
 import "../css/listWb.css";
-
+import PicturesWall from "./upload_img.jsx"
+import moment from 'moment';
 export default class WeiBoList extends Component {
   constructor(props) {
     super(props);
@@ -24,13 +25,15 @@ export default class WeiBoList extends Component {
     return (
       <div className="item">
         <div className="topRightView">
-          <div className="nickNameAndSendTime">
-            <div>
+          <div className="nameandtime">
+            <div style={{marginright:"10px"}}>
               <img className="nick-img" src={data.headUrl} />
               <span style={{ marginLeft: "10px" }}>{data.nickName}</span>
+              
             </div>
-
-            <span>{data.sendTime}</span>
+            {/* <div style={{marginLeft:"600px"}}>{data.sendTime}</div> */}
+            <div style={{marginLeft:"500px"}}>{moment(data.sendTime).format("YYYY-MM-DD HH:mm:ss")}</div>
+            
           </div>
           <div>
             <p style={{ marginTop: "10px" }}>{data.content}</p>

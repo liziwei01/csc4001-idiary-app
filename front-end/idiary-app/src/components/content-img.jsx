@@ -15,21 +15,7 @@ class ContentImg extends React.Component{
         {imgNodes}
       
     </div>
-    // var arr=[]
-    // var badge = this.props.content_img_urls;
-    // if(badge){
-    //     for (var i=0; i<badge.length; i++){
-    //       arr.push(
-    //           <div className="outerViewStyle">
-    //               <div className="viewStyle">
-    //                   <img source={badge[i]}/> 
-    //               </div>
-    //           </div>
-    //       )
-    //     }
-    //     return arr;
-    // }
-    //return <div>test</div>
+    
   }
 }
 export default ContentImg;
