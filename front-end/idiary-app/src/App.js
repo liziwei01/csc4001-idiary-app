@@ -24,7 +24,6 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/aaa" element={<AAA />} />
         <Route path="/admin" element={<Admin />} />
         <Route
           path="/forgetPasswordByEmail"
