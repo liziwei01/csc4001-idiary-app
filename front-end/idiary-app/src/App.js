@@ -16,12 +16,15 @@ import FriendsDiary from "./components/friendsDiary";
 import ResetPassword from "./components/resetPassword";
 import Landing from "./landing";
 import IDiary from "./idiary";
+import Admin from "./components/admin";
+import AAA from "./components/aaa";
 
 function App() {
   return (
     <div>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/admin" element={<Admin />} />
         <Route
           path="/forgetPasswordByEmail"
           element={<ForgetPasswordByEmail />}
@@ -34,7 +37,7 @@ function App() {
         <Route path="/idiary/*" element={<IDiary />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/login" element={<LoginForm />} />
-        
+
         <Route path="/not-found" element={<NotFound />} />
         <Route path="*" element={<Navigate replace to="/not-found" />} />
       </Routes>
