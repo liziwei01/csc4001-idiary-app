@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-12 10:58:49
+ * @LastEditTime: 2022-04-14 00:09:59
  * @Description: file content
  */
 package controllers
@@ -19,10 +19,12 @@ func AddFriend(ctx *gin.Context) {
 	inputs, hasError := getAddFriendPars(ctx)
 	if hasError {
 		response.StdInvalidParams(ctx)
+		return
 	}
 	err := userService.AddFriend(ctx, inputs)
 	if err != nil {
 		response.StdFailed(ctx, err.Error())
+		return
 	}
 	response.StdSuccess(ctx)
 }

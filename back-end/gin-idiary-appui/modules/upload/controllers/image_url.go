@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 15:31:28
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-12 15:35:08
+ * @LastEditTime: 2022-04-14 00:09:52
  * @Description: file content
  */
 package controllers
@@ -19,10 +19,12 @@ func GetImageURL(ctx *gin.Context) {
 	inputs, hasError := getImageURLPars(ctx)
 	if hasError {
 		response.StdInvalidParams(ctx)
+		return
 	}
 	src, err := uploadService.GetImageURL(ctx, inputs.FileName)
 	if err != nil {
 		response.StdFailed(ctx, err.Error())
+		return
 	}
 	response.StdSuccess(ctx, src)
 }

@@ -1,3 +1,10 @@
+/*
+ * @Author: liziwei01
+ * @Date: 2022-04-12 10:45:14
+ * @LastEditors: liziwei01
+ * @LastEditTime: 2022-04-14 00:08:56
+ * @Description: file content
+ */
 package controllers
 
 import (
@@ -12,10 +19,12 @@ func AllDiary(ctx *gin.Context) {
 	inputs, hasError := getAllDiaryPars(ctx)
 	if hasError {
 		response.StdInvalidParams(ctx)
+		return
 	}
 	diary, err := diaryService.AllDiary(ctx, inputs)
 	if err != nil {
 		response.StdFailed(ctx, err.Error())
+		return
 	}
 	response.StdSuccess(ctx, diary)
 }

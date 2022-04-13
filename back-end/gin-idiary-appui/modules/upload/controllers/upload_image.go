@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 11:14:30
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-12 15:26:11
+ * @LastEditTime: 2022-04-14 00:09:45
  * @Description: file content
  */
 package controllers
@@ -22,10 +22,12 @@ func UploadImage(ctx *gin.Context) {
 	inputs, hasError := getUploadImagePars(ctx)
 	if hasError {
 		response.StdInvalidParams(ctx)
+		return
 	}
 	src, err := uploadService.UploadImage(ctx, inputs)
 	if err != nil {
 		response.StdFailed(ctx, err.Error())
+		return
 	}
 	response.StdSuccess(ctx, src)
 }

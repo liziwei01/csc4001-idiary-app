@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-12 11:00:04
+ * @LastEditTime: 2022-04-14 00:11:18
  * @Description: file content
  */
 package controllers
@@ -19,10 +19,12 @@ func ModifyPassword(ctx *gin.Context) {
 	inputs, hasError := getModifyPasswordPars(ctx)
 	if hasError {
 		response.StdInvalidParams(ctx)
+		return
 	}
 	err := userService.ModifyPassword(ctx, inputs)
 	if err != nil {
 		response.StdFailed(ctx, err.Error())
+		return
 	}
 	response.StdSuccess(ctx)
 }

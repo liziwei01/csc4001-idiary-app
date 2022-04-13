@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-12 10:59:06
+ * @LastEditTime: 2022-04-14 00:11:40
  * @Description: file content
  */
 package controllers
@@ -19,10 +19,12 @@ func Register(ctx *gin.Context) {
 	inputs, hasError := getRegisterPars(ctx)
 	if hasError {
 		response.StdInvalidParams(ctx)
+		return
 	}
 	err := userService.Register(ctx, inputs)
 	if err != nil {
 		response.StdFailed(ctx, err.Error())
+		return
 	}
 	response.StdSuccess(ctx)
 }

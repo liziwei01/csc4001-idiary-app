@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-12 10:51:23
+ * @LastEditTime: 2022-04-13 23:31:08
  * @Description: file content
  */
 package dao
@@ -14,7 +14,7 @@ import (
 	userModel "gin-idiary-appui/modules/user/model"
 )
 
-func Login(ctx context.Context, pars userModel.LoginPars) (string, error) {
+func GetPassword(ctx context.Context, pars userModel.LoginPars) (string, error) {
 	var password string
 
 	// 数据库名字，之后替换

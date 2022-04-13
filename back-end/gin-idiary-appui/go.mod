@@ -6,6 +6,7 @@ require (
 	github.com/BurntSushi/toml v0.3.1
 	github.com/aliyun/aliyun-oss-go-sdk v2.2.1+incompatible
 	github.com/baidu/go-lib v0.0.0-20210902034828-42829d4bdecd
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/didi/gendry v1.7.0
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-redis/redis v6.15.9+incompatible
