@@ -17,7 +17,6 @@ import ResetPassword from "./components/resetPassword";
 import Landing from "./landing";
 import IDiary from "./idiary";
 import Admin from "./components/admin";
-import AAA from "./components/aaa";
 
 function App() {
   return (
