@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 20:08:41
+ * @LastEditTime: 2022-04-16 21:17:06
  * @Description: file content
  */
 package model
@@ -23,6 +23,8 @@ type FriendDiaryListRequestPars struct {
 type DiaryInfo struct {
 	DiaryID      int64  `form:"diary_id" json:"diary_id" ddb:"diary_id"`
 	UserID       int64  `form:"user_id" json:"user_id" ddb:"user_id" binding:"required"`
+	Nickname     string `form:"nickname" json:"nickname" ddb:"nickname" binding:"required"`
+	Profile      string `form:"profile" json:"profile" ddb:"profile" binding:"required"`
 	Title        string `form:"title" json:"title" ddb:"title"`
 	Content      string `form:"content" json:"content" ddb:"content" binding:"required"`
 	ImageList    string `form:"image_list" json:"image_list" ddb:"image_list"`

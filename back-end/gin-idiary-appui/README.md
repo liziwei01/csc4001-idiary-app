@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 15:20:51
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 20:54:53
+ * @LastEditTime: 2022-04-16 21:13:45
  * @Description: README
 -->
 # gin-idiary-appui
@@ -258,6 +258,8 @@ DROP table if exists `tb_user_diary_feed`;
 create table `tb_user_diary_feed`(
     `diary_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'auto increment primary key',
     `user_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '发送用户ID',
+    `nickname` varchar(24) NOT NULL DEFAULT '' COMMENT '用户昵称',
+    `profile` varchar(255) NOT NULL DEFAULT '' COMMENT '用户头像',
     `title` varchar(200) NOT NULL DEFAULT '' COMMENT '投稿标题',
     `content` varchar(2000) NOT NULL DEFAULT '' COMMENT '投稿内容',
     `image_list` varchar(2000) NOT NULL DEFAULT '' COMMENT '投稿内包含的图片,使用 json list ["image_name1", "image_name2"...]保存',
