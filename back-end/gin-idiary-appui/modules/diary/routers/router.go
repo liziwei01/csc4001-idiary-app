@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 19:32:17
+ * @LastEditTime: 2022-04-16 19:59:56
  * @Description: file content
  */
 package routers
@@ -22,6 +22,7 @@ func Init(router *gin.Engine) {
 	userGroup := router.Group("/diary")
 	{
 		userGroup.GET("/world", diaryControllers.AllDiary)
+		userGroup.GET("/friend", diaryControllers.FriendDiary)
 		userGroup.POST("/addDiary", diaryControllers.AddDiary)
 	}
 }

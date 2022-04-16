@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 19:50:03
+ * @LastEditTime: 2022-04-16 19:57:15
  * @Description: file content
  */
 package dao
@@ -27,6 +27,9 @@ func AllDiary(ctx context.Context, pars diaryModel.DiaryListRequestPars) ([]diar
 	where := map[string]interface{}{
 		"_limit":   []uint{pars.PageIndex, pars.PageLength},
 		"_orderby": "db_time desc",
+	}
+	if pars.UserID != 0 {
+		where["user_id"] = pars.UserID
 	}
 
 	columns := []string{"*"}
@@ -53,6 +56,9 @@ func AllDiaryCount(ctx context.Context, pars diaryModel.DiaryListRequestPars) (i
 
 	where := map[string]interface{}{
 		"diary_id >": 0,
+	}
+	if pars.UserID != 0 {
+		where["user_id"] = pars.UserID
 	}
 
 	columns := []string{"count(1) as count"}
