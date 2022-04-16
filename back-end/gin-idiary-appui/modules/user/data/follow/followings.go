@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-16 18:24:49
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 19:16:27
+ * @LastEditTime: 2022-04-16 20:11:45
  * @Description: file content
  */
 package follow
@@ -12,12 +12,11 @@ import (
 	"encoding/json"
 	"gin-idiary-appui/library/logit"
 	followDao "gin-idiary-appui/modules/user/dao/follow"
-	userModel "gin-idiary-appui/modules/user/model"
 )
 
-func Followings(ctx context.Context, pars userModel.FollowingPars) ([]int64, error) {
+func Followings(ctx context.Context, userID int64) ([]int64, error) {
 	var followingList []int64
-	followings, err := followDao.GetFollowing(ctx, pars.UserID)
+	followings, err := followDao.GetFollowing(ctx, userID)
 	if err != nil {
 		return nil, err
 	}

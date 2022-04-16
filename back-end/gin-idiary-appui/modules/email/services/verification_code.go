@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-12 22:45:52
+ * @LastEditTime: 2022-04-16 20:30:44
  * @Description: file content
  */
 package services
@@ -16,7 +16,7 @@ import (
 )
 
 func VerificationCode(ctx context.Context, pars emailModel.EmailPars) error {
-	// 检查 redis 是否存在 key
+	// 检查 redis 是否存在 key: 即是否已经发送过
 	exists, err := emailData.EmailSent(ctx, pars.Email)
 	if err != nil {
 		return err

@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 13:27:57
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-12 13:43:47
+ * @LastEditTime: 2022-04-16 20:31:06
  * @Description: file content
  */
 package data
@@ -14,6 +14,7 @@ import (
 	"gin-idiary-appui/modules/email/constant"
 )
 
+// 检查 redis 是否存在 key: 即是否已经发送过邮件
 func EmailSent(ctx context.Context, email string) (bool, error) {
 	client, err := redis.GetClient(ctx, constant.SERVICE_CONF_REDIS_IDIARY)
 	if err != nil {

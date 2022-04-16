@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-04 13:52:11
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-24 23:04:36
+ * @LastEditTime: 2022-04-16 20:44:56
  * @Description: file content
  */
 package redis
@@ -32,6 +32,8 @@ type Client interface {
 	Del(ctx context.Context, keys ...string) error
 	// Determine if a key exists
 	Exists(ctx context.Context, keys ...string) (bool, error)
+	// Expired
+	// Expired(ctx context.Context, key string) (bool, error)
 
 	connect(ctx context.Context) (*r.Client, error)
 

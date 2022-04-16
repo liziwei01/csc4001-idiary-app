@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 14:24:06
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 19:16:23
+ * @LastEditTime: 2022-04-16 20:12:15
  * @Description: file content
  */
 package follow
@@ -14,5 +14,5 @@ import (
 )
 
 func Followings(ctx context.Context, pars userModel.FollowingPars) ([]int64, error) {
-	return followData.Followings(ctx, pars)
+	return followData.Followings(ctx, pars.UserID)
 }

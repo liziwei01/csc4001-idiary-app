@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 15:20:51
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 19:52:47
+ * @LastEditTime: 2022-04-16 20:54:53
  * @Description: README
 -->
 # gin-idiary-appui
@@ -81,6 +81,30 @@ eg
     },
     "errmsg": "Success",
     "errno": 0
+}
+```
+
+post: /user/register
+
+a user wants to register
+
+|postParams|comment|require|
+| --------- | --------- | --------- |
+|email|email|yes|
+|verification_code|verification_code|yes|
+|username|username|yes|
+|password|password|yes|
+
+
+|returnParams|comment|require|
+| --------- | --------- | --------- |
+
+eg
+```bash
+{
+    "data": null,
+    "errno": 0,
+    "errmsg": "Success"
 }
 ```
 

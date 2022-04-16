@@ -14,5 +14,5 @@ import (
 )
 
 func Followers(ctx context.Context, pars userModel.FollowerPars) ([]int64, error) {
-	return followData.Followers(ctx, pars)
+	return followData.Followers(ctx, pars.UserID)
 }
