@@ -29,8 +29,8 @@ func AllDiary(ctx *gin.Context) {
 	response.StdSuccess(ctx, diary)
 }
 
-func getAllDiaryPars(ctx *gin.Context) (diaryModel.DiaryShowPars, bool) {
-	var inputs diaryModel.DiaryShowPars
+func getAllDiaryPars(ctx *gin.Context) (diaryModel.DiaryListRequestPars, bool) {
+	var inputs diaryModel.DiaryListRequestPars
 	err := ctx.ShouldBind(&inputs)
 	if err != nil {
 		return inputs, true

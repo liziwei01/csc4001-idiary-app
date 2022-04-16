@@ -1,12 +1,16 @@
+/*
+ * @Author: liziwei01
+ * @Date: 2022-04-12 10:45:14
+ * @LastEditors: liziwei01
+ * @LastEditTime: 2022-04-16 18:50:52
+ * @Description: file content
+ */
 package model
 
-type DiaryShowPars struct {
-	UserID    string `form:"user_id" json:"user_id" binding:"required" `
-	Title     string `form:"title" json:"title" `
-	Content   string `form:"content" json:"content" `
-	Timestamp int64  `form:"timestamp" json:"timestamp" `
-	Authority string `form:"authority" json:"authority" `
-	Address   string `form:"address" json:"address" `
+type DiaryListRequestPars struct {
+	UserID     string `form:"user_id" json:"user_id"`
+	PageIndex  uint   `form:"page_index" json:"page_index"`
+	PageLength uint   `form:"page_length" json:"page_length"`
 }
 
 type DiaryInfo struct {

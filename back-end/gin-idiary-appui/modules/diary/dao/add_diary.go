@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-12 10:55:50
+ * @LastEditTime: 2022-04-16 18:43:55
  * @Description: file content
  */
 package dao
@@ -12,26 +12,34 @@ import (
 	"gin-idiary-appui/library/mysql"
 	"gin-idiary-appui/modules/diary/constant"
 	diaryModel "gin-idiary-appui/modules/diary/model"
+	"time"
 )
 
-func AddDiary(ctx context.Context, pars diaryModel.DiaryRegisterPars) error {
-	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY)
+const (
+	// 日记投稿总表
+	DIARY_FEED_TABLE = "tb_user_diary_feed"
+)
+
+func AddDiary(ctx context.Context, pars diaryModel.DiaryPars) error {
+	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY_FEED)
 	if err != nil {
 		return err
 	}
 
+	tableName := DIARY_FEED_TABLE
+
 	mapSliceInsertData := []map[string]interface{}{}
 	mapSliceInsertData = append(mapSliceInsertData, map[string]interface{}{
-		"user_id":   pars.UserID,
-		"diary_id":  pars.DiaryID,
-		"title":     pars.Title,
-		"content":   pars.Content,
-		"timestamp": pars.Timestamp,
-		"authority": pars.Authority,
-		"address":   pars.Address,
+		"user_id":    pars.UserID,
+		"content":    pars.Content,
+		"image_list": pars.ImageList,
+		"device":     pars.Device,
+		"db_time":    time.Now().Unix(),
+		"authority":  pars.Authority,
+		"address":    pars.Address,
 	})
 
-	_, err = client.Insert(ctx, "idiary_diary", mapSliceInsertData)
+	_, err = client.Insert(ctx, tableName, mapSliceInsertData)
 	if err != nil {
 		return err
 	}

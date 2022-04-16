@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 18:30:53
+ * @LastEditTime: 2022-04-16 19:16:09
  * @Description: file content
  */
 package follow
@@ -26,7 +26,10 @@ func Followings(ctx *gin.Context) {
 		response.StdFailed(ctx, err.Error())
 		return
 	}
-	response.StdSuccess(ctx, followings)
+	response.StdSuccess(ctx, gin.H{
+		"followings": followings,
+		"count":      len(followings),
+	})
 }
 
 func getFollowingsPars(ctx *gin.Context) (userModel.FollowingPars, bool) {

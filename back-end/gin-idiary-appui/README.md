@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 15:20:51
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 18:34:51
+ * @LastEditTime: 2022-04-16 19:18:30
  * @Description: README
 -->
 # gin-idiary-appui
@@ -15,7 +15,7 @@ Interface
 
 post: /user/follow/follow
 
-a user want to follow somebody
+a user wants to follow somebody
 
 |postParams|comment|require|
 | --------- | --------- | --------- |
@@ -44,11 +44,16 @@ a user's following list
 
 |returnParams|comment|require|
 | --------- | --------- | --------- |
+|followings|list|yes|
+|count|count|yes|
 
 eg
 ```bash
 {
-    "data": [1, 2, 3],
+    "data": {
+        "followings": [1, 2, 3],
+        "count":     3
+    },
     "errno": 0,
     "errmsg": "Success"
 }
@@ -64,11 +69,16 @@ a user's follower list
 
 |returnParams|comment|require|
 | --------- | --------- | --------- |
+|followers|list|yes|
+|count|count|yes|
 
 eg
 ```bash
 {
-    "data": [1, 2, 3],
+    "data": {
+        "followers": [1, 2, 3],
+        "count":     3
+    },
     "errno": 0,
     "errmsg": "Success"
 }
