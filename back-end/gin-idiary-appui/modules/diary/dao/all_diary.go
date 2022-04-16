@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 18:46:06
+ * @LastEditTime: 2022-04-16 19:50:03
  * @Description: file content
  */
 package dao
@@ -22,18 +22,45 @@ func AllDiary(ctx context.Context, pars diaryModel.DiaryListRequestPars) ([]diar
 		return nil, err
 	}
 
+	tableName := DIARY_FEED_TABLE
+
 	where := map[string]interface{}{
-		"user_id": pars.UserID,
+		"_limit":   []uint{pars.PageIndex, pars.PageLength},
+		"_orderby": "db_time desc",
 	}
 
 	columns := []string{"*"}
 
-	// "idiary_diary"是表名，之后替换
-	// diary是一个list
-	_ = client.Query(ctx, "idiary_diary", where, columns, &diary)
+	err = client.Query(ctx, tableName, where, columns, &diary)
 	if err != nil {
 		return nil, err
 	}
 
 	return diary, nil
+}
+
+func AllDiaryCount(ctx context.Context, pars diaryModel.DiaryListRequestPars) (int64, error) {
+	var count = make([]struct {
+		Count int64 `ddb:"count"`
+	}, 1)
+
+	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY_FEED)
+	if err != nil {
+		return 0, err
+	}
+
+	tableName := DIARY_FEED_TABLE
+
+	where := map[string]interface{}{
+		"diary_id >": 0,
+	}
+
+	columns := []string{"count(1) as count"}
+
+	err = client.Query(ctx, tableName, where, columns, &count)
+	if err != nil {
+		return 0, err
+	}
+
+	return count[0].Count, nil
 }

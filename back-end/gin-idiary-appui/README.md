@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 15:20:51
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 19:18:30
+ * @LastEditTime: 2022-04-16 19:52:47
  * @Description: README
 -->
 # gin-idiary-appui
@@ -12,6 +12,77 @@
 This is a school project written by senior students Ziwei Li, Kexin Wu from CUHK(SZ)
 
 Interface
+
+post: /diary/addDiary
+
+a user wants to post a diary
+
+|postParams|comment|require|
+| --------- | --------- | --------- |
+|user_id|int|yes|
+|title|title|no|
+|content|content|yes|
+|image_list|json style: eg: "[\"image_name1\", \"image_name2\"...]"|no|
+|device|device|no|
+|authority|default 0 means public, 1 means private, 2 means protected|no|
+|address|string address|no|
+
+|returnParams|comment|require|
+| --------- | --------- | --------- |
+
+eg
+```bash
+{
+    "data": null,
+    "errno": 0,
+    "errmsg": "Success"
+}
+```
+
+get: /diary/world
+
+a user wants to take a quick look at others diaries
+
+|getParams|comment|require|
+| --------- | --------- | --------- |
+|user_id|int|no|
+|page_index|page start index, default 0|no|
+|page_length|page length, default 10|no|
+
+|returnParams|comment|require|
+| --------- | --------- | --------- |
+|count|the number of diaries in the table (not the returned number of diaries)|yes|
+|diaries|diaries|yes|
+
+eg
+```bash
+{
+    "data": {
+        "count": 1,
+        "diaries": [
+            {
+                "diary_id": 1,
+                "user_id": 1,
+                "title": "",
+                "content": "i'm sending the very first diary",
+                "image_list": "",
+                "device": "",
+                "db_time": 1650109109,
+                "authority": 0,
+                "address": "",
+                "vote_count": 0,
+                "dislike_count": 0,
+                "share_count": 0,
+                "report_count": 0,
+                "delete_status": 0,
+                "tags": ""
+            }
+        ]
+    },
+    "errmsg": "Success",
+    "errno": 0
+}
+```
 
 post: /user/follow/follow
 
@@ -163,6 +234,7 @@ DROP table if exists `tb_user_diary_feed`;
 create table `tb_user_diary_feed`(
     `diary_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'auto increment primary key',
     `user_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '发送用户ID',
+    `title` varchar(200) NOT NULL DEFAULT '' COMMENT '投稿标题',
     `content` varchar(2000) NOT NULL DEFAULT '' COMMENT '投稿内容',
     `image_list` varchar(2000) NOT NULL DEFAULT '' COMMENT '投稿内包含的图片,使用 json list ["image_name1", "image_name2"...]保存',
     `device` varchar(24) NOT NULL DEFAULT '' COMMENT '设备',

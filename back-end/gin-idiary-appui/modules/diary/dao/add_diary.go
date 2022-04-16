@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 18:43:55
+ * @LastEditTime: 2022-04-16 19:35:42
  * @Description: file content
  */
 package dao
@@ -20,7 +20,7 @@ const (
 	DIARY_FEED_TABLE = "tb_user_diary_feed"
 )
 
-func AddDiary(ctx context.Context, pars diaryModel.DiaryPars) error {
+func AddDiary(ctx context.Context, pars diaryModel.DiaryInfo) error {
 	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY_FEED)
 	if err != nil {
 		return err

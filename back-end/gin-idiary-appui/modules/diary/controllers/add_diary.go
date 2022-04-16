@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-09 23:52:44
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-14 00:08:45
+ * @LastEditTime: 2022-04-16 19:35:29
  * @Description: file content
  */
 package controllers
@@ -29,8 +29,8 @@ func AddDiary(ctx *gin.Context) {
 	response.StdSuccess(ctx)
 }
 
-func getAddDiaryPars(ctx *gin.Context) (diaryModel.DiaryPars, bool) {
-	var inputs diaryModel.DiaryPars
+func getAddDiaryPars(ctx *gin.Context) (diaryModel.DiaryInfo, bool) {
+	var inputs diaryModel.DiaryInfo
 	err := ctx.ShouldBind(&inputs)
 	if err != nil {
 		return inputs, true
