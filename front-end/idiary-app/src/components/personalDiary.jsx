@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import axios from "axios";
 import WeiBoList from "./list-wb.jsx";
 import onePic from "./1.jpg";
 import twoPic from "./2.jpg";
@@ -21,7 +22,7 @@ var dataList = [
     NoComment: 142, //评论
     NoPointGreat: 423, //转发
     sendTime: "11.2",
-    contentImgUrls: [twoPic, threePic, threePic,threePic,threePic,],
+    contentImgUrls: [twoPic, threePic, threePic, threePic, threePic],
     isShowComment: false,
     isTransfer: false,
     id: 1,
@@ -170,31 +171,6 @@ var dataList = [
   },
 ];
 
-// for (let i = 0; i < 10; i++) {
-//   let web = {
-//     myUrl: onePic,
-//     headUrl: onePic,
-//     privacy: { name: "public", _id: 3 },
-//     nickName: "Daduo",
-//     content: "test333333333333333333333333333333",
-//     NoCollect: 132,
-//     NoForward: 202,
-//     NoComment: 142,
-//     NoPointGreat: 423,
-//     sendTime: "11.1",
-//     contentImgUrls: [twoPic, threePic, threePic,threePic,threePic,threePic,threePic,],
-//     isShowComment: false,
-//     isTransfer: false,
-//     id: i + 3,
-//     commentList: [
-//       {
-//         name: "xxx",
-//         age: 18,
-//       },
-//     ],
-//   };
-//   dataList.push(web);
-// }
 
 class personalDiary extends React.Component {
   state = {
@@ -210,14 +186,31 @@ class personalDiary extends React.Component {
     sortColumn: { path: "sendTime", order: "asc" },
   };
 
+  componentDidMount() {
+    console.log("personnal Diary===");
+
+    // const location = useLocation();
+    // console.log(location.pathname);
+    // axios({
+    //   url: "/api/get/list",
+    //   method: "get",
+    // }).thent((res) => {
+    //   if(res.status === 200) {
+    //     this.setState({
+    //       list: res.xxxx.x
+    //     })
+    //   }
+    // });
+  }
+
   // 页面加载的钩子
   // react 生命周期
-  componentDidMount() {
-    // xxxx 请求列表的数据
-    // this.setState({
-    //     list : xxxx
-    // })
-  }
+  // componentDidMount() {
+  //   // xxxx 请求列表的数据
+  //   // this.setState({
+  //   //     list : xxxx
+  //   // })
+  // }
   getPagedData = () => {
     const {
       pageSize,
