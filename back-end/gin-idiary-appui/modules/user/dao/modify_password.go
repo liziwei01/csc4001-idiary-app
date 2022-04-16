@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-12 11:02:31
+ * @LastEditTime: 2022-04-16 17:38:29
  * @Description: file content
  */
 package dao
@@ -16,7 +16,12 @@ import (
 
 func ModifyPassword(ctx context.Context, pars userModel.UserPars) error {
 	// 数据库名字，之后替换
-	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY)
+	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY_USER)
+	if err != nil {
+		return err
+	}
+
+	tableName := USER_PRIVATE_INFO_TABLE
 
 	where := map[string]interface{}{
 		"user_id": pars.UserID,
@@ -28,7 +33,7 @@ func ModifyPassword(ctx context.Context, pars userModel.UserPars) error {
 
 	// "idiary_diary"是表名，之后替换
 	// diary是一个list
-	_, err = client.Update(ctx, "idiary_user", where, update_password)
+	_, err = client.Update(ctx, tableName, where, update_password)
 	if err != nil {
 		return err
 	}

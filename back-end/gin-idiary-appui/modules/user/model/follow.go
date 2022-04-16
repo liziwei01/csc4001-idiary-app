@@ -1,0 +1,21 @@
+/*
+ * @Author: liziwei01
+ * @Date: 2022-04-12 14:24:06
+ * @LastEditors: liziwei01
+ * @LastEditTime: 2022-04-16 18:20:48
+ * @Description: file content
+ */
+package model
+
+type FollowPars struct {
+	UserID      int64 `form:"user_id" json:"user_id" binding:"required"`
+	FollowingID int64 `form:"following_id" json:"following_id" binding:"required"`
+}
+
+type FollowingPars struct {
+	UserID      int64 `form:"user_id" json:"user_id" binding:"required"`
+}
+
+type FollowerPars struct {
+	UserID      int64 `form:"user_id" json:"user_id" binding:"required"`
+}

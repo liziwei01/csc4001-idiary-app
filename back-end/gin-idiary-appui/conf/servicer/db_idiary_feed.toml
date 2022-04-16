@@ -1,7 +1,7 @@
 # idiary.toml: mysql数据库idiary配置文件
 
 # Service的名字, 必选
-Name = "idiary"
+Name = "db_idiary_feed"
 
 ## 各种自定义的参数, 非必选
 # 写数据超时 ms
@@ -19,8 +19,8 @@ Port = 3306
 # mysql组件配置
 [MySQL]
 Username = "root"
-Password = "wkx2000shxf"
-DBName = "idiary"
+Password = ""
+DBName = "db_idiary_feed"
 DBDriver = "mysql"
 Charset = "utf8"
 Collation = "utf8_unicode_ci"

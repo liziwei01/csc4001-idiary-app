@@ -15,7 +15,7 @@ import (
 )
 
 func Register(ctx context.Context, pars userModel.RegisterPars) error {
-	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY)
+	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY_USER)
 	if err != nil {
 		return err
 	}

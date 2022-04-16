@@ -2,26 +2,26 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-14 00:09:59
+ * @LastEditTime: 2022-04-16 18:22:56
  * @Description: file content
  */
-package controllers
+package follow
 
 import (
 	"gin-idiary-appui/library/response"
 	userModel "gin-idiary-appui/modules/user/model"
-	userService "gin-idiary-appui/modules/user/services"
+	followService "gin-idiary-appui/modules/user/services/follow"
 
 	"github.com/gin-gonic/gin"
 )
 
-func AddFriend(ctx *gin.Context) {
+func Follow(ctx *gin.Context) {
 	inputs, hasError := getAddFriendPars(ctx)
 	if hasError {
 		response.StdInvalidParams(ctx)
 		return
 	}
-	err := userService.AddFriend(ctx, inputs)
+	err := followService.Follow(ctx, inputs)
 	if err != nil {
 		response.StdFailed(ctx, err.Error())
 		return
@@ -29,8 +29,8 @@ func AddFriend(ctx *gin.Context) {
 	response.StdSuccess(ctx)
 }
 
-func getAddFriendPars(ctx *gin.Context) (userModel.FriendsPars, bool) {
-	var inputs userModel.FriendsPars
+func getAddFriendPars(ctx *gin.Context) (userModel.FollowPars, bool) {
+	var inputs userModel.FollowPars
 	err := ctx.ShouldBind(&inputs)
 	if err != nil {
 		return inputs, true
