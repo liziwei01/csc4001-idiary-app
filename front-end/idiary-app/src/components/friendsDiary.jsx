@@ -19,7 +19,7 @@ class FriendsDiary extends Component {
         user_id: 1,
       },
     }).then((res) => {
-      // console.log(res);
+      console.log(res);
       if (res.status === 200) {
         this.setState({
           FriendsDiaryList: (res.data.data && res.data.data.diaries) || [],
@@ -35,7 +35,7 @@ class FriendsDiary extends Component {
           <div className="nameandtime">
             <div style={{ marginright: "10px" }}>
               <img className="nick-img" src={data.user_profile} />
-              <span style={{ marginLeft: "10px" }}>{data.diary_id}</span>
+              <span style={{ marginLeft: "10px" }}>{data.nickname}</span>
             </div>
             {/* <div style={{marginLeft:"600px"}}>{data.sendTime}</div> */}
             <div style={{ marginLeft: "700px" }}>
