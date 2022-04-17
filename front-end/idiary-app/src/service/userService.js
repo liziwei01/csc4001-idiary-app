@@ -1,8 +1,5 @@
 import http from "./httpService";
 
-const apiUrl = "http://jsonplaceholder.typicode.com";
-const apiEndpoint = apiUrl + "/users";
-
 export function register(user) {
   return http.post(apiEndpoint, {
     email: user.email,
@@ -12,9 +9,10 @@ export function register(user) {
 }
 
 export function login(user) {
-  return http.post(apiEndpoint, {
+  const apiUrl = `http://localhost:8080/user/login`;
+  return http.post(apiUrl, {
     password: user.password,
-    name: user.username,
+    email: user.username,
   });
 }
 

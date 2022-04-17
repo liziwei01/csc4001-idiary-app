@@ -10,8 +10,8 @@ class LoginForm extends Component {
     e.preventDefault();
     //server
     const data = { ...this.state.data };
-    const { data: user } = await userService.login(data);
-    console.log({ user });
+    const user = await userService.login(data);
+    console.log(user);
   };
   validate = () => {
     const { data } = this.state;
