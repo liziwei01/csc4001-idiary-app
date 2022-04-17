@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 15:20:51
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 21:13:45
+ * @LastEditTime: 2022-04-17 13:58:06
  * @Description: README
 -->
 # gin-idiary-appui
@@ -13,7 +13,7 @@ This is a school project written by senior students Ziwei Li, Kexin Wu from CUHK
 
 Interface
 
-post: /diary/addDiary
+post: /api/diary/addDiary
 
 a user wants to post a diary
 
@@ -39,13 +39,103 @@ eg
 }
 ```
 
-get: /diary/world
+get: /api/diary/world
 
 a user wants to take a quick look at others diaries
 
 |getParams|comment|require|
 | --------- | --------- | --------- |
 |user_id|int|no|
+|page_index|page start index, default 0|no|
+|page_length|page length, default 10|no|
+
+|returnParams|comment|require|
+| --------- | --------- | --------- |
+|count|the number of diaries in the table (not the returned number of diaries)|yes|
+|diaries|diaries|yes|
+
+eg
+```bash
+{
+    "data": {
+        "count": 1,
+        "diaries": [
+            {
+                "diary_id": 1,
+                "user_id": 1,
+                "title": "",
+                "content": "i'm sending the very first diary",
+                "image_list": "",
+                "device": "",
+                "db_time": 1650109109,
+                "authority": 0,
+                "address": "",
+                "vote_count": 0,
+                "dislike_count": 0,
+                "share_count": 0,
+                "report_count": 0,
+                "delete_status": 0,
+                "tags": ""
+            }
+        ]
+    },
+    "errmsg": "Success",
+    "errno": 0
+}
+```
+
+get: /api/diary/friend
+
+a user wants to take a quick look at his/her friend's diaries
+
+|getParams|comment|require|
+| --------- | --------- | --------- |
+|user_id|int|yes|
+|page_index|page start index, default 0|no|
+|page_length|page length, default 10|no|
+
+|returnParams|comment|require|
+| --------- | --------- | --------- |
+|count|the number of diaries in the table (not the returned number of diaries)|yes|
+|diaries|diaries|yes|
+
+eg
+```bash
+{
+    "data": {
+        "count": 1,
+        "diaries": [
+            {
+                "diary_id": 1,
+                "user_id": 1,
+                "title": "",
+                "content": "i'm sending the very first diary",
+                "image_list": "",
+                "device": "",
+                "db_time": 1650109109,
+                "authority": 0,
+                "address": "",
+                "vote_count": 0,
+                "dislike_count": 0,
+                "share_count": 0,
+                "report_count": 0,
+                "delete_status": 0,
+                "tags": ""
+            }
+        ]
+    },
+    "errmsg": "Success",
+    "errno": 0
+}
+```
+
+get: /api/diary/mine
+
+a user wants to take a quick look at his/her diaries
+
+|getParams|comment|require|
+| --------- | --------- | --------- |
+|user_id|int|yes|
 |page_index|page start index, default 0|no|
 |page_length|page length, default 10|no|
 

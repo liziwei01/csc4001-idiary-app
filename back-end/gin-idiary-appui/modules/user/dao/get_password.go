@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 17:39:23
+ * @LastEditTime: 2022-04-16 21:22:14
  * @Description: file content
  */
 package dao
@@ -24,7 +24,6 @@ const (
 func GetPassword(ctx context.Context, pars userModel.LoginPars) (string, error) {
 	var password []string
 
-	// 数据库名字，之后替换
 	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY_USER)
 	if err != nil {
 		return "", err
@@ -38,8 +37,6 @@ func GetPassword(ctx context.Context, pars userModel.LoginPars) (string, error) 
 
 	columns := []string{"password"}
 
-	// "idiary_diary"是表名，之后替换
-	// diary是一个list
 	err = client.Query(ctx, tableName, where, columns, &password)
 	if err != nil {
 		return "", err
