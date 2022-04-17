@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-18 01:41:57
+ * @LastEditTime: 2022-04-18 02:13:47
  * @Description: file content
  */
 package dao
@@ -23,7 +23,7 @@ const (
 
 func GetPassword(ctx context.Context, pars userModel.LoginPars) (string, error) {
 	var passwords = make([]struct {
-		Pwd string `ddb:password`
+		Pwd string `ddb:"password"`
 	}, 1)
 
 	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY_USER)
