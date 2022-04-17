@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 16:55:50
+ * @LastEditTime: 2022-04-17 16:20:49
  * @Description: file content
  */
 package dao
@@ -14,7 +14,7 @@ import (
 	diaryModel "gin-idiary-appui/modules/diary/model"
 )
 
-func AllDiary(ctx context.Context, pars diaryModel.DiaryListRequestPars) ([]diaryModel.DiaryInfo, error) {
+func GetDiaryByUserID(ctx context.Context, pars diaryModel.DiaryListRequestPars) ([]diaryModel.DiaryInfo, error) {
 	var diary []diaryModel.DiaryInfo
 
 	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY_FEED)
@@ -27,6 +27,7 @@ func AllDiary(ctx context.Context, pars diaryModel.DiaryListRequestPars) ([]diar
 	where := map[string]interface{}{
 		"_orderby": "db_time desc",
 		"_limit":   []uint{pars.PageIndex, pars.PageLength},
+		"user_id":  pars.UserID,
 	}
 
 	columns := []string{"*"}
@@ -39,7 +40,7 @@ func AllDiary(ctx context.Context, pars diaryModel.DiaryListRequestPars) ([]diar
 	return diary, nil
 }
 
-func AllDiaryCount(ctx context.Context, pars diaryModel.DiaryListRequestPars) (int64, error) {
+func GetDiaryByUserIDCount(ctx context.Context, pars diaryModel.DiaryListRequestPars) (int64, error) {
 	var count = make([]struct {
 		Count int64 `ddb:"count"`
 	}, 1)
@@ -52,7 +53,7 @@ func AllDiaryCount(ctx context.Context, pars diaryModel.DiaryListRequestPars) (i
 	tableName := DIARY_FEED_TABLE
 
 	where := map[string]interface{}{
-		"diary_id !=": 0,
+		"user_id": pars.UserID,
 	}
 
 	columns := []string{"count(1) as count"}

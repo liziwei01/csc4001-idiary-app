@@ -1,8 +1,8 @@
 /*
  * @Author: liziwei01
- * @Date: 2022-04-12 10:45:14
+ * @Date: 2022-04-17 16:53:02
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 16:46:12
+ * @LastEditTime: 2022-04-17 16:53:03
  * @Description: file content
  */
 package services
@@ -15,9 +15,9 @@ import (
 	infoData "gin-idiary-appui/modules/user/data/info"
 )
 
-func AllDiary(ctx context.Context, pars diaryModel.DiaryListRequestPars) ([]diaryModel.DiaryInfo, int64, error) {
+func MyDiary(ctx context.Context, pars diaryModel.DiaryListRequestPars) ([]diaryModel.DiaryInfo, int64, error) {
 	// 1 get diary
-	diaries, count, err := diaryData.AllDiary(ctx, pars)
+	diaries, count, err := diaryData.MyDiary(ctx, pars)
 	if err != nil {
 		return nil, 0, err
 	}

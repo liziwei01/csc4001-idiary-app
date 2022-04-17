@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 15:20:51
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 14:47:32
+ * @LastEditTime: 2022-04-17 16:41:16
  * @Description: README
 -->
 # gin-idiary-appui
@@ -344,7 +344,7 @@ Mysql require
 ```bash
 In database db_idiary_feed:
 
-DROP table if exists `tb_user_diary_feed`;
+DROP table if exists `s`;
 create table `tb_user_diary_feed`(
     `diary_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'auto increment primary key',
     `user_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '发送用户ID',
