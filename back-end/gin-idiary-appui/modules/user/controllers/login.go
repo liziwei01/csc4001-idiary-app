@@ -2,12 +2,13 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 14:24:06
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-18 00:14:24
+ * @LastEditTime: 2022-04-18 02:14:29
  * @Description: file content
  */
 package controllers
 
 import (
+	"gin-idiary-appui/library/jwtoken"
 	"gin-idiary-appui/library/response"
 	userModel "gin-idiary-appui/modules/user/model"
 	userService "gin-idiary-appui/modules/user/services"
@@ -32,14 +33,14 @@ func Login(ctx *gin.Context) {
 		return
 	}
 
-	// jwtToken, err := jwtoken.GenToken(inputs.UserID)
-	// if err != nil {
-	// 	response.StdFailed(ctx, err.Error())
-	// 	return
-	// }
-	// response.StdSuccess(ctx, gin.H{
-	// 	"Authorization": jwtToken,
-	// })
+	jwtToken, err := jwtoken.GenToken(inputs.Email)
+	if err != nil {
+		response.StdFailed(ctx, err.Error())
+		return
+	}
+	response.StdSuccess(ctx, gin.H{
+		"Authorization": jwtToken,
+	})
 }
 
 func getLoginPars(ctx *gin.Context) (userModel.LoginPars, bool) {
