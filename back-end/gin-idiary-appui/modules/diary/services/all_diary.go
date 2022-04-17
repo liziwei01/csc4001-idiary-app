@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 16:46:12
+ * @LastEditTime: 2022-04-17 18:02:14
  * @Description: file content
  */
 package services
@@ -12,6 +12,7 @@ import (
 	diaryData "gin-idiary-appui/modules/diary/data"
 	commentData "gin-idiary-appui/modules/diary/data/comment"
 	diaryModel "gin-idiary-appui/modules/diary/model"
+	uploadData "gin-idiary-appui/modules/upload/data"
 	infoData "gin-idiary-appui/modules/user/data/info"
 )
 
@@ -58,7 +59,15 @@ func AllDiary(ctx context.Context, pars diaryModel.DiaryListRequestPars) ([]diar
 		existedDiary[k].CommentCount = count
 	}
 
-	// 6 unmarshal image_list
+	// 6 get profile url
+	for k, v := range existedDiary {
+		existedDiary[k].UserProfile, err = uploadData.GetImageURL(ctx, v.UserProfile)
+		if err != nil {
+			return nil, 0, err
+		}
+	}
+
+	// 7 unmarshal image_list
 	// for k := range existedDiary {
 	// 	if existedDiary[k].ImageList != "" {
 	// 		imgList := make([]diaryModel.DiaryInfo, 0)

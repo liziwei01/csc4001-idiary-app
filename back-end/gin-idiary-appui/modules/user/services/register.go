@@ -2,13 +2,15 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 14:24:06
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 16:34:29
+ * @LastEditTime: 2022-04-17 17:57:21
  * @Description: file content
  */
 package services
 
 import (
 	"context"
+	"fmt"
+
 	// emailData "gin-idiary-appui/modules/email/data"
 	userData "gin-idiary-appui/modules/user/data"
 
@@ -36,13 +38,13 @@ func Register(ctx context.Context, pars userModel.RegisterPars) error {
 	// }
 
 	// 3 检查邮箱是否已经注册过
-	// hasRegisted, err := userData.HasRegisted(ctx, pars.Email)
-	// if err != nil {
-	// 	return err
-	// }
-	// if hasRegisted {
-	// 	return fmt.Errorf("邮箱已经注册过")
-	// }
+	hasRegisted, err := userData.HasRegisted(ctx, pars.Email)
+	if err != nil {
+		return err
+	}
+	if hasRegisted {
+		return fmt.Errorf("邮箱已经注册过")
+	}
 
 	// 4 注册
 	return userData.Register(ctx, pars)
