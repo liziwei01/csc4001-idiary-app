@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 14:20:47
+ * @LastEditTime: 2022-04-18 01:29:04
  * @Description: file content
  */
 package dao
@@ -24,6 +24,7 @@ func Register(ctx context.Context, pars userModel.RegisterPars) error {
 
 	mapSliceInsertData := []map[string]interface{}{}
 	mapSliceInsertData = append(mapSliceInsertData, map[string]interface{}{
+		"email":    pars.Email,
 		"password": pars.Password,
 		"nickname": pars.Username,
 	})

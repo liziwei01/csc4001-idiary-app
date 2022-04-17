@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 15:20:51
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 17:34:25
+ * @LastEditTime: 2022-04-18 01:08:59
  * @Description: README
 -->
 # gin-idiary-appui
@@ -483,7 +483,7 @@ Mysql require
 ```bash
 In database db_idiary_feed:
 
-DROP table if exists `s`;
+DROP table if exists `tb_user_diary_feed`;
 create table `tb_user_diary_feed`(
     `diary_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'auto increment primary key',
     `user_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '发送用户ID',
@@ -506,7 +506,7 @@ create table `tb_user_diary_feed`(
 DROP table if exists `tb_diary_comment`;
 create table `tb_diary_comment`(
     `comment_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'auto increment primary key',
-    `diary_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT 'auto increment primary key',
+    `diary_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '',
     `user_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '发送用户ID',
     `content` varchar(2000) NOT NULL DEFAULT '' COMMENT '投稿内容',
     `device` varchar(24) NOT NULL DEFAULT '' COMMENT '设备',
@@ -524,6 +524,7 @@ In database db_idiary_user:
 DROP table if exists `tb_user_private_info`;
 create table `tb_user_private_info`(
     `user_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+    `email` varchar(24) NOT NULL DEFAULT '' COMMENT '用户邮箱',
     `password` varchar(24) NOT NULL DEFAULT '' COMMENT '用户密码',
     `nickname` varchar(24) NOT NULL DEFAULT '' COMMENT '用户昵称',
     `address` varchar(24) NOT NULL DEFAULT '' COMMENT '地址',
