@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 15:20:51
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 16:41:16
+ * @LastEditTime: 2022-04-17 16:59:04
  * @Description: README
 -->
 # gin-idiary-appui
@@ -45,7 +45,7 @@ a user wants to take a quick look at others diaries
 
 |getParams|comment|require|
 | --------- | --------- | --------- |
-|user_id|int|no|
+|user_id|int|yes|
 |page_index|page start index, default 0|no|
 |page_length|page length, default 10|no|
 
@@ -58,23 +58,135 @@ eg
 ```bash
 {
     "data": {
-        "count": 1,
+        "count": 3,
         "diaries": [
             {
-                "diary_id": 1,
-                "user_id": 1,
-                "title": "",
-                "content": "i'm sending the very first diary",
-                "image_list": "",
+                "diary_id": 3,
+                "user_id": 3,
+                "nickname": "liziwei01",
+                "user_profile": "1/files/48121988-631d-4dc1-9c9b-9ef2964743a6.jpeg",
+                "title": "this is a diary title3",
+                "content": "this is a diary content3",
+                "image_list": "[1/files/48121988-631d-4dc1-9c9b-9ef2964743a6.jpeg]",
+                "comment_list": [
+                    {
+                        "comment_id": 4,
+                        "diary_id": 3,
+                        "user_id": 3,
+                        "nickname": "liziwei01",
+                        "profile": "1/files/48121988-631d-4dc1-9c9b-9ef2964743a6.jpeg",
+                        "content": "and what iam i doing?",
+                        "device": "",
+                        "db_time": 1650185874,
+                        "address": "",
+                        "vote_count": 0,
+                        "dislike_count": 0,
+                        "report_count": 0,
+                        "delete_status": 0
+                    },
+                    {
+                        "comment_id": 2,
+                        "diary_id": 3,
+                        "user_id": 1,
+                        "nickname": "liziwei03",
+                        "profile": "1/files/48121988-631d-4dc1-9c9b-9ef2964743a6.jpeg",
+                        "content": "what r u doing?",
+                        "device": "",
+                        "db_time": 1650184940,
+                        "address": "",
+                        "vote_count": 0,
+                        "dislike_count": 0,
+                        "report_count": 0,
+                        "delete_status": 0
+                    }
+                ],
+                "comment_count": 2,
                 "device": "",
-                "db_time": 1650109109,
+                "db_time": 1650184770,
                 "authority": 0,
                 "address": "",
                 "vote_count": 0,
+                "has_voted": false,
                 "dislike_count": 0,
                 "share_count": 0,
                 "report_count": 0,
-                "delete_status": 0,
+                "delete_status": false,
+                "tags": ""
+            },
+            {
+                "diary_id": 2,
+                "user_id": 2,
+                "nickname": "liziwei02",
+                "user_profile": "1/files/48121988-631d-4dc1-9c9b-9ef2964743a6.jpeg",
+                "title": "this is a diary title2",
+                "content": "this is a diary content2",
+                "image_list": "[1/files/48121988-631d-4dc1-9c9b-9ef2964743a6.jpeg]",
+                "comment_list": [
+                    {
+                        "comment_id": 1,
+                        "diary_id": 2,
+                        "user_id": 1,
+                        "nickname": "liziwei03",
+                        "profile": "1/files/48121988-631d-4dc1-9c9b-9ef2964743a6.jpeg",
+                        "content": "what r u doing?",
+                        "device": "",
+                        "db_time": 1650184935,
+                        "address": "",
+                        "vote_count": 0,
+                        "dislike_count": 0,
+                        "report_count": 0,
+                        "delete_status": 0
+                    }
+                ],
+                "comment_count": 1,
+                "device": "",
+                "db_time": 1650184756,
+                "authority": 0,
+                "address": "",
+                "vote_count": 0,
+                "has_voted": false,
+                "dislike_count": 0,
+                "share_count": 0,
+                "report_count": 0,
+                "delete_status": false,
+                "tags": ""
+            },
+            {
+                "diary_id": 1,
+                "user_id": 1,
+                "nickname": "liziwei03",
+                "user_profile": "1/files/48121988-631d-4dc1-9c9b-9ef2964743a6.jpeg",
+                "title": "this is a diary title1",
+                "content": "this is a diary content2",
+                "image_list": "[1/files/48121988-631d-4dc1-9c9b-9ef2964743a6.jpeg, 1/files/48121988-631d-4dc1-9c9b-9ef2964743a6.jpeg]",
+                "comment_list": [
+                    {
+                        "comment_id": 3,
+                        "diary_id": 1,
+                        "user_id": 2,
+                        "nickname": "liziwei02",
+                        "profile": "1/files/48121988-631d-4dc1-9c9b-9ef2964743a6.jpeg",
+                        "content": "what r u doing?",
+                        "device": "",
+                        "db_time": 1650184945,
+                        "address": "",
+                        "vote_count": 0,
+                        "dislike_count": 0,
+                        "report_count": 0,
+                        "delete_status": 0
+                    }
+                ],
+                "comment_count": 1,
+                "device": "",
+                "db_time": 1650184737,
+                "authority": 0,
+                "address": "",
+                "vote_count": 0,
+                "has_voted": false,
+                "dislike_count": 0,
+                "share_count": 0,
+                "report_count": 0,
+                "delete_status": false,
                 "tags": ""
             }
         ]
