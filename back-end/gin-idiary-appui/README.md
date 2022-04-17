@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 15:20:51
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 16:59:04
+ * @LastEditTime: 2022-04-17 17:34:25
  * @Description: README
 -->
 # gin-idiary-appui
@@ -215,23 +215,50 @@ eg
 ```bash
 {
     "data": {
-        "count": 1,
+        "count": 2,
         "diaries": [
             {
-                "diary_id": 1,
-                "user_id": 1,
+                "diary_id": 4,
+                "user_id": 2,
+                "nickname": "",
+                "user_profile": "",
                 "title": "",
-                "content": "i'm sending the very first diary",
+                "content": "this is a diary content4",
                 "image_list": "",
+                "comment_list": null,
+                "comment_count": 0,
                 "device": "",
-                "db_time": 1650109109,
+                "db_time": 1650183419,
                 "authority": 0,
                 "address": "",
                 "vote_count": 0,
+                "has_voted": false,
                 "dislike_count": 0,
                 "share_count": 0,
                 "report_count": 0,
-                "delete_status": 0,
+                "delete_status": false,
+                "tags": ""
+            },
+            {
+                "diary_id": 3,
+                "user_id": 2,
+                "nickname": "",
+                "user_profile": "",
+                "title": "",
+                "content": "this is a diary content3",
+                "image_list": "",
+                "comment_list": null,
+                "comment_count": 0,
+                "device": "",
+                "db_time": 1650183413,
+                "authority": 0,
+                "address": "",
+                "vote_count": 0,
+                "has_voted": false,
+                "dislike_count": 0,
+                "share_count": 0,
+                "report_count": 0,
+                "delete_status": false,
                 "tags": ""
             }
         ]

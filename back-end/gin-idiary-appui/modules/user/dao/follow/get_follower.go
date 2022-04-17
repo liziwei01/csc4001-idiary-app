@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 15:22:21
+ * @LastEditTime: 2022-04-17 17:33:24
  * @Description: file content
  */
 package follow
@@ -19,7 +19,9 @@ const (
 )
 
 func GetFollower(ctx context.Context, userID int64) (string, error) {
-	var followers string
+	var followers = make([]struct {
+		FollowerList string `ddb:"follower_list"`
+	}, 1)
 
 	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY_USER)
 	if err != nil {
@@ -42,5 +44,5 @@ func GetFollower(ctx context.Context, userID int64) (string, error) {
 		return "", err
 	}
 
-	return followers, nil
+	return followers[0].FollowerList, nil
 }

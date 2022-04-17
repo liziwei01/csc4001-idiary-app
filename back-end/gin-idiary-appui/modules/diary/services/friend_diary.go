@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 17:00:10
+ * @LastEditTime: 2022-04-17 17:09:46
  * @Description: file content
  */
 package services
@@ -33,14 +33,14 @@ func FriendDiary(ctx context.Context, pars diaryModel.FriendDiaryListRequestPars
 	if len(followerList) == 0 || len(followingList) == 0 {
 		return nil, 0, nil
 	}
-	
-	pars.FriendIDs, err = diaryData.CalcFriend(ctx, followingList, followerList)
+
+	friendIDs, err := diaryData.CalcFriend(ctx, followingList, followerList)
 	if err != nil {
 		return nil, 0, err
 	}
 
 	// 4 获取朋友的日记列表
-	diaryList, total, err := diaryData.FriendDiary(ctx, pars)
+	diaryList, total, err := diaryData.FriendDiary(ctx, pars, friendIDs)
 	if err != nil {
 		return nil, 0, err
 	}

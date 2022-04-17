@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-16 18:24:49
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 20:11:45
+ * @LastEditTime: 2022-04-17 17:13:03
  * @Description: file content
  */
 package follow
@@ -15,10 +15,14 @@ import (
 )
 
 func Followings(ctx context.Context, userID int64) ([]int64, error) {
-	var followingList []int64
+	var followingList = make([]int64, 0)
 	followings, err := followDao.GetFollowing(ctx, userID)
 	if err != nil {
 		return nil, err
+	}
+
+	if len(followings) == 0 {
+		return followingList, nil
 	}
 
 	err = json.Unmarshal([]byte(followings), &followingList)

@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-16 20:06:15
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 20:20:11
+ * @LastEditTime: 2022-04-17 17:09:19
  * @Description: file content
  */
 
@@ -14,13 +14,13 @@ import (
 	diaryModel "gin-idiary-appui/modules/diary/model"
 )
 
-func FriendDiary(ctx context.Context, pars diaryModel.FriendDiaryListRequestPars) ([]diaryModel.DiaryInfo, int64, error) {
-	diaries, err := diaryDao.FriendDiary(ctx, pars)
+func FriendDiary(ctx context.Context, pars diaryModel.FriendDiaryListRequestPars, friendIDs []int64) ([]diaryModel.DiaryInfo, int64, error) {
+	diaries, err := diaryDao.BatchGetDiary(ctx, pars, friendIDs)
 	if err != nil {
 		return nil, 0, err
 	}
 
-	count, err := diaryDao.FriendDiaryCount(ctx, pars)
+	count, err := diaryDao.BatchGetDiaryCount(ctx, pars, friendIDs)
 	if err != nil {
 		return nil, 0, err
 	}

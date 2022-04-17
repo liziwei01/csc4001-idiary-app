@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-16 20:15:50
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 20:19:11
+ * @LastEditTime: 2022-04-17 17:08:13
  * @Description: file content
  */
 package dao
@@ -14,7 +14,7 @@ import (
 	diaryModel "gin-idiary-appui/modules/diary/model"
 )
 
-func FriendDiary(ctx context.Context, pars diaryModel.FriendDiaryListRequestPars) ([]diaryModel.DiaryInfo, error) {
+func BatchGetDiary(ctx context.Context, pars diaryModel.FriendDiaryListRequestPars, IDs []int64) ([]diaryModel.DiaryInfo, error) {
 	var diary []diaryModel.DiaryInfo
 
 	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY_FEED)
@@ -25,7 +25,7 @@ func FriendDiary(ctx context.Context, pars diaryModel.FriendDiaryListRequestPars
 	tableName := DIARY_FEED_TABLE
 
 	where := map[string]interface{}{
-		"user_id in": pars.FriendIDs,
+		"user_id in": IDs,
 		"_orderby":   "db_time desc",
 		"_limit":     []uint{pars.PageIndex, pars.PageLength},
 	}
@@ -40,7 +40,7 @@ func FriendDiary(ctx context.Context, pars diaryModel.FriendDiaryListRequestPars
 	return diary, nil
 }
 
-func FriendDiaryCount(ctx context.Context, pars diaryModel.FriendDiaryListRequestPars) (int64, error) {
+func BatchGetDiaryCount(ctx context.Context, pars diaryModel.FriendDiaryListRequestPars, IDs []int64) (int64, error) {
 	var count = make([]struct {
 		Count int64 `ddb:"count"`
 	}, 1)
@@ -53,7 +53,7 @@ func FriendDiaryCount(ctx context.Context, pars diaryModel.FriendDiaryListReques
 	tableName := DIARY_FEED_TABLE
 
 	where := map[string]interface{}{
-		"user_id in": pars.FriendIDs,
+		"user_id in": IDs,
 	}
 
 	columns := []string{"count(1) as count"}

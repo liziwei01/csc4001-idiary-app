@@ -17,7 +17,7 @@ import (
 
 func MyDiary(ctx context.Context, pars diaryModel.DiaryListRequestPars) ([]diaryModel.DiaryInfo, int64, error) {
 	// 1 get diary
-	diaries, count, err := diaryData.MyDiary(ctx, pars)
+	diaries, count, err := diaryData.GetDiary(ctx, pars)
 	if err != nil {
 		return nil, 0, err
 	}

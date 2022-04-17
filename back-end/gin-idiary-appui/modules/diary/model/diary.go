@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 16:47:30
+ * @LastEditTime: 2022-04-17 17:06:04
  * @Description: file content
  */
 package model
@@ -16,10 +16,9 @@ type DiaryListRequestPars struct {
 }
 
 type FriendDiaryListRequestPars struct {
-	UserID     int64   `form:"user_id" json:"user_id" binding:"required"`
-	FriendIDs  []int64 `form:"friend_ids" json:"friend_ids"`
-	PageIndex  uint    `form:"page_index" json:"page_index"`
-	PageLength uint    `form:"page_length" json:"page_length"`
+	UserID     int64 `form:"user_id" json:"user_id" binding:"required"`
+	PageIndex  uint  `form:"page_index" json:"page_index"`
+	PageLength uint  `form:"page_length" json:"page_length"`
 }
 
 type DiaryInfo struct {
