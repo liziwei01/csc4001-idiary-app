@@ -9,7 +9,7 @@ package follow
 
 import (
 	"gin-idiary-appui/library/response"
-	userModel "gin-idiary-appui/modules/user/model"
+	followModel "gin-idiary-appui/modules/user/model/follow"
 	followService "gin-idiary-appui/modules/user/services/follow"
 
 	"github.com/gin-gonic/gin"
@@ -32,8 +32,8 @@ func Followings(ctx *gin.Context) {
 	})
 }
 
-func getFollowingsPars(ctx *gin.Context) (userModel.FollowingPars, bool) {
-	var inputs userModel.FollowingPars
+func getFollowingsPars(ctx *gin.Context) (followModel.FollowingPars, bool) {
+	var inputs followModel.FollowingPars
 	err := ctx.ShouldBind(&inputs)
 	if err != nil {
 		return inputs, true

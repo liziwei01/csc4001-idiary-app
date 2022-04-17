@@ -53,6 +53,17 @@ func (dao *client) InsertReplace(ctx context.Context, tableName string, data []m
 	return res, nil
 }
 
+func (dao *client) InsertOnDuplicate(ctx context.Context, tableName string, data []map[string]interface{}, update map[string]interface{}) (sql.Result, error) {
+	builder := NewInsertBuilder(tableName, data, insertOnDuplicate, update)
+	res, err := ExecWithBuilder(ctx, dao, builder)
+	if err != nil {
+		logit.Logger.Error("mysql.InsertOnDuplicate error: %+v", err)
+		return nil, err
+	}
+	logit.Logger.Info("mysql.InsertOnDuplicate success")
+	return res, nil
+}
+
 func (dao *client) Update(ctx context.Context, tableName string, where map[string]interface{}, update map[string]interface{}) (sql.Result, error) {
 	builder := NewUpdateBuilder(tableName, where, update)
 	res, err := ExecWithBuilder(ctx, dao, builder)

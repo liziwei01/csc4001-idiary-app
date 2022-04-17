@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 14:24:06
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 20:47:34
+ * @LastEditTime: 2022-04-17 14:22:47
  * @Description: file content
  */
 package services
@@ -37,13 +37,13 @@ func Register(ctx context.Context, pars userModel.RegisterPars) error {
 	}
 
 	// 3 检查邮箱是否已经注册过
-	hasRegisted, err := userData.HasRegisted(ctx, pars.Email)
-	if err != nil {
-		return err
-	}
-	if hasRegisted {
-		return fmt.Errorf("邮箱已经注册过")
-	}
+	// hasRegisted, err := userData.HasRegisted(ctx, pars.Email)
+	// if err != nil {
+	// 	return err
+	// }
+	// if hasRegisted {
+	// 	return fmt.Errorf("邮箱已经注册过")
+	// }
 
 	// 4 注册
 	return userData.Register(ctx, pars)

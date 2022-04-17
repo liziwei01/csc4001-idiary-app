@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-09 19:26:04
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-09 21:38:16
+ * @LastEditTime: 2022-04-17 15:39:35
  * @Description: file content
  */
 package mysql
@@ -31,6 +31,8 @@ type Client interface {
 	InsertIgnore(ctx context.Context, tableName string, data []map[string]interface{}) (sql.Result, error)
 
 	InsertReplace(ctx context.Context, tableName string, data []map[string]interface{}) (sql.Result, error)
+
+	InsertOnDuplicate(ctx context.Context, tableName string, data []map[string]interface{}, update map[string]interface{}) (sql.Result, error)
 
 	Update(ctx context.Context, tableName string, where map[string]interface{}, update map[string]interface{}) (sql.Result, error)
 

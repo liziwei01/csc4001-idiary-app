@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 15:20:51
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 13:58:06
+ * @LastEditTime: 2022-04-17 14:47:32
  * @Description: README
 -->
 # gin-idiary-appui
@@ -348,8 +348,6 @@ DROP table if exists `tb_user_diary_feed`;
 create table `tb_user_diary_feed`(
     `diary_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'auto increment primary key',
     `user_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '发送用户ID',
-    `nickname` varchar(24) NOT NULL DEFAULT '' COMMENT '用户昵称',
-    `profile` varchar(255) NOT NULL DEFAULT '' COMMENT '用户头像',
     `title` varchar(200) NOT NULL DEFAULT '' COMMENT '投稿标题',
     `content` varchar(2000) NOT NULL DEFAULT '' COMMENT '投稿内容',
     `image_list` varchar(2000) NOT NULL DEFAULT '' COMMENT '投稿内包含的图片,使用 json list ["image_name1", "image_name2"...]保存',
@@ -365,6 +363,22 @@ create table `tb_user_diary_feed`(
     `tags` varchar(255) NOT NULL DEFAULT '' COMMENT 'AI 标签',
     PRIMARY KEY (`diary_id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='用户日记投稿表';
+
+DROP table if exists `tb_diary_comment`;
+create table `tb_diary_comment`(
+    `comment_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'auto increment primary key',
+    `diary_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT 'auto increment primary key',
+    `user_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '发送用户ID',
+    `content` varchar(2000) NOT NULL DEFAULT '' COMMENT '投稿内容',
+    `device` varchar(24) NOT NULL DEFAULT '' COMMENT '设备',
+    `db_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+    `address` varchar(24) NOT NULL DEFAULT '' COMMENT '地址',
+    `vote_count` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '点赞数量',
+    `dislike_count` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '点赞数量',
+    `report_count` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '举报数量',
+    `delete_status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '删除状态,0=正常',
+    PRIMARY KEY (`comment_id`)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='用户日记评论表';
 
 In database db_idiary_user:
 

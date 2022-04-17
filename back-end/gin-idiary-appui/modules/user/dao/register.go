@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 20:51:24
+ * @LastEditTime: 2022-04-17 14:20:47
  * @Description: file content
  */
 package dao
@@ -34,28 +34,4 @@ func Register(ctx context.Context, pars userModel.RegisterPars) error {
 	}
 
 	return nil
-}
-
-func GetUserInfoByEmail(ctx context.Context, email string) ([]userModel.UserInfo, error) {
-	var userInfo []userModel.UserInfo
-
-	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY_USER)
-	if err != nil {
-		return make([]userModel.UserInfo, 0), err
-	}
-
-	tableName := USER_PRIVATE_INFO_TABLE
-
-	where := map[string]interface{}{
-		"email": email,
-	}
-
-	columns := []string{"*"}
-
-	err = client.Query(ctx, tableName, where, columns, &userInfo)
-	if err != nil {
-		return make([]userModel.UserInfo, 0), err
-	}
-
-	return userInfo, nil
 }

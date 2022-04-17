@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 19:35:42
+ * @LastEditTime: 2022-04-17 16:27:58
  * @Description: file content
  */
 package dao
@@ -31,6 +31,7 @@ func AddDiary(ctx context.Context, pars diaryModel.DiaryInfo) error {
 	mapSliceInsertData := []map[string]interface{}{}
 	mapSliceInsertData = append(mapSliceInsertData, map[string]interface{}{
 		"user_id":    pars.UserID,
+		"title":      pars.Title,
 		"content":    pars.Content,
 		"image_list": pars.ImageList,
 		"device":     pars.Device,

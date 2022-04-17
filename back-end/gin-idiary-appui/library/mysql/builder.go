@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-09 19:26:42
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-03-21 22:26:45
+ * @LastEditTime: 2022-04-17 15:40:47
  * @Description: file content
  */
 package mysql
@@ -24,6 +24,9 @@ const (
 
 	// replace insert
 	insertReplace
+
+	// on duplicate key update
+	insertOnDuplicate
 )
 
 type Builder interface {
@@ -47,9 +50,10 @@ type SelectBuilder struct {
 
 // InsertBuilder 默认的select sql builder
 type InsertBuilder struct {
-	table string
-	data  []map[string]interface{}
-	typ   int
+	table  string
+	data   []map[string]interface{}
+	update map[string]interface{}
+	typ    int
 
 	res *result
 }
@@ -85,7 +89,15 @@ func NewSelectBuilder(table string, where map[string]interface{}, fields []strin
 	}
 }
 
-func NewInsertBuilder(table string, data []map[string]interface{}, typ int) *InsertBuilder {
+func NewInsertBuilder(table string, data []map[string]interface{}, typ int, update ...map[string]interface{}) *InsertBuilder {
+	if len(update) > 0 {
+		return &InsertBuilder{
+			table:  table,
+			data:   data,
+			typ:    typ,
+			update: update[0],
+		}
+	}
 	return &InsertBuilder{
 		table: table,
 		data:  data,
@@ -154,6 +166,8 @@ func (b *InsertBuilder) CompileContext(ctx context.Context, c Client) (string, [
 		cond, values, err = builder.BuildInsertIgnore(b.table, b.data)
 	case insertReplace:
 		cond, values, err = builder.BuildReplaceInsert(b.table, b.data)
+	case insertOnDuplicate:
+		cond, values, err = builder.BuildInsertOnDuplicate(b.table, b.data, b.update)
 	}
 	log(ctx, c, cond, values)
 	return cond, values, err

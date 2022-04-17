@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 18:52:09
+ * @LastEditTime: 2022-04-17 15:22:21
  * @Description: file content
  */
 package follow
@@ -36,6 +36,9 @@ func GetFollower(ctx context.Context, userID int64) (string, error) {
 
 	err = client.Query(ctx, tableName, where, columns, &followers)
 	if err != nil {
+		if err.Error() == "[scanner]: empty result" {
+			return "", nil
+		}
 		return "", err
 	}
 

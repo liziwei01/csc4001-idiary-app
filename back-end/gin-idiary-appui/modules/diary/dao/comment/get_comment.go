@@ -1,32 +1,36 @@
 /*
  * @Author: liziwei01
- * @Date: 2022-04-12 10:45:14
+ * @Date: 2022-04-17 14:42:31
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 16:20:49
+ * @LastEditTime: 2022-04-17 14:44:43
  * @Description: file content
  */
-package dao
+package comment
 
 import (
 	"context"
 	"gin-idiary-appui/library/mysql"
 	"gin-idiary-appui/modules/diary/constant"
-	diaryModel "gin-idiary-appui/modules/diary/model"
+	commentModel "gin-idiary-appui/modules/diary/model/comment"
 )
 
-func AllDiary(ctx context.Context, pars diaryModel.DiaryListRequestPars) ([]diaryModel.DiaryInfo, error) {
-	var diary []diaryModel.DiaryInfo
+const (
+	DIARY_COMMENT_TABLE = "tb_diary_comment"
+)
+
+func GetCommentByDiaryID(ctx context.Context, diaryID int64) ([]commentModel.CommentInfo, error) {
+	var diary []commentModel.CommentInfo
 
 	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY_FEED)
 	if err != nil {
 		return nil, err
 	}
 
-	tableName := DIARY_FEED_TABLE
+	tableName := DIARY_COMMENT_TABLE
 
 	where := map[string]interface{}{
 		"_orderby": "db_time desc",
-		"_limit":   []uint{pars.PageIndex, pars.PageLength},
+		"diary_id": diaryID,
 	}
 
 	columns := []string{"*"}
@@ -39,7 +43,7 @@ func AllDiary(ctx context.Context, pars diaryModel.DiaryListRequestPars) ([]diar
 	return diary, nil
 }
 
-func AllDiaryCount(ctx context.Context, pars diaryModel.DiaryListRequestPars) (int64, error) {
+func GetCommentByDiaryIDCount(ctx context.Context, diaryID int64) (int64, error) {
 	var count = make([]struct {
 		Count int64 `ddb:"count"`
 	}, 1)
@@ -49,14 +53,12 @@ func AllDiaryCount(ctx context.Context, pars diaryModel.DiaryListRequestPars) (i
 		return 0, err
 	}
 
-	tableName := DIARY_FEED_TABLE
+	tableName := DIARY_COMMENT_TABLE
 
 	where := map[string]interface{}{
-		"diary_id >": 0,
+		"_orderby": "db_time desc",
+		"diary_id": diaryID,
 	}
-	// if pars.UserID != 0 {
-	// 	where["user_id"] = pars.UserID
-	// }
 
 	columns := []string{"count(1) as count"}
 

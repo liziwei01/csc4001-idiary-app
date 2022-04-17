@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 20:12:35
+ * @LastEditTime: 2022-04-17 14:51:12
  * @Description: file content
  */
 package services
@@ -10,8 +10,10 @@ package services
 import (
 	"context"
 	diaryData "gin-idiary-appui/modules/diary/data"
+	commentData "gin-idiary-appui/modules/diary/data/comment"
 	diaryModel "gin-idiary-appui/modules/diary/model"
 	followData "gin-idiary-appui/modules/user/data/follow"
+	infoData "gin-idiary-appui/modules/user/data/info"
 )
 
 func FriendDiary(ctx context.Context, pars diaryModel.FriendDiaryListRequestPars) ([]diaryModel.DiaryInfo, int64, error) {
@@ -37,6 +39,42 @@ func FriendDiary(ctx context.Context, pars diaryModel.FriendDiaryListRequestPars
 	diaryList, total, err := diaryData.FriendDiary(ctx, pars)
 	if err != nil {
 		return nil, 0, err
+	}
+
+	// 5 remove deleted diary
+	existedDiary := make([]diaryModel.DiaryInfo, 0)
+	for _, v := range diaryList {
+		if v.DeleteStatus == true {
+			continue
+		}
+		existedDiary = append(existedDiary, v)
+	}
+
+	// 6 get user info
+	userIDs := make([]int64, 0)
+	for _, v := range existedDiary {
+		userIDs = append(userIDs, v.UserID)
+	}
+
+	userInfos, err := infoData.BatchGetUserInfo(ctx, userIDs)
+	if err != nil {
+		return nil, 0, err
+	}
+
+	// 7 combine user info and diary
+	for k, v := range existedDiary {
+		v.Nickname = userInfos[k].Nickname
+		v.UserProfile = userInfos[k].Profile
+	}
+
+	// 8 get comments
+	for k, v := range existedDiary {
+		comments, count, err := commentData.GetCommentByDiaryID(ctx, v.UserID)
+		if err != nil {
+			return nil, 0, err
+		}
+		existedDiary[k].CommentList = comments
+		existedDiary[k].CommentCount = count
 	}
 
 	return diaryList, total, nil

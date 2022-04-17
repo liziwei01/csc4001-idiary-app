@@ -2,13 +2,14 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 13:56:45
+ * @LastEditTime: 2022-04-17 14:54:51
  * @Description: file content
  */
 package routers
 
 import (
 	diaryControllers "gin-idiary-appui/modules/diary/controllers"
+	commentControllers "gin-idiary-appui/modules/diary/controllers/comment"
 
 	"github.com/gin-gonic/gin"
 )
@@ -25,5 +26,6 @@ func Init(router *gin.Engine) {
 		userGroup.GET("/world", diaryControllers.AllDiary)
 		userGroup.GET("/friend", diaryControllers.FriendDiary)
 		userGroup.POST("/addDiary", diaryControllers.AddDiary)
+		userGroup.POST("/comment", commentControllers.Comment)
 	}
 }
