@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 15:20:51
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-18 01:08:59
+ * @LastEditTime: 2022-04-18 01:33:39
  * @Description: README
 -->
 # gin-idiary-appui
@@ -524,10 +524,10 @@ In database db_idiary_user:
 DROP table if exists `tb_user_private_info`;
 create table `tb_user_private_info`(
     `user_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
-    `email` varchar(24) NOT NULL DEFAULT '' COMMENT '用户邮箱',
-    `password` varchar(24) NOT NULL DEFAULT '' COMMENT '用户密码',
-    `nickname` varchar(24) NOT NULL DEFAULT '' COMMENT '用户昵称',
-    `address` varchar(24) NOT NULL DEFAULT '' COMMENT '地址',
+    `email` varchar(255) NOT NULL DEFAULT '' COMMENT '用户邮箱',
+    `password` varchar(255) NOT NULL DEFAULT '' COMMENT '用户密码',
+    `nickname` varchar(255) NOT NULL DEFAULT '' COMMENT '用户昵称',
+    `address` varchar(255) NOT NULL DEFAULT '' COMMENT '地址',
     `profile` varchar(255) NOT NULL DEFAULT '' COMMENT '用户头像',
     `db_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
     primary key (`user_id`)
