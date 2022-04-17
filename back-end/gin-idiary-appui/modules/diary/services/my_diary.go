@@ -2,13 +2,14 @@
  * @Author: liziwei01
  * @Date: 2022-04-17 16:53:02
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 18:01:27
+ * @LastEditTime: 2022-04-17 23:05:00
  * @Description: file content
  */
 package services
 
 import (
 	"context"
+	"encoding/json"
 	diaryData "gin-idiary-appui/modules/diary/data"
 	commentData "gin-idiary-appui/modules/diary/data/comment"
 	diaryModel "gin-idiary-appui/modules/diary/model"
@@ -16,7 +17,7 @@ import (
 	infoData "gin-idiary-appui/modules/user/data/info"
 )
 
-func MyDiary(ctx context.Context, pars diaryModel.DiaryListRequestPars) ([]diaryModel.DiaryInfo, int64, error) {
+func MyDiary(ctx context.Context, pars diaryModel.DiaryListRequestPars) ([]diaryModel.DiaryInfoUnmarshaled, int64, error) {
 	// 1 get diary
 	diaries, count, err := diaryData.GetDiary(ctx, pars)
 	if err != nil {
@@ -68,16 +69,40 @@ func MyDiary(ctx context.Context, pars diaryModel.DiaryListRequestPars) ([]diary
 	}
 
 	// 7 unmarshal image_list
-	// for k := range existedDiary {
-	// 	if existedDiary[k].ImageList != "" {
-	// 		imgList := make([]diaryModel.DiaryInfo, 0)
-	// 		err = json.Unmarshal([]byte(existedDiary[k].ImageList), &imgList)
-	// 		if err != nil {
-	// 			return nil, 0, err
-	// 		}
-	// 		existedDiary[k].ImageList = imgList
-	// 	}
-	// }
+	UnmarshaledDiary := make([]diaryModel.DiaryInfoUnmarshaled, 0)
+	for k, v := range existedDiary {
+		var newDiary diaryModel.DiaryInfoUnmarshaled
+		newDiary.Address = v.Address
+		newDiary.Authority = v.Authority
+		newDiary.CommentCount = v.CommentCount
+		newDiary.CommentList = v.CommentList
+		newDiary.Content = v.Content
+		newDiary.DBTime = v.DBTime
+		newDiary.DeleteStatus = v.DeleteStatus
+		newDiary.Device = v.Device
+		newDiary.DiaryID = v.DiaryID
+		newDiary.DislikeCount = v.DislikeCount
+		newDiary.HasVoted = v.HasVoted
+		newDiary.ImageList = make([]string, 0)
+		newDiary.Nickname = v.Nickname
+		newDiary.ReportCount = v.ReportCount
+		newDiary.ShareCount = v.ShareCount
+		newDiary.Tags = v.Tags
+		newDiary.Title = v.Title
+		newDiary.UserID = v.UserID
+		newDiary.UserProfile = v.UserProfile
+		newDiary.VoteCount = v.VoteCount
 
-	return existedDiary, count, nil
+		if existedDiary[k].ImageList != "" {
+			imgList := make([]string, 0)
+			err = json.Unmarshal([]byte(existedDiary[k].ImageList), &imgList)
+			if err != nil {
+				return nil, 0, err
+			}
+			newDiary.ImageList = append(newDiary.ImageList, imgList...)
+		}
+		UnmarshaledDiary = append(UnmarshaledDiary, newDiary)
+	}
+
+	return UnmarshaledDiary, count, nil
 }

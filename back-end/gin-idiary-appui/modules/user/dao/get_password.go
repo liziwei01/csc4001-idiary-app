@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 21:22:14
+ * @LastEditTime: 2022-04-17 23:46:16
  * @Description: file content
  */
 package dao
@@ -32,7 +32,7 @@ func GetPassword(ctx context.Context, pars userModel.LoginPars) (string, error) 
 	tableName := USER_PRIVATE_INFO_TABLE
 
 	where := map[string]interface{}{
-		"user_id": pars.UserID,
+		"email": pars.Email,
 	}
 
 	columns := []string{"password"}
