@@ -19,7 +19,7 @@ export default class WeiBoList extends Component {
     var contentImgs;
     if (data.contentImgUrls) {
       //若后端给的数据中有图片url，则展示
-      contentImgs = <ContentImg content-img-urls={data.contentImgUrls} />;
+      contentImgs = <ContentImg contentImgUrls={data.contentImgUrls} />;
     }
     return (
       <div className="item">

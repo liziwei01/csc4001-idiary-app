@@ -5,7 +5,7 @@ class ContentImg extends React.Component {
     super(props);
   }
   render() {
-    console.log(this.props["contentImgUrls"]);
+    //console.log(this.props["contentImgUrls"]);
     var imgNodes = this.props["contentImgUrls"].map(function (oneImg, index) {
       return (
         <div key={index} className="aa">

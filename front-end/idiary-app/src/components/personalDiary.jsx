@@ -187,7 +187,7 @@ class personalDiary extends React.Component {
   };
 
   componentDidMount() {
-    console.log("personnal Diary===");
+    //console.log("personnal Diary===");
 
     // const location = useLocation();
     // console.log(location.pathname);

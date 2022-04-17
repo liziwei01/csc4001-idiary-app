@@ -20,7 +20,8 @@ class WorldDiary extends Component {
         user_id: 1,
       },
     }).then((res) => {
-      // console.log(res);
+      console.log(res);
+      console.log("WorldDiary====WorldDiary");
       if (res.status === 200) {
         this.setState({
           WorldDiaryList: (res.data.data && res.data.data.diaries) || [],
@@ -30,6 +31,7 @@ class WorldDiary extends Component {
   }
 
   _renderHeadView(data) {
+    //console.log(data)
     return (
       <div className="item">
         <div className="topRightView">
@@ -45,7 +47,7 @@ class WorldDiary extends Component {
           </div>
           <div>
             <p style={{ marginTop: "10px" }}>{data.content}</p>
-            {/* <ContentImg contentImgUrls={data.image_list || []} /> */}
+            <ContentImg contentImgUrls={data.image_list || []} />
           </div>
         </div>
       </div>
