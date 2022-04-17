@@ -65,7 +65,7 @@ class FriendsDiary extends Component {
     const arr = this.state.FriendsDiaryList.map((ele) => {
       if (ele.diary_id === id) {
         //var isshow = ele.isShowComment;
-        return { ...ele, isShowComment: true, comment_count: number + 1 };
+        return { ...ele, isShowComment: true};
       }
       return { ...ele };
     });

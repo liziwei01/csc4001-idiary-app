@@ -179,7 +179,7 @@ class personalDiary extends React.Component {
       { name: "protected", _id: 2 },
       { name: "private", _id: 1 },
     ],
-    list: [...dataList],
+    list: [ ],
     currentPage: 1,
     pageSize: 4,
     selectedPrivacy: null,
@@ -187,20 +187,23 @@ class personalDiary extends React.Component {
   };
 
   componentDidMount() {
-    //console.log("personnal Diary===");
+    console.log("personnal Diary===");
 
-    // const location = useLocation();
-    // console.log(location.pathname);
-    // axios({
-    //   url: "/api/get/list",
-    //   method: "get",
-    // }).thent((res) => {
-    //   if(res.status === 200) {
-    //     this.setState({
-    //       list: res.xxxx.x
-    //     })
-    //   }
-    // });
+    axios({
+        url: "/api/diary/mine",
+        method: "get",
+        params: {
+          user_id: 1,
+        },
+      }).then((res) => {
+        console.log(res);
+        console.log(res.data.data.diaries[0].user_profile);
+        if (res.status === 200) {
+          this.setState({
+            list: (res.data.data && res.data.data.diaries) || [],
+          });
+        }
+      });
   }
 
   // 页面加载的钩子

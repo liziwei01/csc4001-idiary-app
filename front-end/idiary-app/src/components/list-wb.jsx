@@ -16,27 +16,23 @@ export default class WeiBoList extends Component {
    * 渲染顶部View
    */
   _renderHeadView(data) {
-    var contentImgs;
-    if (data.contentImgUrls) {
-      //若后端给的数据中有图片url，则展示
-      contentImgs = <ContentImg contentImgUrls={data.contentImgUrls} />;
-    }
+ 
     return (
       <div className="item">
         <div className="topRightView">
           <div className="nameandtime">
             <div style={{marginright:"10px"}}>
-              <img className="nick-img" src={data.headUrl} />
+              <img className="nick-img" src={data.user_profile} />
               <span style={{ marginLeft: "10px" }}>{data.nickName}</span>
               
             </div>
             {/* <div style={{marginLeft:"600px"}}>{data.sendTime}</div> */}
-            <div style={{marginLeft:"500px"}}>{moment(data.sendTime).format("YYYY-MM-DD HH:mm:ss")}</div>
+            <div style={{marginLeft:"500px"}}>{moment(data.db_time).format("YYYY-MM-DD HH:mm:ss")}</div>
             
           </div>
           <div>
             <p style={{ marginTop: "10px" }}>{data.content}</p>
-            <div>{contentImgs}</div>
+            <ContentImg contentImgUrls={data.image_list || []} />
           </div>
         </div>
       </div>
@@ -45,19 +41,19 @@ export default class WeiBoList extends Component {
 
   like = (id, number) => {
     const arr = this.props.data.map((ele) => {
-      if (ele.id === id) {
-        return { ...ele, NoForward: number + 1 };
+      if (ele.diary_id === id) {
+        return { ...ele, vote_number: number + 1 };
       }
       return { ...ele };
     });
     this.props.update(arr);
   };
 
-  comment = (id) => {
+  comment = (id,number) => {
     const arr = this.props.data.map((ele) => {
-      if (ele.id === id) {
-          var isshow = ele.isShowComment;
-        return { ...ele, isShowComment: !isshow };
+      if (ele.diary_id === id) {
+        //   var isshow = ele.isShowComment;
+        return { ...ele, isShowComment: true};
       }
       return { ...ele };
     });
@@ -66,7 +62,7 @@ export default class WeiBoList extends Component {
 
   intChange = (e, id) => {
     const arr = this.props.data.map((ele) => {
-      if (ele.id === id) {
+      if (ele.diary_id === id) {
         return { ...ele, inputValue: e.target.value };
       }
       return { ...ele };
@@ -74,20 +70,21 @@ export default class WeiBoList extends Component {
     this.props.update(arr);
   };
 
-  btnSure = (id, name) => {
+  btnSure = (id, name,number) => {
     // 拿到后发送给服务端
     const arr = this.props.data.map((ele) => {
-      if (ele.id === id) {
+      if (ele.diary_id === id) {
         return {
           ...ele,
           inputValue: "",
-          commentList: [
-            ...ele.commentList,
+          comment_list: [
+            ...ele.comment_list,
             {
-              name: name,
-              comment: ele.inputValue,
+              nickname: name,
+              content: ele.inputValue,
             },
           ],
+          comment_count: number+1
         };
       }
       return { ...ele };
@@ -97,11 +94,11 @@ export default class WeiBoList extends Component {
 
   transferdata = (id) => {
     const arr = this.props.data.map((ele) => {
-      if (ele.id === id) {
-        var istransfer = ele.isTransfer;
+      if (ele.diary_id === id) {
+        //var istransfer = ele.isTransfer;
         return { 
             ...ele, 
-            isTransfer: !istransfer };
+            isTransfer: true };
       }
       return { ...ele };
     });
@@ -110,7 +107,7 @@ export default class WeiBoList extends Component {
 
   transferChange = (e,id) => {
     const arr = this.props.data.map((ele) => {
-        if (ele.id === id) {
+        if (ele.diary_id === id) {
           return { ...ele, transferValue: e.target.value };
         }
         return { ...ele };
@@ -122,15 +119,15 @@ export default class WeiBoList extends Component {
   transfer = (id, number) => {
     // 增加转发数量
     const arr = this.props.data.map((ele) => {
-      if (ele.id === id) {
+      if (ele.diary_id === id) {
         return { 
             ...ele, 
             transferValue:"",
-            NoPointGreat: number + 1 };
+            share_count: number + 1 };
       }
       return { ...ele };
     });
-    console.log(arr);
+    // console.log(arr);
     this.props.update(arr);
 
     //自己发送日记
@@ -162,21 +159,21 @@ export default class WeiBoList extends Component {
                   <div className="shuxian"></div>
                   <li
                     className="liStyle"
-                    onClick={() => this.like(ele.id, ele.NoForward)}>
-                    点赞:{ele.NoForward}
+                    onClick={() => this.like(ele.diary_id, ele.vote_count)}>
+                    点赞:{ele.vote_count}
                   </li>
 
                   <div className="shuxian"></div>
-                  <li className="liStyle" onClick={() => this.comment(ele.id)}>
-                    评论:{ele.NoComment}
+                  <li className="liStyle" onClick={() => this.comment(ele.diary_id,ele.comment_count)}>
+                    评论:{ele.comment_count}
                   </li>
 
                   <div className="shuxian"></div>
                   <li
                     className="liStyle"
-                    onClick={() => this.transferdata(ele.id)}
+                    onClick={() => this.transferdata(ele.diary_id)}
                   >
-                    转发:{ele.NoPointGreat}
+                    转发:{ele.share_count}
                   </li>
                 </ul>
 
@@ -185,12 +182,12 @@ export default class WeiBoList extends Component {
                     <input
                       style={{ width: "500px" }}
                       type="text"
-                      onChange={(e) => this.transferChange(e, ele.id)}
+                      onChange={(e) => this.transferChange(e, ele.diary_id)}
                       value={ele.transferValue}
                     />
                     <pre></pre>
                     <button
-                      onClick={() => this.transfer(ele.id, ele.NoPointGreat)}
+                      onClick={() => this.transfer(ele.diary_id, ele.share_count)}
                     >
                       转发
                     </button>
@@ -202,20 +199,20 @@ export default class WeiBoList extends Component {
                     <input
                       style={{ width: "500px" }}
                       type="text"
-                      onChange={(e) => this.intChange(e, ele.id)}
+                      onChange={(e) => this.intChange(e, ele.diary_id)}
                       value={ele.inputValue}
                     ></input>
                     <pre></pre>
-                    <button onClick={() => this.btnSure(ele.id, ele.nickName)}>
+                    <button onClick={() => this.btnSure(ele.diary_id, ele.nickName,ele.comment_count)}>
                       评论
                     </button>
                   </div>
                 )}
                 {ele.isShowComment &&
-                  ele.commentList.map((subEle, subIndex) => {
+                  ele.comment_list.map((subEle, subIndex) => {
                     return (
                       <div key={subIndex}>
-                        {subEle.name} : {subEle.comment}
+                        {subEle.nickname} : {subEle.content}
                       </div>
                     );
                   })}

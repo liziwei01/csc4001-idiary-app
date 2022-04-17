@@ -21,6 +21,7 @@ class WorldDiary extends Component {
       },
     }).then((res) => {
       console.log(res);
+      console.log(res.data.data.diaries[0].user_profile);
       console.log("WorldDiary====WorldDiary");
       if (res.status === 200) {
         this.setState({
@@ -68,7 +69,7 @@ class WorldDiary extends Component {
     const arr = this.state.WorldDiaryList.map((ele) => {
       if (ele.diary_id === id) {
         //var isshow = ele.isShowComment;
-        return { ...ele, isShowComment: true, comment_count: number + 1 };
+        return { ...ele, isShowComment: true};
       }
       return { ...ele };
     });
