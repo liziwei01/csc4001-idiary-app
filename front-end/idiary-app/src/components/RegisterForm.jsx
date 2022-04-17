@@ -33,6 +33,7 @@ class RegisterForm extends Component {
     if (response.data.errmsg != "Success") {
       errors.email = "Email has be registered!";
       this.setState({ errors });
+      return;
     }
     this.setState({ user: true });
     localStorage.setItem("token", this.state.data.email);

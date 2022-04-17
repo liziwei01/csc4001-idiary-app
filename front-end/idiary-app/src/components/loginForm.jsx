@@ -16,6 +16,7 @@ class LoginForm extends Component {
     if (response.data.errmsg != "Success") {
       errors.email = "Email or password incorrect!";
       this.setState({ errors });
+      return;
     }
     this.setState({ user: true });
     localStorage.setItem("token", this.state.data.email);
