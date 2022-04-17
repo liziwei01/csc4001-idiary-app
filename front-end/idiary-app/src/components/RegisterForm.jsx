@@ -26,8 +26,12 @@ class RegisterForm extends Component {
     e.preventDefault();
     //server
     const data = { ...this.state.data };
-    delete data.repeatpassword;
-    await userService.register(data);
+    const response = await userService.register(data);
+    console.log(response.data);
+    const errors = { ...this.state.errors };
+    if (response.data.errmsg != "Success")
+      errors.email = "Email or password incorrect!";
+    this.setState({ errors });
   };
   validate = () => {
     const { data } = this.state;
@@ -116,7 +120,8 @@ class RegisterForm extends Component {
     const response = await userService.send_email(this.state.data);
     console.log(response);
     const errors = { ...this.state.errors };
-    if (response.data.errmsg != "Success") errors.email = response.data.data;
+    if (response.data.errmsg != "Success")
+      errors.email = "The email has received within 60s!";
     this.setState({ errors });
   };
 
@@ -163,7 +168,7 @@ class RegisterForm extends Component {
                   errors={errors.username}
                   text="Must be 6-20 characters long."
                   label="fa fa-user"
-                  placeholder="username"
+                  placeholder="nickname"
                 />
                 <InputWithDesc
                   onChange={this.handleChange}
@@ -178,7 +183,7 @@ class RegisterForm extends Component {
                 <InputWithDesc
                   onChange={this.handleChange}
                   value={data.repeatpassword}
-                  type="repeatpassword"
+                  type="password"
                   id="repeatpassword"
                   errors={errors.repeatpassword}
                   text="Please repeat your password."

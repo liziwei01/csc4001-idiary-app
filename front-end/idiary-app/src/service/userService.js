@@ -2,10 +2,11 @@ import http from "./httpService";
 
 const apiEndpoint = "http://localhost:8080/user/login";
 export function register(user) {
-  return http.post(apiEndpoint, {
+  return http.post("http://localhost:8080/user/register", {
     email: user.email,
+    verification_code: user.verification,
     password: user.password,
-    name: user.username,
+    username: user.username,
   });
 }
 

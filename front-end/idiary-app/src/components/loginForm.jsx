@@ -11,9 +11,9 @@ class LoginForm extends Component {
     //server
     const data = { ...this.state.data };
     const response = await userService.login(data);
-    console.log(response.data);
     const errors = { ...this.state.errors };
-    if (response.data.errmsg != "Success") errors.email = response.data.data;
+    if (response.data.errmsg != "Success")
+      errors.email = "Email or password incorrect!";
     this.setState({ errors });
   };
   validate = () => {
