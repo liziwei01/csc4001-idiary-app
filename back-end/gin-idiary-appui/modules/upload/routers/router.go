@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-12 15:30:42
+ * @LastEditTime: 2022-04-17 20:41:29
  * @Description: file content
  */
 package routers
@@ -19,7 +19,7 @@ import (
  * @return {*}
  */
 func Init(router *gin.Engine) {
-	uploadGroup := router.Group("/upload")
+	uploadGroup := router.Group("/api/upload")
 	{
 		uploadGroup.POST("/image", uploadController.UploadImage)
 		uploadGroup.GET("/getImageURL", uploadController.GetImageURL)
