@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import * as userService from "./../service/userService";
 
 class LoginForm extends Component {
-  state = { data: { username: "", password: "" }, errors: {} };
+  state = { data: { email: "", password: "" }, errors: {} };
   handleSubmit = async (e) => {
     e.preventDefault();
     //server
@@ -13,13 +13,13 @@ class LoginForm extends Component {
     const response = await userService.login(data);
     console.log(response.data);
     const errors = { ...this.state.errors };
-    if (response.data.errmsg != "Success") errors.username = response.data.data;
+    if (response.data.errmsg != "Success") errors.email = response.data.data;
     this.setState({ errors });
   };
   validate = () => {
     const { data } = this.state;
     if (
-      this.validateProperty({ id: "username", value: data.username }) ||
+      this.validateProperty({ id: "email", value: data.email }) ||
       this.validateProperty({
         id: "password",
         value: data.password,
@@ -29,8 +29,8 @@ class LoginForm extends Component {
     else return false;
   };
   validateProperty = ({ id, value }) => {
-    if (id === "username") {
-      if (value.trim() === "") return "Username is required!";
+    if (id === "email") {
+      if (value.trim() === "") return "Email is required!";
     }
     if (id === "password") {
       if (value.trim() === "") return "Password is required!";
@@ -70,12 +70,12 @@ class LoginForm extends Component {
               >
                 <Input
                   onChange={this.handleChange}
-                  value={data.username}
+                  value={data.email}
                   type="text"
-                  id="username"
-                  errors={errors.username}
-                  label="fa fa-user"
-                  placeholder="username"
+                  id="email"
+                  errors={errors.email}
+                  label="fa fa-envelope"
+                  placeholder="email"
                 />
                 <Input
                   onChange={this.handleChange}

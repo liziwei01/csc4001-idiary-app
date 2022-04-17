@@ -13,7 +13,7 @@ export function login(user) {
   const apiUrl = `http://localhost:8080/user/login`;
   return http.post(apiUrl, {
     password: user.password,
-    email: user.username,
+    email: user.email,
   });
 }
 
