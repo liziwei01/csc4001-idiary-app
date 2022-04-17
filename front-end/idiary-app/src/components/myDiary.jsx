@@ -6,9 +6,8 @@ import FriendsDiary from "./friendsDiary";
 
 import Tab from "./common/tab";
 
-// import PicturesWall from "./upload_img";
 import { Upload, Button, message } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 
 export default class MyDiary extends Component {
   state = {
@@ -20,6 +19,8 @@ export default class MyDiary extends Component {
       img: "",
       text: "",
     },
+    imageUrl: "",
+    loading: false,
   };
   writeChange = (e) => {
     this.setState({
@@ -29,23 +30,21 @@ export default class MyDiary extends Component {
 
   write = () => {
     // 拿到后发送给服务端
-    var t = (new Date()).getTime();
+    var t = new Date().getTime();
     axios({
-        url: "/api/diary/addDiary",
-        method: "post",
-        data:{
-           user_id: 1,
-           content: this.state.writeVal,
-           image_list: "",
-           authority: this.state.diary_type,
-           time: t,
-        }
-      }).then((res) => {
-          
-        if(res.status === 200) {
-            console.log("success")
-        }
-      });
+      url: "/api/diary/addDiary",
+      method: "post",
+      data: {
+        user_id: 1,
+        content: this.state.writeVal,
+        image_list: "",
+        authority: this.state.diary_type,
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        console.log("success");
+      }
+    });
   };
   // react一个生命周期
 
@@ -58,51 +57,39 @@ export default class MyDiary extends Component {
   customRequest = async (obj) => {
     const { file, onSuccess, onError } = obj;
     const suffix = file.name.split(".").reverse()[0];
+    // console.log(file, "==file");
+    // console.log(suffix, "===suffix");
+    const values = {
+      user_id: 1,
+      file,
+    };
+    const formData = new FormData();
+    Object.keys(values).forEach((key) => {
+      formData.append(key, values[key]);
+    });
     axios({
       method: "post",
       url: `/api/upload/image`,
-      headers: {
-        // "access-uid": jsCookie.get("accessUid"),
-        // Authorization: jsCookie.get("adminToken"),
-      },
+      data: formData,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.status === 200) {
-        // this.setState({
-        //   articleData: { ...this.setState.articleData, img: res.data.data.url },
-        // });
+        this.setState({
+          imageUrl: res.data.data.url,
+        });
+        onSuccess();
       }
-
-      // if (res.status === 200) {
-      //   if (!res.data.data[0]) return message.error(res);
-      //   const data = res.data.data[0];
-      //   axios({
-      //     method: "put",
-      //     url: data.url,
-      //     data: file,
-      //     headers: {
-      //       "Content-Type": "binary/octet-stream",
-      //     },
-      //   })
-      //     .then((res) => {
-      //       if (res.status === 200) {
-      //         const uploadData = {
-      //           fileName: file.name,
-      //           fileKey: data.key,
-      //         };
-      //         onSuccess(true);
-      //       }
-      //     })
-      //     .catch(() => {
-      //       onError(true);
-      //     });
-      // } else {
-      //   message.error(res.status);
-      // }
     });
   };
 
   render() {
+    const { imageUrl, loading } = this.state;
+    const uploadButton = (
+      <div>
+        {loading ? <LoadingOutlined /> : <PlusOutlined />}
+        <div style={{ marginTop: 8 }}>Upload</div>
+      </div>
+    );
     return (
       <React.Fragment>
         <div className="wrap">
@@ -117,19 +104,23 @@ export default class MyDiary extends Component {
               />
               <Upload
                 name="file"
+                // action="www.baidu.com/api/upload/image"
                 // beforeUpload={this.beforeUpload}
-                //customRequest={this.customRequest}
-                listType="image"
+                customRequest={this.customRequest}
+                // listType="picture-card"
+                showUploadList={false}
                 // accept=".jpg.png.jpeg"
                 // onRemove={this.onRemove}
                 // showUploadList={{ showPreviewIcon: false, showDownloadIcon: false }}
               >
-                <Button icon={<UploadOutlined />}>{"upload image"}</Button>
-                {/* {dataLength > 0 && (
-                  <span style={{ marginLeft: "10px" }}>
-                    {t("共")} {dataLength} {t("数据")}
-                  </span>
-                )} */}
+                {imageUrl ? (
+                  <img
+                    src={imageUrl}
+                    alt="avatar"
+                    style={{ width: 100, height: 100 }}
+                  />
+                ) : null}
+                {uploadButton}
               </Upload>
             </div>
             <div style={{ display: "flex" }}>

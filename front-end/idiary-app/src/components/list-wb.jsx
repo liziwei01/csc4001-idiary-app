@@ -1,7 +1,6 @@
 import React, { Component, PropTypes} from "react";
 import ContentImg from "./content-img.jsx";
 import "../css/listWb.css";
-import PicturesWall from "./upload_img.jsx"
 import moment from 'moment';
 export default class WeiBoList extends Component {
   constructor(props) {

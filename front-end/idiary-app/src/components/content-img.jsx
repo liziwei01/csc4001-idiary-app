@@ -1,21 +1,23 @@
-import React from 'react';
-import "../css/image.css"
-class ContentImg extends React.Component{
-    constructor(props) {
-        super(props);
-      }
+import React from "react";
+import "../css/image.css";
+class ContentImg extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
-    var imgNodes=this.props['content-img-urls'].map(function(oneImg,index){
-      return <div key={index} className="aa">
-            <img style={{width:"240px",height:"240px"}} src={oneImg} alt="微博配图" />
-          </div>;
+    console.log(this.props["contentImgUrls"]);
+    var imgNodes = this.props["contentImgUrls"].map(function (oneImg, index) {
+      return (
+        <div key={index} className="aa">
+          <img
+            style={{ width: "240px", height: "240px" }}
+            src={oneImg}
+            alt="微博配图"
+          />
+        </div>
+      );
     });
-    return <div  className="box">
-      
-        {imgNodes}
-      
-    </div>
-    
+    return <div className="box">{imgNodes}</div>;
   }
 }
 export default ContentImg;

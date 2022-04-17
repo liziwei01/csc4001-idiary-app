@@ -143,7 +143,7 @@ const Landing = () => {
         <div
           class="modal fade bd-example-modal-lg watchvideomodal"
           data-keyboard="false"
-          tabindex="-1"
+          tabIndex="-1"
           aria-hidden="true"
         >
           <div class="modal-dialog modal-dialog-centered modal-dialog modal-lg">
