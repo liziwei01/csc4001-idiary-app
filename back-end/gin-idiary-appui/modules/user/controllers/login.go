@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 14:24:06
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 23:46:04
+ * @LastEditTime: 2022-04-18 00:14:24
  * @Description: file content
  */
 package controllers
@@ -24,6 +24,7 @@ func Login(ctx *gin.Context) {
 	success, err := userService.Login(ctx, inputs)
 	if err != nil {
 		response.StdFailed(ctx, err.Error())
+		return
 	}
 
 	if !success {
