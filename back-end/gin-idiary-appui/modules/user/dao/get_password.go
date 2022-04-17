@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 23:46:16
+ * @LastEditTime: 2022-04-18 01:41:57
  * @Description: file content
  */
 package dao
@@ -22,7 +22,9 @@ const (
 )
 
 func GetPassword(ctx context.Context, pars userModel.LoginPars) (string, error) {
-	var password []string
+	var passwords = make([]struct {
+		Pwd string `ddb:password`
+	}, 1)
 
 	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY_USER)
 	if err != nil {
@@ -37,16 +39,16 @@ func GetPassword(ctx context.Context, pars userModel.LoginPars) (string, error) 
 
 	columns := []string{"password"}
 
-	err = client.Query(ctx, tableName, where, columns, &password)
+	err = client.Query(ctx, tableName, where, columns, &passwords)
 	if err != nil {
 		return "", err
 	}
 
-	if len(password) != 1 {
-		err := fmt.Errorf("len(password) = %d", len(password))
+	if len(passwords) != 1 {
+		err := fmt.Errorf("len(password) = %d", len(passwords))
 		logit.Logger.Warn(err.Error())
 		return "", err
 	}
 
-	return password[0], nil // 密码验证
+	return passwords[0].Pwd, nil // 密码验证
 }
