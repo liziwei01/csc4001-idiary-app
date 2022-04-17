@@ -4,7 +4,7 @@ import InputWithButton from "./common/inputWithButton";
 import InputWithDesc from "./common/inputWithDesc";
 import Button from "./common/button";
 import Input from "./common/input";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 class RegisterForm extends Component {
   state = {
@@ -21,6 +21,7 @@ class RegisterForm extends Component {
       secretproblem: false,
     },
     errors: {},
+    user: null,
   };
   handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,9 +30,12 @@ class RegisterForm extends Component {
     const response = await userService.register(data);
     console.log(response.data);
     const errors = { ...this.state.errors };
-    if (response.data.errmsg != "Success")
-      errors.email = "Email or password incorrect!";
-    this.setState({ errors });
+    if (response.data.errmsg != "Success") {
+      errors.email = "Email has be registered!";
+      this.setState({ errors });
+    }
+    this.setState({ user: true });
+    localStorage.setItem("token", this.state.data.email);
   };
   validate = () => {
     const { data } = this.state;
@@ -129,6 +133,7 @@ class RegisterForm extends Component {
     const { data, errors } = this.state;
     return (
       <section class="signup sign">
+        {this.state.user && <Navigate to="/idiary" replace="true" />}
         <div class="container">
           <div class="signup-content">
             <div class="signup-form">

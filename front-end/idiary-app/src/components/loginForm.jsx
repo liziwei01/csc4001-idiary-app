@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import Input from "./common/input";
 import Button from "./common/button";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import * as userService from "./../service/userService";
 
 class LoginForm extends Component {
-  state = { data: { email: "", password: "" }, errors: {} };
+  state = { data: { email: "", password: "" }, errors: {}, user: null };
   handleSubmit = async (e) => {
     e.preventDefault();
     //server
@@ -13,9 +13,12 @@ class LoginForm extends Component {
     const response = await userService.login(data);
     const errors = { ...this.state.errors };
     console.log(response.data);
-    if (response.data.errmsg != "Success")
+    if (response.data.errmsg != "Success") {
       errors.email = "Email or password incorrect!";
-    this.setState({ errors });
+      this.setState({ errors });
+    }
+    this.setState({ user: true });
+    localStorage.setItem("token", this.state.data.email);
   };
   validate = () => {
     const { data } = this.state;
@@ -51,6 +54,7 @@ class LoginForm extends Component {
     const { data, errors } = this.state;
     return (
       <section class="sign-in sign">
+        {this.state.user && <Navigate to="/idiary" replace="true" />}
         <div class="container">
           <div class="signin-content">
             <div class="signin-image">
