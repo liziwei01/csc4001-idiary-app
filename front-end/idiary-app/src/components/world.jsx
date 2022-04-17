@@ -68,7 +68,7 @@ class WorldDiary extends Component {
     const arr = this.state.WorldDiaryList.map((ele) => {
       if (ele.diary_id === id) {
         //var isshow = ele.isShowComment;
-        return { ...ele, isShowComment: false, comment_count: number + 1 };
+        return { ...ele, isShowComment: true, comment_count: number + 1 };
       }
       return { ...ele };
     });
@@ -82,7 +82,7 @@ class WorldDiary extends Component {
       if (ele.diary_id === id) {
         return {
           ...ele,
-          isTransfer: false,
+          isTransfer: true,
         };
       }
       return { ...ele };
@@ -236,7 +236,7 @@ class WorldDiary extends Component {
                   </div>
                 )}
                 {ele.isShowComment &&
-                  ele.commentList.map((subEle, subIndex) => {
+                  ele.comment_list.map((subEle, subIndex) => {
                     return (
                       <div key={subIndex}>
                         {subEle.nickname} : {subEle.content}
