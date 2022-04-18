@@ -18,15 +18,7 @@ class IDiary extends Component {
         </div>
         <div className="mainpart">
           <Routes>
-            <Route
-              path=""
-              exact
-              element={
-                <RequireAuth>
-                  <Navigate replace to="myDiary" />
-                </RequireAuth>
-              }
-            />
+            <Route path="" exact element={<Navigate replace to="myDiary" />} />
             <Route path="myDiary/*" element={<MyDiary />} />
             <Route path="world" element={<World />} />
             <Route path="personalCenter" element={<PersonalCenter />} />

@@ -11,6 +11,7 @@ import Landing from "./landing";
 import IDiary from "./idiary";
 import Admin from "./components/admin";
 import auth from "./service/authService";
+import RequireAuth from "./components/common/protectRoute";
 
 class App extends Component {
   state = { user: null };
@@ -36,7 +37,14 @@ class App extends Component {
           <Route path="/resetPassword" element={<ResetPassword />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/login" element={<LoginForm />} />
-          <Route path="/idiary/*" element={<IDiary />} />
+          <Route
+            path="/idiary/*"
+            element={
+              <RequireAuth>
+                <IDiary />
+              </RequireAuth>
+            }
+          />
           <Route path="/not-found" element={<NotFound />} />
 
           <Route path="*" element={<Navigate replace to="/not-found" />} />
