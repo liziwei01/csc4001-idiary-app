@@ -1,10 +1,3 @@
-/*
- * @Author: liziwei01
- * @Date: 2022-04-12 10:45:14
- * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 17:38:29
- * @Description: file content
- */
 package dao
 
 import (
@@ -24,7 +17,7 @@ func ModifyPassword(ctx context.Context, pars userModel.UserPars) error {
 	tableName := USER_PRIVATE_INFO_TABLE
 
 	where := map[string]interface{}{
-		"user_id": pars.UserID,
+		"email": pars.Email,
 	}
 
 	update_password := map[string]interface{}{

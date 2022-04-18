@@ -1,10 +1,3 @@
-/*
- * @Author: liziwei01
- * @Date: 2022-04-12 14:24:06
- * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-18 02:14:29
- * @Description: file content
- */
 package controllers
 
 import (
