@@ -62,7 +62,7 @@ class ResetPassword extends Component {
                   value={data.password}
                   type="password"
                   id="password"
-                  errors={errors}
+                  errors={errors.password}
                   text="Must be 8-20 characters long."
                   label="fa fa-unlock-alt"
                   placeholder="password"
@@ -70,14 +70,14 @@ class ResetPassword extends Component {
                 <InputWithDesc
                   onChange={this.handleChange}
                   value={data.repeatpassword}
-                  type="repeatpassword"
+                  type="password"
                   id="repeatpassword"
-                  errors={errors}
+                  errors={errors.repeatpassword}
                   text="Please repeat your password."
                   label="fa fa-repeat"
                   placeholder="repeat password"
                 />
-                <Button disabled={this.validate()} label="Reset Password" />
+                <Button disabled={this.validate} label="Reset Password" />
               </form>
             </div>
           </div>

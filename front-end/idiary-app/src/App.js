@@ -25,7 +25,14 @@ class App extends Component {
       <div>
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route
+            path="/admin"
+            element={
+              <RequireAuth>
+                <Admin />
+              </RequireAuth>
+            }
+          />
           <Route
             path="/forgetPasswordByEmail"
             element={<ForgetPasswordByEmail />}
