@@ -1,3 +1,10 @@
+/*
+ * @Author: liziwei01
+ * @Date: 2022-04-18 17:27:34
+ * @LastEditors: liziwei01
+ * @LastEditTime: 2022-04-18 20:51:42
+ * @Description: file content
+ */
 package controllers
 
 import (
@@ -15,13 +22,13 @@ func Login(ctx *gin.Context) {
 		response.StdInvalidParams(ctx)
 		return
 	}
-	success, err := userService.Login(ctx, inputs)
+	info, err := userService.Login(ctx, inputs)
 	if err != nil {
 		response.StdFailed(ctx, err.Error())
 		return
 	}
 
-	if !success {
+	if info.Password != inputs.Password {
 		response.StdFailed(ctx, "用户名或密码错误")
 		return
 	}
@@ -33,6 +40,8 @@ func Login(ctx *gin.Context) {
 	}
 	response.StdSuccess(ctx, gin.H{
 		"Authorization": jwtToken,
+		"email":         info.Email,
+		"user_id":       info.UserID,
 	})
 }
 
