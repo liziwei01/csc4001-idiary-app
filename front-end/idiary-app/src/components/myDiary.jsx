@@ -6,25 +6,9 @@ import FriendsDiary from "./friendsDiary";
 
 import Tab from "./common/tab";
 
-import { Upload, Button, message } from "antd";
+import { Upload, Button, message, Space } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import "../css/myDiary.css"
-
-
-const Portal = () => {
-    // 函数组件里创建方法要加const 另外使用不用加this
-    const wrap = (ev) => {
-      ev.stopPropagation();
-    };
-    return (
-      <div className="Wrap">
-        <div className="Center" onClick={wrap}>
-          <h2>我是弹出框，快来点我啊</h2>
-        </div>
-      </div>
-    );
-  };
-
+import "../css/myDiary.css";
 
 export default class MyDiary extends Component {
   state = {
@@ -34,8 +18,8 @@ export default class MyDiary extends Component {
     list: [],
     imageUrl: "",
     loading: false,
-    image_list:[],
-    show:false,
+    image_list: [],
+    str_image_list:""
   };
   writeChange = (e) => {
     this.setState({
@@ -43,7 +27,7 @@ export default class MyDiary extends Component {
     });
   };
 
-  write = (e) => {
+  write = () => {
     // 拿到后发送给服务端
     var t = new Date().getTime();
     axios({
@@ -53,24 +37,19 @@ export default class MyDiary extends Component {
         user_id: 1,
         content: this.state.writeVal,
         authority: this.state.diary_type,
-        image_list: this.state.image_list,
+        image_list: this.state.str_image_list,
       },
     }).then((res) => {
       if (res.status === 200) {
         console.log("success");
       }
     });
-    this.setState(
-        {
-          writeVal:"",
-          image_list:"",
-          imageUrl: "",
-        }
-    )
-    e.stopPropagation();
     this.setState({
-      show: true,
+      writeVal: "",
+      image_list: "",
+      imageUrl: "",
     });
+    message.success("Success add diary!");
   };
   // react一个生命周期
 
@@ -98,29 +77,29 @@ export default class MyDiary extends Component {
       url: `/api/upload/image`,
       data: formData,
     }).then((res) => {
-      // console.log(res);
-      if (res.status === 200) {
+        //console.log(res.data.data.file_name);
+        
         this.setState({
-          imageUrl: res.data.data.url,
-          image_list: [...this.state.image_list, res.data.data.file_name]
+            imageUrl: res.data.data.url,
+            image_list: [...this.state.image_list, res.data.data.file_name,],
+            
         });
-        console.log(this.state.image_list);
+        this.setState({
+            str_image_list: JSON.stringify(this.state.image_list),
+        })
+
+        //console.log(this.state.image_list);
+        //console.log(this.state.str_image_list);
+        // console.log("341423");
         onSuccess();
-      }
+        
+        
     });
   };
 
-
-  
- 
-  
-  // 弹出框框之后，点击框框之外部分，框框会消失
-  all = () => {
-    this.setState({
-      show: false,
-    });
+  success = () => {
+    message.success("This is a success message");
   };
-
 
   render() {
     const { imageUrl, loading } = this.state;
@@ -171,7 +150,8 @@ export default class MyDiary extends Component {
                 >
                   publish
                 </button>
-                {this.state.show && <Portal />}
+               
+                
               </div>
               <div style={{ margin: "10px" }}>
                 <select

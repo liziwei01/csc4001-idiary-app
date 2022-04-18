@@ -38,8 +38,8 @@ class FriendsDiary extends Component {
               <span style={{ marginLeft: "10px" }}>{data.nickname}</span>
             </div>
             {/* <div style={{marginLeft:"600px"}}>{data.sendTime}</div> */}
-            <div style={{ marginLeft: "700px" }}>
-              {moment(data.db_time).format("YYYY-MM-DD HH:mm:ss")}
+            <div style={{ marginLeft: "600px" }}>
+              {moment(data.db_time*1000).format("YYYY-MM-DD HH:mm:ss")}
             </div>
           </div>
           <div>
@@ -64,8 +64,8 @@ class FriendsDiary extends Component {
   comment = (id, number) => {
     const arr = this.state.FriendsDiaryList.map((ele) => {
       if (ele.diary_id === id) {
-        //var isshow = ele.isShowComment;
-        return { ...ele, isShowComment: true};
+        var isshow = ele.isShowComment;
+        return { ...ele, isShowComment: !isshow};
       }
       return { ...ele };
     });
@@ -77,9 +77,10 @@ class FriendsDiary extends Component {
   transferdata = (id) => {
     const arr = this.state.FriendsDiaryList.map((ele) => {
       if (ele.diary_id === id) {
+          var transfer = ele.isTransfer;
         return {
           ...ele,
-          isTransfer: true,
+          isTransfer: !transfer,
         };
       }
       return { ...ele };
@@ -133,16 +134,22 @@ class FriendsDiary extends Component {
     // 拿到后发送给服务端
     const arr = this.state.FriendsDiaryList.map((ele) => {
       if (ele.diary_id === id) {
+        if (ele.comment_count === 0){
+            var commentlist = [{nickname: name, content: ele.inputValue,}]
+        }else{
+            var commentlist = [
+                ...ele.comment_list,
+                {
+                  nickname: name,
+                  content: ele.inputValue,
+                },
+                
+              ]
+        }
         return {
           ...ele,
           inputValue: "",
-          comment_list: [
-            ...ele.comment_list,
-            {
-              nickname: name,
-              content: ele.inputValue,
-            },
-          ],
+          comment_list: commentlist,
           comment_count: number + 1,
         };
       }
@@ -192,7 +199,7 @@ class FriendsDiary extends Component {
                   </li>
                 </ul>
 
-                {ele.isTransfer && (
+                {ele.isTransfer &&  (
                   <div>
                     <input
                       style={{ width: "500px" }}
@@ -211,7 +218,7 @@ class FriendsDiary extends Component {
                   </div>
                 )}
 
-                {ele.isShowComment && (
+                {ele.isShowComment &&  (
                   <div>
                     <input
                       style={{ width: "500px" }}
@@ -233,7 +240,7 @@ class FriendsDiary extends Component {
                     </button>
                   </div>
                 )}
-                {ele.isShowComment &&
+                {ele.isShowComment && !ele.comment_count===0 &&
                   ele.comment_list.map((subEle, subIndex) => {
                     return (
                       <div key={subIndex}>
