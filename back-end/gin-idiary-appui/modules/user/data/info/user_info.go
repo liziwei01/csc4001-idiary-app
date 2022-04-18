@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-17 14:12:20
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 14:25:05
+ * @LastEditTime: 2022-04-18 20:18:06
  * @Description: file content
  */
 /*
@@ -36,4 +36,21 @@ func BatchGetUserInfo(ctx context.Context, userIDs []int64) ([]infoModel.UserInf
 	}
 
 	return userInfos, nil
+}
+
+func GetUserInfoByEmail(ctx context.Context, email string) (infoModel.UserInfo, error) {
+	if email == "" {
+		return infoModel.UserInfo{}, fmt.Errorf("invalid email: %s", email)
+	}
+
+	info, err := infoDao.GetUserInfoByEmail(ctx, email)
+	if err != nil {
+		return infoModel.UserInfo{}, err
+	}
+
+	if len(info) != 1 {
+		return infoModel.UserInfo{}, fmt.Errorf("invalid user info len: %v", len(info))
+	}
+
+	return info[0], nil
 }
