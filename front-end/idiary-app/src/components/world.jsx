@@ -169,9 +169,7 @@ class WorldDiary extends Component {
     var content;
     const arr = this.state.WorldDiaryList.map((ele) => {
       if (ele.diary_id === id) {
-        if (ele.comment_count === 0){
-            var commentlist = [{nickname: name, content: ele.inputValue,}]
-        }else{
+        
             var commentlist = [
                 ...ele.comment_list,
                 {
@@ -180,7 +178,7 @@ class WorldDiary extends Component {
                 },
                 
               ]
-        }
+        
         content = ele.inputValue;
         return {
           ...ele,
