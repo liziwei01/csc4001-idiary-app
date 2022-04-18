@@ -17,20 +17,7 @@ class PersonalCenter extends Component {
                   Change Photo
                   <input type="file" name="file" />
                 </div>
-                <div className="mb-3">
-                  <a href="#" class="set_1_btn Vbtn-1 btn-block mt-6">
-                    <svg>
-                      <rect
-                        x="0"
-                        y="0"
-                        fill="none"
-                        width="100%"
-                        height="100%"
-                      ></rect>
-                    </svg>{" "}
-                    Follow
-                  </a>
-                </div>
+                <div className="mb-3"></div>
               </div>
             </div>
             <div class="col-md-6">
@@ -137,22 +124,6 @@ class PersonalCenter extends Component {
                     </div>
                     <div class="col-md-6">
                       <p>kshitighelani@gmail.com</p>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <label>Phone</label>
-                    </div>
-                    <div class="col-md-6">
-                      <p>123 456 7890</p>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <label>Profession</label>
-                    </div>
-                    <div class="col-md-6">
-                      <p>Web Developer and Designer</p>
                     </div>
                   </div>
                 </div>

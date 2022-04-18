@@ -30,6 +30,11 @@ class RegisterForm extends Component {
     const response = await userService.register(data);
     console.log(response.data);
     const errors = { ...this.state.errors };
+    if (data.verification === "1234") {
+      errors.verification = "Verification code not correct";
+      this.setState({ errors });
+      return;
+    }
     if (response.data.errmsg != "Success") {
       errors.email = "Email has be registered!";
       this.setState({ errors });

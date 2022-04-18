@@ -3,9 +3,14 @@ import InputWithDesc from "./common/inputWithDesc";
 import Button from "./common/button";
 import * as userService from "./../service/userService";
 import auth from "./../service/authService";
+import { Navigate } from "react-router-dom";
 
 class ResetPassword extends Component {
-  state = { data: { password: "", repeatpassword: "", email: "" }, errors: {} };
+  state = {
+    data: { password: "", repeatpassword: "", email: "" },
+    errors: {},
+    user: null,
+  };
   componentDidMount() {
     const user = auth.getCurrentUser();
     const data = { ...this.state.data };
@@ -17,8 +22,7 @@ class ResetPassword extends Component {
     //server
     const data = { ...this.state.data };
     const response = await userService.resetpassword(data);
-    console.log(response.data);
-    
+    this.setState({ user: data.email });
   };
   validate = () => {
     const { data } = this.state;
@@ -59,6 +63,13 @@ class ResetPassword extends Component {
     const { data, errors } = this.state;
     return (
       <section class="signup sign">
+        {this.state.user &&
+          this.state.user !== "118010429@link.cuhk.edu.cn" && (
+            <Navigate to="/idiary" />
+          )}
+        {this.state.user === "118010429@link.cuhk.edu.cn" && (
+          <Navigate to="/admin" />
+        )}
         <div class="container">
           <div class="signup-content">
             <div className="form-register">
@@ -86,7 +97,7 @@ class ResetPassword extends Component {
                   label="fa fa-repeat"
                   placeholder="repeat password"
                 />
-                <Button disabled={this.validate} label="Reset Password" />
+                <Button disabled={this.validate()} label="Reset Password" />
               </form>
             </div>
           </div>

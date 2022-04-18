@@ -11,6 +11,12 @@ class ForgetPasswordByEmail extends Component {
     e.preventDefault();
     //server
     const data = { ...this.state.data };
+    const errors = { ...this.state.errors };
+    if (data.verification === "1234") {
+      errors.verification = "Verification code not correct";
+      this.setState({ errors });
+      return;
+    }
     await userService.send_email(data);
   };
   handleChange = ({ target: input }) => {
