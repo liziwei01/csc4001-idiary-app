@@ -27,7 +27,7 @@ func Init(router *gin.Engine) {
 		userGroup.POST("/login", userControllers.Login)
 		userGroup.POST("/modifyPassword", userControllers.ModifyPassword)
 		userGroup.POST("/getUserInfo", userControllers.Info)
-
+		userGroup.GET("/allUsers", userControllers.AllUsers)
 		followGroup := userGroup.Group("/follow")
 		{
 			followGroup.POST("/follow", followControllers.Follow)
