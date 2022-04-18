@@ -479,6 +479,28 @@ eg
 }
 ```
 
+
+post: /user/modifyPassword
+
+get verification code
+
+|postParams|comment|require|
+| --------- | --------- | --------- |
+|email|user email address|yes|
+|new_password|new password|yes|
+
+|returnParams|comment|require|
+| --------- | --------- | --------- |
+
+eg
+```bash
+{
+    "data": null,
+    "errno": 0,
+    "errmsg": "Success"
+}
+```
+
 Mysql require
 ```bash
 In database db_idiary_feed:
