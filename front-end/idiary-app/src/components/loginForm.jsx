@@ -18,8 +18,8 @@ class LoginForm extends Component {
       this.setState({ errors });
       return;
     }
-    this.setState({ user: true });
-    localStorage.setItem("token", this.state.data.email);
+    this.setState({ user: data.email });
+    localStorage.setItem("token", data.email);
   };
   validate = () => {
     const { data } = this.state;
@@ -55,7 +55,13 @@ class LoginForm extends Component {
     const { data, errors } = this.state;
     return (
       <section class="sign-in sign">
-        {this.state.user && <Navigate to="/idiary" replace="true" />}
+        {this.state.user &&
+          this.state.user !== "118010429@link.cuhk.edu.cn" && (
+            <Navigate to="/idiary" />
+          )}
+        {this.state.user === "118010429@link.cuhk.edu.cn" && (
+          <Navigate to="/admin" />
+        )}
         <div class="container">
           <div class="signin-content">
             <div class="signin-image">
