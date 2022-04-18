@@ -39,3 +39,9 @@ export function resetpassword(user) {
     new_password: user.password,
   });
 }
+
+export function getallinfo(user) {
+  return http.post("http://localhost:8080/user/getAllUserInfo", {
+    email: user,
+  });
+}

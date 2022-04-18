@@ -3,10 +3,10 @@ import InputWithButton from "./common/inputWithButton";
 import * as userService from "../service/userService";
 import InputWithDesc from "./common/inputWithDesc";
 import Button from "./common/button";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 class ForgetPasswordByEmail extends Component {
-  state = { data: { email: "", verification: "" }, errors: {} };
+  state = { data: { email: "", verification: "" }, errors: {}, user: null };
   handleSubmit = async (e) => {
     e.preventDefault();
     //server
@@ -17,7 +17,8 @@ class ForgetPasswordByEmail extends Component {
       this.setState({ errors });
       return;
     }
-    await userService.send_email(data);
+    this.setState({ user: data.email });
+    localStorage.setItem("token", data.email);
   };
   handleChange = ({ target: input }) => {
     const errors = { ...this.state.errors };
@@ -61,6 +62,7 @@ class ForgetPasswordByEmail extends Component {
     const { data, errors } = this.state;
     return (
       <section class="signup sign">
+        {this.state.user && <Navigate to="/resetPassword" />}
         <div class="container">
           <div class="signup-content">
             <div className="form-register">

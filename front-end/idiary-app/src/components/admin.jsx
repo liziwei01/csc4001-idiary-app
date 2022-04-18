@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+import * as userService from "./../service/userService";
 import AdminTable from "./adminTable";
 import Pagination from "./common/pagination";
 import { paginate } from "../utils/paginate";
@@ -36,6 +36,11 @@ class Admin extends Component {
     pageSize: 4,
     searchQuery: "",
   };
+  async componentDidMount() {
+    const user = localStorage.getItem("token");
+    const response = await userService.getallinfo(user);
+    console.log(response.data);
+  }
   handleReset = (user) => {
     this.setState({ resetuser: user });
   };
