@@ -52,7 +52,7 @@ func AllDiary(ctx context.Context, pars diaryModel.DiaryListRequestPars) ([]diar
 
 	// 5 get comments
 	for k, v := range existedDiary {
-		comments, count, err := commentData.GetCommentWithUserInfoByDiaryID(ctx, v.UserID)
+		comments, count, err := commentData.GetCommentWithUserInfoByDiaryID(ctx, v.DiaryID)
 		if err != nil {
 			return nil, 0, err
 		}
