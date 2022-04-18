@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-18 20:12:54
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-18 20:28:54
+ * @LastEditTime: 2022-04-18 21:50:01
  * @Description: file content
  */
 package controllers
@@ -33,6 +33,21 @@ func Info(ctx *gin.Context) {
 		"nickname": info.Nickname,
 		"profile":  info.Profile,
 	})
+}
+
+func AllInfo(ctx *gin.Context) {
+	inputs, hasError := getInfoPars(ctx)
+	if hasError {
+		response.StdInvalidParams(ctx)
+		return
+	}
+	infos, err := infoService.AllInfo(ctx, inputs)
+	if err != nil {
+		response.StdFailed(ctx, err.Error())
+		return
+	}
+
+	response.StdSuccess(ctx, infos)
 }
 
 func getInfoPars(ctx *gin.Context) (infoModel.UserInfoRequest, bool) {

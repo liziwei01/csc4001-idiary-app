@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-17 16:53:02
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-18 20:26:55
+ * @LastEditTime: 2022-04-18 21:40:09
  * @Description: file content
  */
 package services
@@ -100,7 +100,7 @@ func MyDiary(ctx context.Context, pars diaryModel.DiaryListRequestPars) ([]diary
 		newDiary.UserProfile = v.UserProfile
 		newDiary.VoteCount = v.VoteCount
 
-		if existedDiary[k].ImageList != "" || existedDiary[k].ImageList != "[]" || existedDiary[k].ImageList != "\"\"" {
+		if existedDiary[k].ImageList != "" && existedDiary[k].ImageList != "[]" && existedDiary[k].ImageList != "\"\"" {
 			imgList := make([]string, 0)
 			err = json.Unmarshal([]byte(existedDiary[k].ImageList), &imgList)
 			if err != nil {

@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-18 20:15:40
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-18 20:30:09
+ * @LastEditTime: 2022-04-18 21:49:13
  * @Description: file content
  */
 package info
@@ -26,4 +26,19 @@ func Info(ctx context.Context, pars infoModel.UserInfoRequest) (infoModel.UserIn
 	}
 
 	return info, nil
+}
+
+func AllInfo(ctx context.Context, pars infoModel.UserInfoRequest) ([]infoModel.UserInfo, error) {
+	infos, err := infoData.GetAllUserInfo(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	for idx, info := range infos {
+		infos[idx].Profile, err = uploadData.GetImageURL(ctx, info.Profile)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return infos, nil
 }
