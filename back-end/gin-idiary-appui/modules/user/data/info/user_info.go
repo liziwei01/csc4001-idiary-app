@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-17 14:12:20
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-18 20:18:06
+ * @LastEditTime: 2022-04-18 21:58:21
  * @Description: file content
  */
 /*
@@ -53,4 +53,12 @@ func GetUserInfoByEmail(ctx context.Context, email string) (infoModel.UserInfo, 
 	}
 
 	return info[0], nil
+}
+func GetAllUserInfo(ctx context.Context) ([]infoModel.UserInfo, error) {
+	infos, err := infoDao.GetAllUserInfo(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return infos, nil
 }

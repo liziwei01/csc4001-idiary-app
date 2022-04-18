@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 15:20:51
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-18 20:40:01
+ * @LastEditTime: 2022-04-18 21:53:27
  * @Description: README
 -->
 # gin-idiary-appui
@@ -310,6 +310,29 @@ eg
     },
     "errmsg": "Success",
     "errno": 0
+}
+```
+
+post: /api/diary/comment
+
+a user wants to comment a diary
+
+|postParams|comment|require|
+| --------- | --------- | --------- |
+|diary_id||yes|
+|user_id||yes|
+|content||yes|
+
+
+|returnParams|comment|require|
+| --------- | --------- | --------- |
+
+eg
+```bash
+{
+    "data": null,
+    "errno": 0,
+    "errmsg": "Success"
 }
 ```
 

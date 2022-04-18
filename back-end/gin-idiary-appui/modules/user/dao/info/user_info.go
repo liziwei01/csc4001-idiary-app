@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-17 14:20:00
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 14:21:31
+ * @LastEditTime: 2022-04-18 21:47:45
  * @Description: file content
  */
 package info
@@ -65,4 +65,28 @@ func GetUserInfoByUserID(ctx context.Context, userID int64) (infoModel.UserInfo,
 	}
 
 	return userInfo, nil
+}
+
+func GetAllUserInfo(ctx context.Context) ([]infoModel.UserInfo, error) {
+	var userInfos = make([]infoModel.UserInfo, 0)
+
+	client, err := mysql.GetClient(ctx, constant.SERVICE_CONF_DB_IDIARY_USER)
+	if err != nil {
+		return nil, err
+	}
+
+	tableName := USER_PRIVATE_INFO_TABLE
+
+	where := map[string]interface{}{
+		"user_id >": 0,
+	}
+
+	columns := []string{"*"}
+
+	err = client.Query(ctx, tableName, where, columns, &userInfos)
+	if err != nil {
+		return nil, err
+	}
+
+	return userInfos, nil
 }

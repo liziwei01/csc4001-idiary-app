@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-18 17:27:34
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-18 20:47:55
+ * @LastEditTime: 2022-04-18 21:51:03
  * @Description: file content
  */
 package routers
@@ -28,6 +28,7 @@ func Init(router *gin.Engine) {
 		userGroup.POST("/modifyPassword", userControllers.ModifyPassword)
 		userGroup.POST("/getUserInfo", userControllers.Info)
 		userGroup.GET("/allUsers", userControllers.AllUsers)
+		userGroup.POST("/getAllUserInfo", userControllers.AllInfo)
 		followGroup := userGroup.Group("/follow")
 		{
 			followGroup.POST("/follow", followControllers.Follow)
