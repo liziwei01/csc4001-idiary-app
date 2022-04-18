@@ -16,13 +16,6 @@ const InputWithDesc = ({ text, errors, label, id, ...rest }) => {
           {text}
         </span>
       </div>
-      <div>
-        {errors && (
-          <p>
-            <font color="#e52b50">{errors}</font>
-          </p>
-        )}
-      </div>
     </div>
   );
 };

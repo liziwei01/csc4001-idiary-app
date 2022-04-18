@@ -1,17 +1,21 @@
-import { Route, Routes, Navigate } from "react-router-dom";
-import React, { Component } from "react";
+import { Route, Routes, Navigate, Switch } from "react-router-dom";
+import MyDiary from "./components/myDiary";
+import React from "react";
+import World from "./components/world";
+import About from "./components/about";
 import NotFound from "./components/notFound";
+import PersonalCenter from "./components/personalCenter";
+import NavBar from "./components/navBar";
 import "./App.css";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/RegisterForm";
 import ForgetPasswordByProblem from "./components/forgetPasswordByProblem";
 import ForgetPasswordByEmail from "./components/forgetPasswordByEmail";
+import PersonalDiary from "./components/personalDiary";
+import FriendsDiary from "./components/friendsDiary";
 import ResetPassword from "./components/resetPassword";
 import Landing from "./landing";
 import IDiary from "./idiary";
-import Admin from "./components/admin";
-import auth from "./service/authService";
-import RequireAuth from "./components/common/protectRoute";
 
 class App extends Component {
   state = { user: null };
