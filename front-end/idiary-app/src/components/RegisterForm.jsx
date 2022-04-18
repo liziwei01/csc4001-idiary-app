@@ -4,7 +4,7 @@ import InputWithButton from "./common/inputWithButton";
 import InputWithDesc from "./common/inputWithDesc";
 import Button from "./common/button";
 import Input from "./common/input";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 class RegisterForm extends Component {
   state = {
@@ -21,13 +21,22 @@ class RegisterForm extends Component {
       secretproblem: false,
     },
     errors: {},
+    user: null,
   };
   handleSubmit = async (e) => {
     e.preventDefault();
     //server
     const data = { ...this.state.data };
-    delete data.repeatpassword;
-    await userService.register(data);
+    const response = await userService.register(data);
+    console.log(response.data);
+    const errors = { ...this.state.errors };
+    if (response.data.errmsg != "Success") {
+      errors.email = "Email has be registered!";
+      this.setState({ errors });
+      return;
+    }
+    this.setState({ user: true });
+    localStorage.setItem("token", this.state.data.email);
   };
   validate = () => {
     const { data } = this.state;
@@ -113,14 +122,19 @@ class RegisterForm extends Component {
     this.setState({ data, errors });
   };
   handleClicked = async () => {
-    console.log("send");
     const response = await userService.send_email(this.state.data);
+    console.log(response);
+    const errors = { ...this.state.errors };
+    if (response.data.errmsg != "Success")
+      errors.email = "The email has received within 60s!";
+    this.setState({ errors });
   };
 
   render() {
     const { data, errors } = this.state;
     return (
       <section class="signup sign">
+        {this.state.user && <Navigate to="/idiary" replace="true" />}
         <div class="container">
           <div class="signup-content">
             <div class="signup-form">
@@ -136,7 +150,7 @@ class RegisterForm extends Component {
                   value={data.email}
                   type="email"
                   id="email"
-                  errors={errors}
+                  errors={errors.email}
                   text="Send"
                   onClick={this.handleClicked}
                   label="fa fa-envelope"
@@ -147,7 +161,7 @@ class RegisterForm extends Component {
                   value={data.verification}
                   type="text"
                   id="verification"
-                  errors={errors}
+                  errors={errors.verification}
                   label="fa fa-keyboard-o"
                   placeholder="verifaction code"
                 />
@@ -157,17 +171,17 @@ class RegisterForm extends Component {
                   value={data.username}
                   type="text"
                   id="username"
-                  errors={errors}
+                  errors={errors.username}
                   text="Must be 6-20 characters long."
                   label="fa fa-user"
-                  placeholder="username"
+                  placeholder="nickname"
                 />
                 <InputWithDesc
                   onChange={this.handleChange}
                   value={data.password}
                   type="password"
                   id="password"
-                  errors={errors}
+                  errors={errors.password}
                   text="Must be 8-20 characters long."
                   label="fa fa-unlock-alt"
                   placeholder="password"
@@ -175,9 +189,9 @@ class RegisterForm extends Component {
                 <InputWithDesc
                   onChange={this.handleChange}
                   value={data.repeatpassword}
-                  type="repeatpassword"
+                  type="password"
                   id="repeatpassword"
-                  errors={errors}
+                  errors={errors.repeatpassword}
                   text="Please repeat your password."
                   label="fa fa-repeat"
                   placeholder="repeat password"
@@ -205,7 +219,7 @@ class RegisterForm extends Component {
                       value={data.answer1}
                       type="text"
                       id="answer1"
-                      errors={errors}
+                      errors={errors.answer1}
                       placeholder="What's your birth day?"
                       label="fa fa-question"
                     />
@@ -214,7 +228,7 @@ class RegisterForm extends Component {
                       value={data.answer2}
                       type="text"
                       id="answer2"
-                      errors={errors}
+                      errors={errors.answer2}
                       placeholder="What's your mother's name?"
                       label="fa fa-question"
                     />
@@ -223,7 +237,7 @@ class RegisterForm extends Component {
                       value={data.answer3}
                       type="text"
                       id="answer3"
-                      errors={errors}
+                      errors={errors.answer3}
                       placeholder="What's your favorite color?"
                       label="fa fa-question"
                     />
@@ -263,7 +277,7 @@ class RegisterForm extends Component {
                 id="staticBackdrop"
                 data-bs-backdrop="static"
                 data-bs-keyboard="false"
-                tabIndex="-1"
+                tabindex="-1"
                 aria-labelledby="staticBackdropLabel"
                 aria-hidden="true"
               >

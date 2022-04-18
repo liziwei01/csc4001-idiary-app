@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import axios from "axios";
 import WeiBoList from "./list-wb.jsx";
 import onePic from "./1.jpg";
 import twoPic from "./2.jpg";
@@ -22,7 +21,7 @@ var dataList = [
     NoComment: 142, //评论
     NoPointGreat: 423, //转发
     sendTime: "11.2",
-    contentImgUrls: [twoPic, threePic, threePic, threePic, threePic],
+    contentImgUrls: [twoPic, threePic],
     isShowComment: false,
     isTransfer: false,
     id: 1,
@@ -50,117 +49,6 @@ var dataList = [
     sendTime: "11.2",
     contentImgUrls: [twoPic, threePic],
     isShowComment: false,
-    isTransfer: false,
-    id: 2,
-    commentList: [
-      {
-        name: "xxx",
-        age: 18,
-      },
-    ],
-  },
-  {
-    myUrl: onePic,
-    headUrl: onePic,
-    privacy: { name: "protected", _id: 2 },
-    nickName: "Robin",
-    content: "test22222222222222222222222222222222222",
-    NoCollect: 132,
-    NoForward: 202,
-    NoComment: 142,
-    NoPointGreat: 423,
-    sendTime: "11.2",
-    contentImgUrls: [twoPic, threePic],
-    isShowComment: false,
-    isTransfer: false,
-    id: 2,
-    commentList: [
-      {
-        name: "xxx",
-        age: 18,
-      },
-    ],
-  },
-  {
-    myUrl: onePic,
-    headUrl: onePic,
-    privacy: { name: "protected", _id: 2 },
-    nickName: "Robin",
-    content: "test22222222222222222222222222222222222",
-    NoCollect: 132,
-    NoForward: 202,
-    NoComment: 142,
-    NoPointGreat: 423,
-    sendTime: "11.2",
-    contentImgUrls: [twoPic, threePic],
-    isShowComment: false,
-    isTransfer: false,
-    id: 2,
-    commentList: [
-      {
-        name: "xxx",
-        age: 18,
-      },
-    ],
-  },
-  {
-    myUrl: onePic,
-    headUrl: onePic,
-    privacy: { name: "protected", _id: 2 },
-    nickName: "Robin",
-    content: "test22222222222222222222222222222222222",
-    NoCollect: 132,
-    NoForward: 202,
-    NoComment: 142,
-    NoPointGreat: 423,
-    sendTime: "11.2",
-    contentImgUrls: [twoPic, threePic],
-    isShowComment: false,
-    isTransfer: false,
-    id: 2,
-    commentList: [
-      {
-        name: "xxx",
-        age: 18,
-      },
-    ],
-  },
-  {
-    myUrl: onePic,
-    headUrl: onePic,
-    privacy: { name: "protected", _id: 2 },
-    nickName: "Robin",
-    content: "test22222222222222222222222222222222222",
-    NoCollect: 132,
-    NoForward: 202,
-    NoComment: 142,
-    NoPointGreat: 423,
-    sendTime: "11.2",
-    contentImgUrls: [twoPic, threePic],
-    isShowComment: false,
-    isTransfer: false,
-    id: 2,
-    commentList: [
-      {
-        name: "xxx",
-        age: 18,
-      },
-    ],
-  },
-  {
-    myUrl: onePic,
-    headUrl: onePic,
-    privacy: { name: "protected", _id: 2 },
-    nickName: "Robin",
-    content: "test22222222222222222222222222222222222",
-    NoCollect: 132,
-    NoForward: 202,
-    NoComment: 142,
-    NoPointGreat: 423,
-    sendTime: "11.2",
-    contentImgUrls: [twoPic, threePic],
-    isShowComment: false,
-    isTransfer: false,
     id: 2,
     commentList: [
       {
@@ -171,6 +59,30 @@ var dataList = [
   },
 ];
 
+for (let i = 0; i < 10; i++) {
+  let web = {
+    myUrl: onePic,
+    headUrl: onePic,
+    privacy: { name: "public", _id: 3 },
+    nickName: "Daduo",
+    content: "test333333333333333333333333333333",
+    NoCollect: 132,
+    NoForward: 202,
+    NoComment: 142,
+    NoPointGreat: 423,
+    sendTime: "11.1",
+    contentImgUrls: [twoPic, threePic],
+    isShowComment: false,
+    id: 2,
+    commentList: [
+      {
+        name: "xxx",
+        age: 18,
+      },
+    ],
+  };
+  dataList.push(web);
+}
 
 class personalDiary extends React.Component {
   state = {
@@ -179,41 +91,21 @@ class personalDiary extends React.Component {
       { name: "protected", _id: 2 },
       { name: "private", _id: 1 },
     ],
-    list: [ ],
+    list: [...dataList],
     currentPage: 1,
     pageSize: 4,
     selectedPrivacy: null,
     sortColumn: { path: "sendTime", order: "asc" },
   };
 
-  componentDidMount() {
-    console.log("personnal Diary===");
-
-    axios({
-        url: "/api/diary/mine",
-        method: "get",
-        params: {
-          user_id: 1,
-        },
-      }).then((res) => {
-        console.log(res);
-        console.log(res.data.data.diaries[0].user_profile);
-        if (res.status === 200) {
-          this.setState({
-            list: (res.data.data && res.data.data.diaries) || [],
-          });
-        }
-      });
-  }
-
   // 页面加载的钩子
   // react 生命周期
-  // componentDidMount() {
-  //   // xxxx 请求列表的数据
-  //   // this.setState({
-  //   //     list : xxxx
-  //   // })
-  // }
+  componentDidMount() {
+    // xxxx 请求列表的数据
+    // this.setState({
+    //     list : xxxx
+    // })
+  }
   getPagedData = () => {
     const {
       pageSize,
@@ -245,7 +137,7 @@ class personalDiary extends React.Component {
     const { totalCount, data: diaries } = this.getPagedData();
     return (
       <div>
-        <div className="row" style={{ flexWrap: "inherit" }}>
+        <div className="row">
           <div className="col-3">
             <ListGroup
               items={this.state.privacy}
@@ -253,7 +145,7 @@ class personalDiary extends React.Component {
               onItemSelect={this.handlePrivacySelect}
             />
           </div>
-          <div className="col-10">
+          <div className="col">
             <WeiBoList
               data={diaries}
               update={(list) => {
@@ -261,7 +153,7 @@ class personalDiary extends React.Component {
               }}
             />
             <Pagination
-              itemsCount={dataList.length}
+              itemsCount={totalCount}
               pageSize={pageSize}
               currentPage={currentPage}
               onPageChange={this.handlePageChange}

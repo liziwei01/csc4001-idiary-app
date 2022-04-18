@@ -1,22 +1,30 @@
 import React, { Component } from "react";
 import Input from "./common/input";
 import Button from "./common/button";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import * as userService from "./../service/userService";
 
 class LoginForm extends Component {
-  state = { data: { username: "", password: "" }, errors: {} };
+  state = { data: { email: "", password: "" }, errors: {}, user: null };
   handleSubmit = async (e) => {
     e.preventDefault();
     //server
     const data = { ...this.state.data };
-    const { data: user } = await userService.login(data);
-    console.log({ user });
+    const response = await userService.login(data);
+    const errors = { ...this.state.errors };
+    console.log(response.data);
+    if (response.data.errmsg != "Success") {
+      errors.email = "Email or password incorrect!";
+      this.setState({ errors });
+      return;
+    }
+    this.setState({ user: data.email });
+    localStorage.setItem("token", data.email);
   };
   validate = () => {
     const { data } = this.state;
     if (
-      this.validateProperty({ id: "username", value: data.username }) ||
+      this.validateProperty({ id: "email", value: data.email }) ||
       this.validateProperty({
         id: "password",
         value: data.password,
@@ -26,8 +34,8 @@ class LoginForm extends Component {
     else return false;
   };
   validateProperty = ({ id, value }) => {
-    if (id === "username") {
-      if (value.trim() === "") return "Username is required!";
+    if (id === "email") {
+      if (value.trim() === "") return "Email is required!";
     }
     if (id === "password") {
       if (value.trim() === "") return "Password is required!";
@@ -47,6 +55,13 @@ class LoginForm extends Component {
     const { data, errors } = this.state;
     return (
       <section class="sign-in sign">
+        {this.state.user &&
+          this.state.user !== "118010429@link.cuhk.edu.cn" && (
+            <Navigate to="/idiary" />
+          )}
+        {this.state.user === "118010429@link.cuhk.edu.cn" && (
+          <Navigate to="/admin" />
+        )}
         <div class="container">
           <div class="signin-content">
             <div class="signin-image">
@@ -67,19 +82,19 @@ class LoginForm extends Component {
               >
                 <Input
                   onChange={this.handleChange}
-                  value={data.username}
+                  value={data.email}
                   type="text"
-                  id="username"
-                  errors={errors}
-                  label="fa fa-user"
-                  placeholder="username"
+                  id="email"
+                  errors={errors.email}
+                  label="fa fa-envelope"
+                  placeholder="email"
                 />
                 <Input
                   onChange={this.handleChange}
                   value={data.password}
                   type="password"
                   id="password"
-                  errors={errors}
+                  errors={errors.password}
                   label="fa fa-unlock-alt"
                   placeholder="password"
                 />

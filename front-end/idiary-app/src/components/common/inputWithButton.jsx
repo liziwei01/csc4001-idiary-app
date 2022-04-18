@@ -9,11 +9,18 @@ const InputWithButton = ({ onClick, text, errors, label, id, ...rest }) => {
           <i className={label}></i>
         </label>
       </div>
+      <div>
+        {errors && (
+          <p>
+            <font color="#e52b50">{errors}</font>
+          </p>
+        )}
+      </div>
       <div className="mt-3">
         <button
-          type="submit"
           className="w-100 btn btn-secondary mb-3"
           onClick={onClick}
+          type="button"
         >
           {text}
         </button>

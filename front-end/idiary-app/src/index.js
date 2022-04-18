@@ -16,8 +16,8 @@ import "./css/swiper-bundle.min.css";
 import "./css/style.min.css";
 import "./css/materialdesignicons.min.css";
 import "./css/bootstrap.min.css";
+import "./css/jstable.css";
 import App from "./App";
-import Landing from "./landing";
 
 ReactDOM.render(
   <BrowserRouter>
