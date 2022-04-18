@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-18 17:09:15
+ * @LastEditTime: 2022-04-18 17:31:21
  * @Description: file content
  */
 package services
@@ -106,6 +106,14 @@ func AllDiary(ctx context.Context, pars diaryModel.DiaryListRequestPars) ([]diar
 			if err != nil {
 				return nil, 0, err
 			}
+			
+			for idx, imageName := range imgList {
+				imgList[idx], err = uploadData.GetImageURL(ctx, imageName)
+				if err != nil {
+					return nil, 0, err
+				}
+			}
+
 			newDiary.ImageList = append(newDiary.ImageList, imgList...)
 		}
 		UnmarshaledDiary = append(UnmarshaledDiary, newDiary)
