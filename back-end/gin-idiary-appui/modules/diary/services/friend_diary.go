@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 23:04:28
+ * @LastEditTime: 2022-04-18 17:31:18
  * @Description: file content
  */
 package services
@@ -89,6 +89,13 @@ func FriendDiary(ctx context.Context, pars diaryModel.FriendDiaryListRequestPars
 		if err != nil {
 			return nil, 0, err
 		}
+
+		for _, comment := range v.CommentList {
+			comment.Profile, err = uploadData.GetImageURL(ctx, comment.Profile)
+			if err != nil {
+				return nil, 0, err
+			}
+		}
 	}
 
 	// 10 unmarshal image_list
@@ -122,6 +129,14 @@ func FriendDiary(ctx context.Context, pars diaryModel.FriendDiaryListRequestPars
 			if err != nil {
 				return nil, 0, err
 			}
+
+			for idx, imageName := range imgList {
+				imgList[idx], err = uploadData.GetImageURL(ctx, imageName)
+				if err != nil {
+					return nil, 0, err
+				}
+			}
+
 			newDiary.ImageList = append(newDiary.ImageList, imgList...)
 		}
 		UnmarshaledDiary = append(UnmarshaledDiary, newDiary)
