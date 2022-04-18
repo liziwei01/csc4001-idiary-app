@@ -63,7 +63,7 @@ class ForgetPasswordByEmail extends Component {
                   value={data.email}
                   type="email"
                   id="email"
-                  errors={errors.email}
+                  errors={errors}
                   text="Send"
                   label="fa fa-envelope"
                   placeholder="email"
@@ -74,7 +74,7 @@ class ForgetPasswordByEmail extends Component {
                   value={data.verification}
                   type="text"
                   id="verification"
-                  errors={errors.verification}
+                  errors={errors}
                   placeholder="Verification Code"
                   label="fa fa-keyboard-o"
                 />

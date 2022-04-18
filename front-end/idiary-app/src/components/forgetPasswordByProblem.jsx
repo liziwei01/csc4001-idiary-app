@@ -77,7 +77,7 @@ class ForgetPasswordByProblem extends Component {
                   value={data.username}
                   type="text"
                   id="username"
-                  errors={errors.username}
+                  errors={errors}
                   placeholder="Pleaser enter your user name"
                   label="fa fa-user"
                 />
@@ -86,7 +86,7 @@ class ForgetPasswordByProblem extends Component {
                   value={data.answer1}
                   type="text"
                   id="answer1"
-                  errors={errors.answer1}
+                  errors={errors}
                   placeholder="What's your birth day?"
                   label="fa fa-question"
                 />
@@ -95,7 +95,7 @@ class ForgetPasswordByProblem extends Component {
                   value={data.answer2}
                   type="text"
                   id="answer2"
-                  errors={errors.answer2}
+                  errors={errors}
                   placeholder="What's your mother's name?"
                   label="fa fa-question"
                 />
@@ -104,7 +104,7 @@ class ForgetPasswordByProblem extends Component {
                   value={data.answer3}
                   type="text"
                   id="answer3"
-                  errors={errors.answer3}
+                  errors={errors}
                   placeholder="What's your favorite color?"
                   label="fa fa-question"
                 />

@@ -36,6 +36,18 @@ const NavBar = () => {
                 <strong>PersonalCenter</strong>
               </NavLink>
             </li>
+            <li>
+              <NavLink to="/login" className="nav-link">
+                <i class="fa fa-comments-o"></i>
+                <strong>Login</strong>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/register" className="nav-link">
+                <i class="fa fa-picture-o"></i>
+                <strong>Register</strong>
+              </NavLink>
+            </li>
           </ul>
         </nav>
       </div>
