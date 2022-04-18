@@ -1,20 +1,20 @@
 import http from "./httpService";
 
-const apiUrl = "http://jsonplaceholder.typicode.com";
-const apiEndpoint = apiUrl + "/users";
-
+const apiEndpoint = "http://localhost:8080/user/login";
 export function register(user) {
-  return http.post(apiEndpoint, {
+  return http.post("http://localhost:8080/user/register", {
     email: user.email,
+    verification_code: user.verification,
     password: user.password,
-    name: user.username,
+    username: user.username,
   });
 }
 
 export function login(user) {
-  return http.post(apiEndpoint, {
+  const apiUrl = `http://localhost:8080/user/login`;
+  return http.post(apiUrl, {
     password: user.password,
-    name: user.username,
+    email: user.email,
   });
 }
 

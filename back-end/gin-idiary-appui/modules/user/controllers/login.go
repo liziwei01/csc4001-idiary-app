@@ -18,6 +18,7 @@ func Login(ctx *gin.Context) {
 	success, err := userService.Login(ctx, inputs)
 	if err != nil {
 		response.StdFailed(ctx, err.Error())
+		return
 	}
 
 	if !success {

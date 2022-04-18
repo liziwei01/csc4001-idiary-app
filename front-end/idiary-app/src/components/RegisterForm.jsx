@@ -4,7 +4,7 @@ import InputWithButton from "./common/inputWithButton";
 import InputWithDesc from "./common/inputWithDesc";
 import Button from "./common/button";
 import Input from "./common/input";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 class RegisterForm extends Component {
   state = {
@@ -21,13 +21,22 @@ class RegisterForm extends Component {
       secretproblem: false,
     },
     errors: {},
+    user: null,
   };
   handleSubmit = async (e) => {
     e.preventDefault();
     //server
     const data = { ...this.state.data };
-    delete data.repeatpassword;
-    await userService.register(data);
+    const response = await userService.register(data);
+    console.log(response.data);
+    const errors = { ...this.state.errors };
+    if (response.data.errmsg != "Success") {
+      errors.email = "Email has be registered!";
+      this.setState({ errors });
+      return;
+    }
+    this.setState({ user: true });
+    localStorage.setItem("token", this.state.data.email);
   };
   validate = () => {
     const { data } = this.state;
@@ -116,7 +125,8 @@ class RegisterForm extends Component {
     const response = await userService.send_email(this.state.data);
     console.log(response);
     const errors = { ...this.state.errors };
-    if (response.data.errmsg != "Success") errors.email = response.data.data;
+    if (response.data.errmsg != "Success")
+      errors.email = "The email has received within 60s!";
     this.setState({ errors });
   };
 
@@ -124,6 +134,7 @@ class RegisterForm extends Component {
     const { data, errors } = this.state;
     return (
       <section class="signup sign">
+        {this.state.user && <Navigate to="/idiary" replace="true" />}
         <div class="container">
           <div class="signup-content">
             <div class="signup-form">
@@ -163,7 +174,7 @@ class RegisterForm extends Component {
                   errors={errors.username}
                   text="Must be 6-20 characters long."
                   label="fa fa-user"
-                  placeholder="username"
+                  placeholder="nickname"
                 />
                 <InputWithDesc
                   onChange={this.handleChange}
@@ -178,7 +189,7 @@ class RegisterForm extends Component {
                 <InputWithDesc
                   onChange={this.handleChange}
                   value={data.repeatpassword}
-                  type="repeatpassword"
+                  type="password"
                   id="repeatpassword"
                   errors={errors.repeatpassword}
                   text="Please repeat your password."

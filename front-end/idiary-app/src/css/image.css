@@ -1,0 +1,14 @@
+.box {
+    display: flex;
+    width: 820px;
+    /* border: 1px solid skyblue; */
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.aa {
+    width: calc(33.33%-10px);
+    height: calc(33.33%-2px);
+    margin: 1px;
+    border: 1px solid pink;
+}

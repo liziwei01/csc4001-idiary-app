@@ -17,6 +17,7 @@ func Register(ctx context.Context, pars userModel.RegisterPars) error {
 
 	mapSliceInsertData := []map[string]interface{}{}
 	mapSliceInsertData = append(mapSliceInsertData, map[string]interface{}{
+		"email":    pars.Email,
 		"password": pars.Password,
 		"nickname": pars.Username,
 	})
