@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 15:20:51
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-18 01:33:39
+ * @LastEditTime: 2022-04-18 20:40:01
  * @Description: README
 -->
 # gin-idiary-appui
@@ -403,6 +403,28 @@ eg
         "followers": [1, 2, 3],
         "count":     3
     },
+    "errno": 0,
+    "errmsg": "Success"
+}
+```
+
+post: /user/modifyProfile
+
+change a user's profile
+
+|postParams|comment|require|
+| --------- | --------- | --------- |
+|user_id|int|yes|
+|user_profile|string|yes|
+
+
+|returnParams|comment|require|
+| --------- | --------- | --------- |
+
+eg
+```bash
+{
+    "data": null,
     "errno": 0,
     "errmsg": "Success"
 }
