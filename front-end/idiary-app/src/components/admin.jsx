@@ -9,27 +9,7 @@ import SearchBox from "./common/searchBox";
 
 class Admin extends Component {
   state = {
-    username: [
-      "aaaaaaaaaaaaaa",
-      "bbbbbbbbbbbb",
-      "cccccccc",
-      "ddddddddd",
-      "eeeeeeeee",
-    ],
-    email: [
-      "aaaaaaaaaaaaaa",
-      "bbbbbbbbbbbb",
-      "cccccccc",
-      "ddddddddd",
-      "eeeeeeeee",
-    ],
-    password: [
-      "aaaaaaaaaaaaaa",
-      "bbbbbbbbbbbb",
-      "cccccccc",
-      "ddddddddd",
-      "eeeeeeeee",
-    ],
+    users: [],
     resetuser: "",
     resetpassword: "",
     currentPage: 1,
@@ -39,10 +19,14 @@ class Admin extends Component {
   async componentDidMount() {
     const user = localStorage.getItem("token");
     const response = await userService.getallinfo(user);
-    console.log(response.data);
+    const data = response.data.data;
+    let users = [];
+    data.map((item) => users.push(item));
+
+    this.setState({ users });
   }
   handleReset = (user) => {
-    this.setState({ resetuser: user });
+    this.setState({ resetuser: user.email });
   };
 
   handlePageChange = (page) => {
@@ -57,22 +41,21 @@ class Admin extends Component {
     this.setState({ resetpassword: input.value });
   };
 
-  handleClick = () => {
+  handleClick = async () => {
     console.log(this.state.resetpassword);
+    let data = { email: "", password: "" };
+    data.email = this.state.resetuser;
+    data.password = this.state.resetpassword;
+    const response = await userService.resetpassword(data);
   };
 
   getPagedData = () => {
-    const {
-      pageSize,
-      currentPage,
-      searchQuery,
-      username: allUsers,
-    } = this.state;
+    const { pageSize, currentPage, searchQuery, users: allUsers } = this.state;
 
     let filtered = allUsers;
     if (searchQuery)
       filtered = allUsers.filter((m) =>
-        m.toLowerCase().startsWith(searchQuery.toLowerCase())
+        m.email.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
 
     const users = paginate(filtered, currentPage, pageSize);
@@ -80,7 +63,7 @@ class Admin extends Component {
     return { totalCount: filtered.length, data: users };
   };
   render() {
-    const { length: count } = this.state.username;
+    const { length: count } = this.state.users;
     const { pageSize, currentPage, searchQuery, resetpassword, resetuser } =
       this.state;
     const { user } = this.props;

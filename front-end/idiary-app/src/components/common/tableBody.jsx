@@ -5,7 +5,7 @@ class TableBody extends Component {
   renderCell = (item, column) => {
     if (column.content) return column.content(item);
 
-    return item;
+    return _.get(item, column.path);
   };
   createKey = (item, column) => {
     return item + (column.path || column.key);

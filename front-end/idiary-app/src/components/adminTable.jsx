@@ -4,8 +4,12 @@ import Table from "./common/table";
 class AdminTable extends Component {
   columns = [
     {
-      path: "username",
-      label: "Username",
+      path: "user_id",
+      label: "User_id",
+    },
+    {
+      path: "nickname",
+      label: "Nickname",
     },
     { path: "email", label: "Email" },
     { path: "password", label: "Password" },
