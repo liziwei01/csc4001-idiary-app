@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-18 17:31:21
+ * @LastEditTime: 2022-04-18 21:40:33
  * @Description: file content
  */
 package services
@@ -100,13 +100,13 @@ func AllDiary(ctx context.Context, pars diaryModel.DiaryListRequestPars) ([]diar
 		newDiary.UserProfile = v.UserProfile
 		newDiary.VoteCount = v.VoteCount
 
-		if existedDiary[k].ImageList != "" {
+		if existedDiary[k].ImageList != "" && existedDiary[k].ImageList != "[]" && existedDiary[k].ImageList != "\"\"" {
 			imgList := make([]string, 0)
 			err = json.Unmarshal([]byte(existedDiary[k].ImageList), &imgList)
 			if err != nil {
 				return nil, 0, err
 			}
-			
+
 			for idx, imageName := range imgList {
 				imgList[idx], err = uploadData.GetImageURL(ctx, imageName)
 				if err != nil {

@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-18 17:31:18
+ * @LastEditTime: 2022-04-18 21:40:28
  * @Description: file content
  */
 package services
@@ -123,7 +123,7 @@ func FriendDiary(ctx context.Context, pars diaryModel.FriendDiaryListRequestPars
 		newDiary.UserProfile = v.UserProfile
 		newDiary.VoteCount = v.VoteCount
 
-		if existedDiary[k].ImageList != "" {
+		if existedDiary[k].ImageList != "" && existedDiary[k].ImageList != "[]" && existedDiary[k].ImageList != "\"\"" {
 			imgList := make([]string, 0)
 			err = json.Unmarshal([]byte(existedDiary[k].ImageList), &imgList)
 			if err != nil {
