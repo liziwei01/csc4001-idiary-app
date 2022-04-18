@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 10:45:14
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 23:04:02
+ * @LastEditTime: 2022-04-18 17:09:15
  * @Description: file content
  */
 package services
@@ -65,6 +65,13 @@ func AllDiary(ctx context.Context, pars diaryModel.DiaryListRequestPars) ([]diar
 		existedDiary[k].UserProfile, err = uploadData.GetImageURL(ctx, v.UserProfile)
 		if err != nil {
 			return nil, 0, err
+		}
+
+		for _, comment := range v.CommentList {
+			comment.Profile, err = uploadData.GetImageURL(ctx, comment.Profile)
+			if err != nil {
+				return nil, 0, err
+			}
 		}
 	}
 
