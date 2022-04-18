@@ -26,15 +26,9 @@ class Landing extends Component {
             <a class="navbar-brand text-uppercase" href="index-1.html">
               <img
                 class="logo-light"
-                src={require("./img/logo-light.png")}
+                src={require("./img/logo.png")}
                 alt=""
-                height="25"
-              />
-              <img
-                class="logo-dark"
-                src={require("./img/logo-dark.png")}
-                alt=""
-                height="25"
+                height="50"
               />
             </a>
 
@@ -96,12 +90,12 @@ class Landing extends Component {
                   <div class="home-heading">
                     <h1 class="mb-3 text-white">
                       We're Anxiety Perfect Solution For{" "}
-                      <span class="text-warning">Oxhen</span>
+                      <span class="text-warning">Diaries</span>
                     </h1>
                   </div>
                   <p class="fs-20">
-                    Explore and learn more about everything from machine
-                    learning and global payments to scaling your team.
+                    Explore and learn more about everything to write your diary
+                    online and share with more people.
                   </p>
                   <div class="home-btn hstack gap-2 flex-column d-sm-block">
                     <a
@@ -176,11 +170,8 @@ class Landing extends Component {
               <div class="row justify-content-center">
                 <div class="col-lg-7">
                   <div class="text-center mb-4">
-                    <h2 class="heading">Template Features</h2>
-                    <p class="text-muted fs-17">
-                      Ut enim ad minima veniam quis nostrum exercitationem ullam
-                      corporis suscipit laboriosam nisi commodi consequatur.
-                    </p>
+                    <h2 class="heading">Our Features</h2>
+                    <p class="text-muted fs-17">Idiary is a world view</p>
                   </div>
                 </div>
               </div>
@@ -193,10 +184,10 @@ class Landing extends Component {
                       </div>
                       <div class="flex-grow-1 ms-2">
                         <div class="content">
-                          <h5 class="title">Fully Responsive</h5>
+                          <h5 class="title">Private Diary</h5>
                           <p class="text-muted">
-                            One disadvantage of Lorum Ipsum is that in certain
-                            letters which is said more than.
+                            Always write with words or pictures, and don't miss
+                            any moment.
                           </p>
                           <a href="javascipt:void(0)" class="text-dark">
                             Read More <i class="mdi mdi-chevron-right"></i>
@@ -210,10 +201,11 @@ class Landing extends Component {
                   <div class="feature-card p-3 py-sm-4 rounded">
                     <i class="mdi mdi-layers-triple-outline text-primary float-start me-3 h2"></i>
                     <div class="content d-block overflow-hidden">
-                      <h5 class="title">Fresh Layouts</h5>
+                      <h5 class="title">Personal Homepage</h5>
                       <p class="text-muted mt-2">
-                        The most well-known dummy text is the 'Lorem', which
-                        well-known is said which is said.
+                        Social network, a hundred questions and answers about
+                        yourself, and all the information is organized in one
+                        place.
                       </p>
                       <a href="javascipt:void(0)" class="text-dark">
                         Read More <i class="mdi mdi-chevron-right"></i>
@@ -226,10 +218,10 @@ class Landing extends Component {
                     <div class="feature-card p-3 py-sm-4 rounded">
                       <i class="mdi mdi-clipboard-flow-outline text-primary float-start me-3 h2"></i>
                       <div class="content d-block overflow-hidden">
-                        <h5 class="title">Modern Workflow</h5>
+                        <h5 class="title">Explore the World</h5>
                         <p class="text-muted mt-2">
-                          Moreover, in Latin only words at the beginning of
-                          sentences which is said are capitalized.
+                          Match similar friends through Q and A, or explore more
+                          on the world channel.
                         </p>
                         <a href="javascipt:void(0)" class="text-dark">
                           Read More <i class="mdi mdi-chevron-right"></i>
@@ -253,24 +245,28 @@ class Landing extends Component {
                 </div>
                 <div class="col-lg-5">
                   <div data-aos="fade-left" data-aos-duration="1800">
-                    <h3 class="feature-heading mb-2">Marketing</h3>
+                    <h3 class="feature-heading mb-2">
+                      Privacy is our #1 Concern
+                    </h3>
                     <p class="text-muted">
-                      Now that we've aligned the details, it's time to get
-                      things mapped out and organized. Now that we've aligned
-                      the details.{" "}
+                      Even when carefully kept, paper journals can be read by
+                      anyone who happens upon them. Penzu keeps your journals
+                      safe with double password protection and military strength
+                      encryption so you can rest easy knowing that your entries
+                      are secure in the Idiary.
                     </p>
                     <ul class="feature-list">
                       <li>
                         <i class="mdi mdi-checkbox-marked-circle-outline text-primary"></i>
-                        Advertising for a trade magazine
+                        100% Private
                       </li>
                       <li>
                         <i class="mdi mdi-checkbox-marked-circle-outline text-primary"></i>
-                        Designing marketing materials{" "}
+                        Available Everywhere
                       </li>
                       <li>
                         <i class="mdi mdi-checkbox-marked-circle-outline text-primary"></i>
-                        Update website content
+                        Never Forget to Write
                       </li>
                     </ul>
                     <a class="btn btn-primary" href="avascipt:void(0)">
@@ -282,10 +278,13 @@ class Landing extends Component {
               <div class="row align-items-center justify-content-between">
                 <div class="col-lg-6">
                   <div data-aos="fade-right" data-aos-duration="1800">
-                    <h3 class="feature-heading">We aim to help busy peoples</h3>
+                    <h3 class="feature-heading">What are you writing for?</h3>
                     <p class="text-muted">
-                      Lorem text is also used to demonstrate the appearance of
-                      different typefaces and layouts.
+                      IDiary is your private network. Here, we record our life
+                      and exchange opinions, without paying attention to other
+                      people's eyes and catering to other people's interests. In
+                      the complicated world, iDiary will build a new world for
+                      you.
                     </p>
                     <div class="accordion" id="accordionExample">
                       <div class="accordion-item">
@@ -298,7 +297,7 @@ class Landing extends Component {
                             aria-controls="collapseOne"
                           >
                             <div>
-                              <p class="mb-0">Flexible access to facilities.</p>
+                              <p class="mb-0">Fully Customizable Diary</p>
                               <p class="mb-0 fs-13 text-muted">
                                 Our new key fobs make it so easy!
                               </p>
@@ -313,10 +312,8 @@ class Landing extends Component {
                         >
                           <div class="accordion-body">
                             <p class="fs-14 text-muted mb-1">
-                              Lorem text is also used to demonstrate the
-                              appearance of different typefaces and layouts, and
-                              in general the content of dummy text is
-                              nonsensical.
+                              Make each journal your own with custom covers,
+                              backgrounds, and fonts.
                             </p>
                             <a href="javascript:void(0)">
                               Check it out <i class="mdi mdi-arrow-right"></i>
@@ -334,9 +331,7 @@ class Landing extends Component {
                             aria-controls="collapseTwo"
                           >
                             <div>
-                              <p class="mb-0">
-                                Snacks, drinks, coffee, and more.
-                              </p>
+                              <p class="mb-0">Smart Journal Search</p>
                               <p class="mb-0 fs-13 text-muted">
                                 Keep your engine going with free food and
                                 drinks.
@@ -352,10 +347,8 @@ class Landing extends Component {
                         >
                           <div class="accordion-body">
                             <p class="fs-14 text-muted mb-0">
-                              Lorem text is also used to demonstrate the
-                              appearance of different typefaces and layouts, and
-                              in general the content of dummy text is
-                              nonsensical.
+                              Quickly and easily search through your journals,
+                              entries, and tags.
                             </p>
                             <a
                               href="javascript:void(0)"
@@ -376,7 +369,7 @@ class Landing extends Component {
                             aria-controls="collapseThree"
                           >
                             <div>
-                              <p class="mb-0">On site tech support</p>
+                              <p class="mb-0">Military Grade Security</p>
                               <p class="mb-0 fs-13 text-muted">
                                 Connectivity, power, and IT issues solved in no
                                 time.
@@ -392,10 +385,8 @@ class Landing extends Component {
                         >
                           <div class="accordion-body">
                             <p class="fs-14 text-muted mb-0">
-                              Lorem text is also used to demonstrate the
-                              appearance of different typefaces and layouts, and
-                              in general the content of dummy text is
-                              nonsensical.
+                              Further protect your diary with military-grade
+                              256-bit AES encryption.
                             </p>
                             <a
                               href="javascript:void(0)"
@@ -431,9 +422,9 @@ class Landing extends Component {
                   <div data-aos="fade-down" data-aos-duration="1800">
                     <h3 class="fw-bold">Stay Connected</h3>
                     <p>
-                      Now that we've aligned the details, it's time to get
-                      things mapped out and organized. Now that we've aligned
-                      the details.
+                      IDiary gives you all the tools you need to focus on the
+                      ideas you want to preserve, rather than the process of
+                      writing itself.
                     </p>
                     <a class="btn btn-primary" href="javascript:void(0)">
                       Learn More
@@ -453,9 +444,7 @@ class Landing extends Component {
                       What they say about us honest reviews
                     </h2>
                     <p class="text-muted fs-17">
-                      Vivamus ac nulla ultrices laoreet neque mollis mi morbi
-                      elementum mauris sit amet arcu fringilla auctor In
-                      eleifend maximus nisi sed vulputate.
+                      Loved by more than 2,000,000 writers, featured on...
                     </p>
                   </div>
                 </div>
@@ -504,9 +493,9 @@ class Landing extends Component {
                                       alt=""
                                     />
                                     <div class="mt-3">
-                                      <h6 class="mb-0">Brandon Carney</h6>
+                                      <h6 class="mb-0">Charlotte</h6>
                                       <p class="text-muted mb-0 fs-14">
-                                        Vice president
+                                        Actress
                                       </p>
                                     </div>
                                   </div>
@@ -524,11 +513,14 @@ class Landing extends Component {
                                   </div>
                                   <div class="flex-grow-1 ms-2 mt-2">
                                     <p class="text-muted fs-14 mt-xl-4">
-                                      Lorem ipsum dolor sit amet, consectetuer
-                                      adipiscing elit. Aenean commodo ligula
-                                      eget dolor. Aenean massa. Cum sociis
-                                      natoque penatibus et magnis dis parturient
-                                      montes.
+                                      Originally, I only had the habit of
+                                      keeping a diary since I was a child.
+                                      Later, I found that the visible range of
+                                      my diary was not set, so everyone can see
+                                      it. Sometimes it's a negative diary, and
+                                      sometimes strangers will encourage
+                                      themselves. I think this software is very
+                                      warm.
                                     </p>
                                   </div>
                                 </div>
@@ -551,9 +543,9 @@ class Landing extends Component {
                                       alt=""
                                     />
                                     <div class="mt-3">
-                                      <h6 class="mb-0">Brandon Carney</h6>
+                                      <h6 class="mb-0">Tom</h6>
                                       <p class="text-muted mb-0 fs-14">
-                                        Vice president
+                                        Programmer
                                       </p>
                                     </div>
                                   </div>
@@ -571,11 +563,12 @@ class Landing extends Component {
                                   </div>
                                   <div class="flex-grow-1 ms-2 mt-2">
                                     <p class="text-muted fs-14 mt-xl-4">
-                                      Lorem ipsum dolor sit amet, consectetuer
-                                      adipiscing elit. Aenean commodo ligula
-                                      eget dolor. Aenean massa. Cum sociis
-                                      natoque penatibus et magnis dis parturient
-                                      montes.
+                                      After using the iDiary for so long, talk
+                                      about my feeling roughly. The first
+                                      impression of iDiary is exquisite. Whether
+                                      it is layout or software interaction,
+                                      every detail reflects the intention of the
+                                      designer.
                                     </p>
                                   </div>
                                 </div>
@@ -598,9 +591,9 @@ class Landing extends Component {
                                       alt=""
                                     />
                                     <div class="mt-3">
-                                      <h6 class="mb-0">Brandon Carney</h6>
+                                      <h6 class="mb-0">Selina</h6>
                                       <p class="text-muted mb-0 fs-14">
-                                        Vice president
+                                        Writter
                                       </p>
                                     </div>
                                   </div>
@@ -618,11 +611,12 @@ class Landing extends Component {
                                   </div>
                                   <div class="flex-grow-1 ms-2 mt-2">
                                     <p class="text-muted fs-14 mt-xl-4">
-                                      Lorem ipsum dolor sit amet, consectetuer
-                                      adipiscing elit. Aenean commodo ligula
-                                      eget dolor. Aenean massa. Cum sociis
-                                      natoque penatibus et magnis dis parturient
-                                      montes.
+                                      The most attractive part of iDiary is the
+                                      variety of diary recorders. A group of
+                                      emotional and loving people. In this field
+                                      where no one knows anyone, they expose
+                                      their hearts and pry into each other's
+                                      privacy.
                                     </p>
                                   </div>
                                 </div>
@@ -641,10 +635,8 @@ class Landing extends Component {
           <section class="section cta">
             <marquee behavior="" direction="left">
               <p class="mb-0">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book.
+                Penzu gives you all the tools you need to focus on the ideas you
+                want to preserve, rather than the process of writing itself.
               </p>
             </marquee>
             <div class="container">
@@ -662,9 +654,8 @@ class Landing extends Component {
                       !
                     </div>
                     <p>
-                      Now that we've aligned the details, it's time to get
-                      things mapped out and organized. Now that we've aligned
-                      the details.
+                      Take your journal wherever you go with our apps for
+                      iPhone, iPad, and Android phones and tablets.
                     </p>
                     <p class="fs-18">
                       Limited signup only. Order today before the discount
@@ -729,8 +720,8 @@ class Landing extends Component {
                       </div>
                     </div>
                     <div class="team-card-text-2">
-                      <h5 class="fw-bold mb-0">Bao Pan</h5>
-                      <p class="mb-0 fs-13 text-muted">Back End Developer</p>
+                      <h5 class="fw-bold mb-0">Zhang Yiwei</h5>
+                      <p class="mb-0 fs-13 text-muted">Front End Developer</p>
                     </div>
                   </div>
                 </div>
@@ -768,7 +759,7 @@ class Landing extends Component {
                       </div>
                     </div>
                     <div class="team-card-text-2">
-                      <h5 class="fw-bold mb-0">Ines Durr</h5>
+                      <h5 class="fw-bold mb-0">Yi Kerui</h5>
                       <p class="mb-0 fs-13 text-muted">Front End Developer</p>
                     </div>
                   </div>
@@ -807,8 +798,8 @@ class Landing extends Component {
                       </div>
                     </div>
                     <div class="team-card-text-2">
-                      <h5 class="fw-bold mb-0">Stephan Vogt</h5>
-                      <p class="mb-0 fs-13 text-muted">Bid Manager</p>
+                      <h5 class="fw-bold mb-0">Li Ziwei</h5>
+                      <p class="mb-0 fs-13 text-muted">Back End Developer</p>
                     </div>
                   </div>
                 </div>
@@ -846,8 +837,8 @@ class Landing extends Component {
                       </div>
                     </div>
                     <div class="team-card-text-2">
-                      <h5 class="fw-bold mb-0">Cong Chia</h5>
-                      <p class="mb-0 fs-13 text-muted">Team Lead</p>
+                      <h5 class="fw-bold mb-0">Wu Kexin</h5>
+                      <p class="mb-0 fs-13 text-muted">Back End Developer</p>
                     </div>
                   </div>
                 </div>
@@ -860,11 +851,7 @@ class Landing extends Component {
               <div class="row justify-content-center">
                 <div class="col-lg-6 col-sm-10 text-center">
                   <a href="javascript:void(0)">
-                    <img
-                      src={require("./img/logo-light.png")}
-                      height="24"
-                      alt=""
-                    />
+                    <img src={require("./img/logo.png")} height="50" alt="" />
                   </a>
                   <p class="mx-auto mt-sm-4">
                     Obviously I'm a Web Designer. Experienced with all stages of
@@ -947,7 +934,7 @@ class Landing extends Component {
                   <div class="text-center">
                     <p class="mb-0 text-white fs-15">
                       ©<script>document.write(new Date().getFullYear())</script>{" "}
-                      Oxhen. Design by
+                      Idiary. Design by
                       <i class="mdi mdi-heart text-danger"></i> Themesdesign
                     </p>
                   </div>
