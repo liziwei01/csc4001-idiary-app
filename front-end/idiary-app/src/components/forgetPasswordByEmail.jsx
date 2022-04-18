@@ -44,8 +44,12 @@ class ForgetPasswordByEmail extends Component {
     }
   };
   handleClicked = async () => {
-    console.log("send");
     const response = await userService.send_email(this.state.data);
+    console.log(response);
+    const errors = { ...this.state.errors };
+    if (response.data.errmsg != "Success")
+      errors.email = "The email has received within 60s!";
+    this.setState({ errors });
   };
   render() {
     const { data, errors } = this.state;

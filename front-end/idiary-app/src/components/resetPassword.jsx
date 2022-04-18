@@ -2,14 +2,23 @@ import React, { Component } from "react";
 import InputWithDesc from "./common/inputWithDesc";
 import Button from "./common/button";
 import * as userService from "./../service/userService";
+import auth from "./../service/authService";
 
 class ResetPassword extends Component {
-  state = { data: { password: "", repeatpassword: "" }, errors: {} };
+  state = { data: { password: "", repeatpassword: "", email: "" }, errors: {} };
+  componentDidMount() {
+    const user = auth.getCurrentUser();
+    const data = { ...this.state.data };
+    data.email = user;
+    this.setState({ data });
+  }
   handleSubmit = async (e) => {
     e.preventDefault();
     //server
     const data = { ...this.state.data };
-    await userService.login(data);
+    const response = await userService.resetpassword(data);
+    console.log(response.data);
+    
   };
   validate = () => {
     const { data } = this.state;

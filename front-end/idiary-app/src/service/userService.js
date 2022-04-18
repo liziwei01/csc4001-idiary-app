@@ -32,3 +32,10 @@ export function send_problem(user) {
     answer3: user.answer3,
   });
 }
+
+export function resetpassword(user) {
+  return http.post("http://localhost:8080/user/modifyPassword", {
+    email: user.email,
+    new_password: user.password,
+  });
+}
