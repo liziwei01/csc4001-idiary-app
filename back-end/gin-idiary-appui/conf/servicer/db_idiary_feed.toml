@@ -19,7 +19,7 @@ Port = 3306
 # mysql组件配置
 [MySQL]
 Username = "root"
-Password = "wkx2000shxf"
+Password = ""
 DBName = "db_idiary_feed"
 DBDriver = "mysql"
 Charset = "utf8"
