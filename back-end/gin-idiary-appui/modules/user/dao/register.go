@@ -1,10 +1,3 @@
-/*
- * @Author: liziwei01
- * @Date: 2022-04-12 10:45:14
- * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 14:20:47
- * @Description: file content
- */
 package dao
 
 import (

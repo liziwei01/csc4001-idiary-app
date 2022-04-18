@@ -1,10 +1,3 @@
-/*
- * @Author: liziwei01
- * @Date: 2022-04-12 14:24:06
- * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-17 14:21:06
- * @Description: file content
- */
 package data
 
 import (

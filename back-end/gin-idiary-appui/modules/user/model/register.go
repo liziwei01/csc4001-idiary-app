@@ -1,10 +1,3 @@
-/*
- * @Author: liziwei01
- * @Date: 2022-04-12 14:24:06
- * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 20:28:21
- * @Description: file content
- */
 package model
 
 type RegisterPars struct {

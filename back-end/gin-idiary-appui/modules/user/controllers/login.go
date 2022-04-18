@@ -1,10 +1,3 @@
-/*
- * @Author: liziwei01
- * @Date: 2022-04-12 14:24:06
- * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 21:21:24
- * @Description: file content
- */
 package controllers
 
 import (
@@ -32,7 +25,7 @@ func Login(ctx *gin.Context) {
 		return
 	}
 
-	jwtToken, err := jwtoken.GenToken(inputs.UserID)
+	jwtToken, err := jwtoken.GenToken(inputs.Email)
 	if err != nil {
 		response.StdFailed(ctx, err.Error())
 		return

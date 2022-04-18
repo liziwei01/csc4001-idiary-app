@@ -32,7 +32,7 @@ func GetPassword(ctx context.Context, pars userModel.LoginPars) (string, error) 
 	tableName := USER_PRIVATE_INFO_TABLE
 
 	where := map[string]interface{}{
-		"user_id": pars.UserID,
+		"email": pars.Email,
 	}
 
 	columns := []string{"password"}
