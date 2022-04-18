@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-17 14:12:20
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-18 21:48:41
+ * @LastEditTime: 2022-04-18 21:58:21
  * @Description: file content
  */
 /*
@@ -58,10 +58,6 @@ func GetAllUserInfo(ctx context.Context) ([]infoModel.UserInfo, error) {
 	infos, err := infoDao.GetAllUserInfo(ctx)
 	if err != nil {
 		return nil, err
-	}
-
-	if len(infos) != 1 {
-		return nil, fmt.Errorf("invalid user info len: %v", len(infos))
 	}
 
 	return infos, nil
