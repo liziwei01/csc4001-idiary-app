@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-03 15:20:51
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-18 21:53:27
+ * @LastEditTime: 2022-04-19 21:44:34
  * @Description: README
 -->
 # gin-idiary-appui
@@ -452,6 +452,35 @@ eg
     "errmsg": "Success"
 }
 ```
+
+get: /user/getUserInfo
+
+change a user's profile
+
+|getParams|comment|require|
+| --------- | --------- | --------- |
+|email|string|yes|
+
+
+|returnParams|comment|require|
+| --------- | --------- | --------- |
+|user_id|int|yes|
+|nickname|string|yes|
+|profile|string url|yes|
+
+eg
+```bash
+{
+    "data": {
+        "user_id": 1,
+        "nickname": "liziwei01"
+        "profile": "http://idiary-image.oss-cn-shenzhen.aliyuncs.com/1%2Ffiles%2F48121988-631d-4dc1-9c9b-9ef2964743a6.jpeg?Expires=1650211585&OSSAccessKeyId=LTAI5tFEUnHRu5htgFXyKjz7&Signature=NkVLfqm5oeeaodPD6YUvDe8rGSE%3D",
+    },
+    "errno": 0,
+    "errmsg": "Success"
+}
+```
+
 
 post: /email/verificationCode 
 
