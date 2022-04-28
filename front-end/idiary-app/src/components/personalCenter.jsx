@@ -4,22 +4,31 @@ import { Upload, Button, message, Space } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
 import "../css/personalCenter.css"
+import auth from "../service/authService";
+import * as userService from "../service/userService";
+
 class PersonalCenter extends Component {
   state = {
-      imageUrl:"",
-      image_name:"",
-      loading: false,
+    imageUrl: "",
+    image_name: "",
+    loading: false,
+    user_id: null,
   }
   handleClick = () => {
     localStorage.removeItem("token");
   };
   customRequest = async (obj) => {
+    const user = auth.getCurrentUser();
+    const response = await userService.getinfobyemail(user);
+    const user_id = response.data.data.user_id;
+    this.setState({ user_id });
+
     const { file, onSuccess, onError } = obj;
     const suffix = file.name.split(".").reverse()[0];
     // console.log(file, "==file");
     // console.log(suffix, "===suffix");
     const values = {
-      user_id: 1,
+      user_id: this.state.user_id,
       file,
     };
     const formData = new FormData();
@@ -32,25 +41,25 @@ class PersonalCenter extends Component {
       data: formData,
     }).then((res) => {
       // console.log(res);
-        
-        this.setState({
-            imageUrl: res.data.data.url,
-            image_name: res.data.data.file_name,
-        });
-        onSuccess();
-        
-        
+
+      this.setState({
+        imageUrl: res.data.data.url,
+        image_name: res.data.data.file_name,
+      });
+      onSuccess();
+
+
     });
 
     axios({
-        method: "post",
-        url: `/api/user/modifyProfile`,
-        params: {
-            user_id:1,
-            user_profile: this.state.image_name,
-        },
-    }).then((res) =>{
-        message.success("Success change profile!");
+      method: "post",
+      url: `/api/user/modifyProfile`,
+      params: {
+        user_id: this.state.user_id,
+        user_profile: this.state.image_name,
+      },
+    }).then((res) => {
+      message.success("Success change profile!");
     });
   };
   render() {
@@ -62,7 +71,7 @@ class PersonalCenter extends Component {
       </div>
     );
     return (
-        
+
       <div class="container emp-profile">
         <form method="post">
           <div class="row">
@@ -74,40 +83,27 @@ class PersonalCenter extends Component {
                   <input type="file" name="file" />
                 </div> */}
                 <Upload
-                name="file"
-                // action="www.baidu.com/api/upload/image"
-                // beforeUpload={this.beforeUpload}
-                className="avatar-uploader"
-                customRequest={this.customRequest}
-                // listType="picture-card"
-                showUploadList={false}
+                  name="file"
+                  // action="www.baidu.com/api/upload/image"
+                  // beforeUpload={this.beforeUpload}
+                  className="avatar-uploader"
+                  customRequest={this.customRequest}
+                  // listType="picture-card"
+                  showUploadList={false}
                 // accept=".jpg.png.jpeg"
                 // onRemove={this.onRemove}
                 // showUploadList={{ showPreviewIcon: false, showDownloadIcon: false }}
-              >
-                {imageUrl ? (
-                  <img
-                    src={imageUrl}
-                    alt="avatar"
-                    style={{ width: 100, height: 100 }}
-                  />
-                ) : null}
-                {!imageUrl? (uploadButton): null}
-              </Upload>
-                <div className="mb-3">
-                  <a href="#" class="set_1_btn Vbtn-1 btn-block mt-6">
-                    <svg>
-                      <rect
-                        x="0"
-                        y="0"
-                        fill="none"
-                        width="100%"
-                        height="100%"
-                      ></rect>
-                    </svg>{" "}
-                    Follow
-                  </a>
-                </div>
+                >
+                  {imageUrl ? (
+                    <img
+                      src={imageUrl}
+                      alt="avatar"
+                      style={{ width: 100, height: 100 }}
+                    />
+                  ) : null}
+                  {!imageUrl ? (uploadButton) : null}
+                </Upload>
+
               </div>
             </div>
             <div class="col-md-6">
@@ -216,22 +212,7 @@ class PersonalCenter extends Component {
                       <p>kshitighelani@gmail.com</p>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <label>Phone</label>
-                    </div>
-                    <div class="col-md-6">
-                      <p>123 456 7890</p>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <label>Profession</label>
-                    </div>
-                    <div class="col-md-6">
-                      <p>Web Developer and Designer</p>
-                    </div>
-                  </div>
+
                 </div>
                 <div
                   class="tab-pane fade"

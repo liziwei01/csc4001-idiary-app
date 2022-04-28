@@ -3,7 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import axios from "axios";
 import PersonalDiary from "./personalDiary";
 import FriendsDiary from "./friendsDiary";
-
+import auth from "../service/authService";
+import * as userService from "../service/userService";
 import Tab from "./common/tab";
 
 import { Upload, Button, message, Space } from "antd";
@@ -19,7 +20,16 @@ export default class MyDiary extends Component {
     imageUrl: "",
     loading: false,
     image_list: [],
-    str_image_list:""
+    str_image_list: "",
+    user_id: null,
+  };
+  componentDidMount = async () => {
+    const user = auth.getCurrentUser();
+    const response = await userService.getinfobyemail(user);
+    const user_id = response.data.data.user_id;
+    this.setState({ user_id });
+    console.log("personall");
+    console.log(this.state.user_id)
   };
   writeChange = (e) => {
     this.setState({
@@ -27,14 +37,19 @@ export default class MyDiary extends Component {
     });
   };
 
-  write = () => {
+  write = async () => {
     // 拿到后发送给服务端
+    const user = auth.getCurrentUser();
+    const response = await userService.getinfobyemail(user);
+    const user_id = response.data.data.user_id;
+    this.setState({ user_id });
+
     var t = new Date().getTime();
     axios({
       url: "/api/diary/addDiary",
       method: "post",
       params: {
-        user_id: 1,
+        user_id: this.state.user_id,
         content: this.state.writeVal,
         authority: this.state.diary_type,
         image_list: this.state.str_image_list,
@@ -77,23 +92,20 @@ export default class MyDiary extends Component {
       url: `/api/upload/image`,
       data: formData,
     }).then((res) => {
-        //console.log(res.data.data.file_name);
-        
-        this.setState({
-            imageUrl: res.data.data.url,
-            image_list: [...this.state.image_list, res.data.data.file_name,],
-            
-        });
-        this.setState({
-            str_image_list: JSON.stringify(this.state.image_list),
-        })
+      //console.log(res.data.data.file_name);
 
-        //console.log(this.state.image_list);
-        //console.log(this.state.str_image_list);
-        // console.log("341423");
-        onSuccess();
-        
-        
+      this.setState({
+        imageUrl: res.data.data.url,
+        image_list: [...this.state.image_list, res.data.data.file_name],
+      });
+      this.setState({
+        str_image_list: JSON.stringify(this.state.image_list),
+      });
+
+      //console.log(this.state.image_list);
+      //console.log(this.state.str_image_list);
+      // console.log("341423");
+      onSuccess();
     });
   };
 
@@ -128,9 +140,9 @@ export default class MyDiary extends Component {
                 customRequest={this.customRequest}
                 // listType="picture-card"
                 showUploadList={false}
-                // accept=".jpg.png.jpeg"
-                // onRemove={this.onRemove}
-                // showUploadList={{ showPreviewIcon: false, showDownloadIcon: false }}
+              // accept=".jpg.png.jpeg"
+              // onRemove={this.onRemove}
+              // showUploadList={{ showPreviewIcon: false, showDownloadIcon: false }}
               >
                 {imageUrl ? (
                   <img
@@ -150,17 +162,15 @@ export default class MyDiary extends Component {
                 >
                   publish
                 </button>
-               
-                
               </div>
               <div style={{ margin: "10px" }}>
                 <select
                   value={this.state.diary_type}
                   onChange={this.handleChange}
                 >
-                  <option value="Public">Public</option>
-                  <option value="Protected">Protected</option>
-                  <option value="Private">Private</option>
+                  <option value="0">Public</option>
+                  <option value="1">Protected</option>
+                  <option value="2">Private</option>
                 </select>
               </div>
             </div>

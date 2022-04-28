@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-03-21 22:36:04
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 20:44:27
+ * @LastEditTime: 2022-04-24 21:37:52
  * @Description: file content
  */
 package redis
@@ -30,7 +30,7 @@ func (c *client) Get(ctx context.Context, key string) (value string, err error) 
 }
 
 func (c *client) Set(ctx context.Context, key string, value string, expireTime ...time.Duration) error {
-	var exp time.Duration = 0
+	var exp time.Duration = time.Hour
 	db, err := c.connect(ctx)
 	if err != nil {
 		return err

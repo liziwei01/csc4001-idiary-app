@@ -10,5 +10,9 @@ package constant
 const (
 	// db service conf name
 	SERVICE_CONF_DB_IDIARY_FEED = "db_idiary_feed"
+	
 	SERVICE_CONF_DB_IDIARY_USER = "db_idiary_user"
+
+	// redis service conf name
+	SERVICE_CONF_REDIS_IDIARY = "redis_idiary_cache"
 )

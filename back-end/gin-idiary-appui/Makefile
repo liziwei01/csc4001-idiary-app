@@ -5,7 +5,8 @@ OUTDIR  := $(HOMEDIR)/output
 APPNAME := $(shell basename `pwd`)
 OUTPUT_FILE := ${APPNAME}.tar.gz
 
-GOROOT  := /usr/local
+# GOROOT  := /usr/local
+GOROOT  := /home/linuxbrew/.linuxbrew
 GO      := $(GOROOT)/bin/go
 GOPATH  := $(shell $(GO) env GOPATH)
 GOMOD   := $(GO) mod

@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-12 14:00:29
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-16 20:31:35
+ * @LastEditTime: 2022-04-26 00:40:28
  * @Description: file content
  */
 package data
@@ -15,7 +15,7 @@ import (
 )
 
 const (
-	EMAIL_VERIFICATION_CODE_EXPIRE_TIME = 60
+	EMAIL_VERIFICATION_CODE_EXPIRE_TIME = 60 * 5
 )
 
 // 存储验证码

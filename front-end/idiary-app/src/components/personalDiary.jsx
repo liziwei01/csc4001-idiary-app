@@ -9,6 +9,9 @@ import Pagination from "./common/pagination.jsx";
 import _ from "lodash";
 import { paginate } from "../utils/paginate";
 import ListGroup from "./common/listgroup.jsx";
+import auth from "../service/authService";
+import * as userService from "../service/userService";
+
 var dataList = [
   {
     myUrl: onePic,
@@ -175,35 +178,42 @@ var dataList = [
 class personalDiary extends React.Component {
   state = {
     privacy: [
-      { name: "public", _id: 3 },
-      { name: "protected", _id: 2 },
-      { name: "private", _id: 1 },
+      { name: "public", _id: 0 },
+      { name: "protected", _id: 1 },
+      { name: "private", _id: 2 },
     ],
-    list: [ ],
+    list: [],
     currentPage: 1,
     pageSize: 4,
     selectedPrivacy: null,
     sortColumn: { path: "sendTime", order: "asc" },
+    user_id:null,
   };
 
-  componentDidMount() {
-    console.log("personnal Diary===");
+  componentDidMount = async () => {
+    //console.log("personnal Diary===");
+    const user = auth.getCurrentUser();
+    const response = await userService.getinfobyemail(user);
+    const user_id = response.data.data.user_id;
+    this.setState({ user_id });
+
 
     axios({
-        url: "/api/diary/mine",
-        method: "get",
-        params: {
-          user_id: 1,
-        },
-      }).then((res) => {
-        console.log(res);
-        console.log(res.data.data.diaries[0].user_profile);
-        if (res.status === 200) {
-          this.setState({
-            list: (res.data.data && res.data.data.diaries) || [],
-          });
-        }
-      });
+      url: "/api/diary/mine",
+      method: "get",
+      params: {
+        user_id: this.state.user_id,
+      },
+    }).then((res) => {
+      console.log(res);
+      console.log(res.data.data.diaries[0].user_profile);
+      if (res.status === 200) {
+        this.setState({
+          list: (res.data.data && res.data.data.diaries) || [],
+        });
+
+      }
+    });
   }
 
   // 页面加载的钩子
@@ -224,9 +234,9 @@ class personalDiary extends React.Component {
     } = this.state;
 
     let filtered = allDiaries;
-    if (selectedPrivacy && selectedPrivacy._id)
+    if (selectedPrivacy)
       filtered = allDiaries.filter(
-        (m) => m.privacy._id === selectedPrivacy._id
+        (m) => m.authority === selectedPrivacy._id
       );
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
@@ -261,7 +271,7 @@ class personalDiary extends React.Component {
               }}
             />
             <Pagination
-              itemsCount={dataList.length}
+              itemsCount={totalCount}
               pageSize={pageSize}
               currentPage={currentPage}
               onPageChange={this.handlePageChange}

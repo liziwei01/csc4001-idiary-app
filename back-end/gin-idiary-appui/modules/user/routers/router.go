@@ -2,7 +2,7 @@
  * @Author: liziwei01
  * @Date: 2022-04-18 17:27:34
  * @LastEditors: liziwei01
- * @LastEditTime: 2022-04-18 21:51:03
+ * @LastEditTime: 2022-04-24 20:24:26
  * @Description: file content
  */
 package routers
@@ -29,11 +29,14 @@ func Init(router *gin.Engine) {
 		userGroup.POST("/getUserInfo", userControllers.Info)
 		userGroup.GET("/allUsers", userControllers.AllUsers)
 		userGroup.POST("/getAllUserInfo", userControllers.AllInfo)
+
 		followGroup := userGroup.Group("/follow")
 		{
-			followGroup.POST("/follow", followControllers.Follow)
-			followGroup.POST("/followings", followControllers.Followings)
-			followGroup.POST("/followers", followControllers.Followers)
+			followGroup.GET("/followings", followControllers.Followings)
+			followGroup.GET("/followers", followControllers.Followers)
 		}
+
 	}
+
+	router.POST("/api/user/follow/follow", followControllers.Follow)
 }
