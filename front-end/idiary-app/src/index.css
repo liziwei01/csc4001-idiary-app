@@ -50,6 +50,34 @@ code {
   -ms-transition: all 300ms ease 0s;
 }
 
+.commentinput{
+  background-color: #eeeaea;
+  border-bottom: none;
+  border-radius: 15px;
+}
+.commentinput:focus{
+  border-bottom: none;
+  background-color: white;
+  border-radius: 15px;
+  border: 1px solid orange;
+}
+.newdiary{
+  width: 500px; 
+  height: 150px; 
+  padding: 20px; 
+  border-radius: 40px; 
+  background-color: rgb(242, 242, 242); 
+  border: none
+}
+.newdiary:focus{
+  width: 500px; 
+  height: 150px; 
+  padding: 20px; 
+  border-radius: 40px; 
+  background-color: white; 
+  border: 1px solid orange
+}
+
 
 
 

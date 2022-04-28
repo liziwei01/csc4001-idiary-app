@@ -9,7 +9,7 @@ const Pagination = ({ itemsCount, pageSize, currentPage, onPageChange }) => {
 
   return (
     <nav>
-      <ul className="pagination">
+      <ul className="pagination" style={{ marginTop: "0px", width: "200px", marginLeft: "45%" }}>
         {pages.map((page) => (
           <li
             key={page}

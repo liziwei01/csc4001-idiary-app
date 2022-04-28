@@ -4,7 +4,9 @@ import "../css/listWb.css";
 import moment from "moment";
 import auth from "../service/authService";
 import * as userService from "../service/userService";
-
+import axios from "axios";
+import { LikeOutlined, LikeFilled, CommentOutlined } from "@ant-design/icons";
+import { Upload, Button, message, Space } from "antd";
 
 export default class WeiBoList extends Component {
   constructor(props) {
@@ -13,9 +15,20 @@ export default class WeiBoList extends Component {
       inputVal: "",
       transferVal: "",
       writeVal: "",
+      nickname: null,
+      user_id: null,
     };
   }
 
+  componentDidMount = async () => {
+
+    const user = auth.getCurrentUser();
+    const response = await userService.getinfobyemail(user);
+    const user_id = response.data.data.user_id;
+
+    const nickname = response.data.data.nickname;
+    this.setState({ user_id, nickname });
+  }
   /**
    * 渲染顶部View
    */
@@ -26,27 +39,45 @@ export default class WeiBoList extends Component {
           <div className="nameandtime">
             <div style={{ marginright: "10px" }}>
               <img className="nick-img" src={data.user_profile} />
-              <span style={{ marginLeft: "10px" }}>{data.nickname}</span>
+              <span style={{ marginLeft: "10px", fontWeight: "600", fontSize: "16px" }}>{data.nickname}</span>
             </div>
             {/* <div style={{marginLeft:"600px"}}>{data.sendTime}</div> */}
 
-            <div style={{ marginLeft: "500px" }}>
+            <div style={{ marginLeft: "500px", color: "grey" }}>
               {moment(data.db_time * 1000).format("YYYY-MM-DD HH:mm:ss")}
             </div>
           </div>
           <div>
-            <p style={{ marginTop: "10px" }}>{data.content}</p>
+            <p style={{ marginTop: "20px" }}>{data.content}</p>
             <ContentImg contentImgUrls={data.image_list || []} />
           </div>
         </div>
-      </div>
+      </div >
     );
   }
 
   like = (id, number) => {
     const arr = this.props.data.map((ele) => {
+      var vote = ele.has_voted;
       if (ele.diary_id === id) {
-        return { ...ele, vote_number: number + 1 };
+        axios({
+          url: "/api/diary/like",
+          method: "post",
+          params: {
+            user_id: this.state.user_id,
+            diary_id: id,
+            should_unlike: vote,
+          },
+        }).then((res) => {
+
+        });
+        var result;
+        if (vote) {
+          result = number - 1;
+        } else {
+          result = number + 1;
+        }
+        return { ...ele, vote_count: result, has_voted: !vote };
       }
       return { ...ele };
     });
@@ -74,21 +105,23 @@ export default class WeiBoList extends Component {
     this.props.update(arr);
   };
 
-  btnSure = (id, name, number) => {
+  btnSure = (id, number) => {
     // 拿到后发送给服务端
+    var content;
     const arr = this.props.data.map((ele) => {
       if (ele.diary_id === id) {
         if (ele.comment_count === 0) {
-          var commentlist = [{ nickname: name, content: ele.inputValue },];
+          var commentlist = [{ nickname: this.state.nickname, content: ele.inputValue },];
         } else {
           var commentlist = [
             ...ele.comment_list,
             {
-              nickname: name,
+              nickname: this.state.nickname,
               content: ele.inputValue,
             },
           ];
         }
+        content = ele.inputValue;
         return {
           ...ele,
           inputValue: "",
@@ -98,7 +131,18 @@ export default class WeiBoList extends Component {
       }
       return { ...ele };
     });
+
     this.props.update(arr);
+    console.log("listwe", this.state.user_id, id, content, arr);
+    axios({
+      url: "/api/diary/comment",
+      method: "post",
+      params: {
+        user_id: this.state.user_id,
+        diary_id: id,
+        content: content,
+      },
+    }).then((res) => { });
   };
 
   transferdata = (id) => {
@@ -143,23 +187,28 @@ export default class WeiBoList extends Component {
     //自己发送日记
   };
 
-  writeChange = (e) => {
-    this.setState({
-      writeVal: e.target.value,
-    });
-  };
+  handleClick = async (id) => {
+    console.log("id", id)
+    await axios({
+      url: "/api/diary/delete",
+      method: "post",
+      params: {
+        diary_id: id,
+      },
+    }).then((res) => { });
 
-  write = () => {
-    // 拿到后发送给服务端
-  };
+    message.success("Delete one diary!");
+
+  }
 
   render() {
     //渲染列表
+
     return (
       <div className="listRootViewStyle">
         {this.props.data.map((ele, index) => {
           return (
-            <div key={index} style={{ marginTop: 20 }}>
+            <div key={index} style={{ marginTop: 10 }}>
               {this._renderHeadView(ele)}
               <hr className="hrStyle" />
               {/* footer */}
@@ -170,7 +219,7 @@ export default class WeiBoList extends Component {
                     className="liStyle"
                     onClick={() => this.like(ele.diary_id, ele.vote_count)}
                   >
-                    点赞:{ele.vote_count}
+                    {!ele.has_voted ? <LikeOutlined style={{ marginTop: "5px", marginRight: "6px" }} /> : <LikeFilled style={{ marginTop: "5px", marginRight: "6px" }} />}: {ele.vote_count}
                   </li>
 
                   <div className="shuxian"></div>
@@ -180,15 +229,16 @@ export default class WeiBoList extends Component {
                       this.comment(ele.diary_id, ele.comment_count)
                     }
                   >
-                    评论:{ele.comment_count}
+                    <CommentOutlined style={{ marginTop: "5px", marginRight: "6px" }} />comments : {ele.comment_count}
                   </li>
 
                   <div className="shuxian"></div>
                   <li
                     className="liStyle"
-                    onClick={() => this.transferdata(ele.diary_id)}
+                    onClick={() =>
+                      this.handleClick(ele.diary_id)}
                   >
-                    转发:{ele.share_count}
+                    Delete
                   </li>
                 </ul>
 
@@ -212,34 +262,43 @@ export default class WeiBoList extends Component {
                 )}
 
                 {ele.isShowComment && (
-                  <div>
-                    <input
-                      style={{ width: "500px" }}
-                      type="text"
-                      onChange={(e) => this.intChange(e, ele.diary_id)}
-                      value={ele.inputValue}
-                    ></input>
-                    <pre></pre>
-                    <button
-                      onClick={() =>
-                        this.btnSure(
-                          ele.diary_id,
-                          ele.nickName,
-                          ele.comment_count
-                        )
-                      }
-                    >
-                      评论
-                    </button>
+
+                  <div className="row">
+                    <div className="col-auto">
+                      <button
+                        className="btn btn-sm ms-3"
+                        onClick={() =>
+                          this.btnSure(
+                            ele.diary_id,
+                            ele.comment_count
+                          )
+                        }
+                        style={{ backgroundColor: "#ffbb49", color: "white", borderRadius: "8px" }}
+                      >
+                        post
+                      </button>
+                    </div>
+                    <div className="col">
+                      <input
+                        style={{ width: "500px" }}
+                        type="text"
+                        onChange={(e) => this.intChange(e, ele.diary_id)}
+                        value={ele.inputValue}
+                        placeholder="Say something..."
+                        className="commentinput"
+                      ></input>
+                      <pre></pre>
+                    </div>
                   </div>
                 )}
                 {ele.isShowComment &&
-                  !ele.comment_count === 0 &&
+                  !(ele.comment_count === 0) &&
                   ele.comment_list.map((subEle, subIndex) => {
                     return (
-                      <div key={subIndex}>
+                      <div key={subIndex} style={{ backgroundColor: "white", padding: "10px" }}>
                         {subEle.nickname} : {subEle.content}
                       </div>
+
                     );
                   })}
               </div>

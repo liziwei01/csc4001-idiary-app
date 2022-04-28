@@ -51,3 +51,19 @@ export function getinfobyemail(user) {
     email: user,
   });
 }
+
+export function get_follow_count(user_id) {
+  return http.get("http://120.78.134.104:8080/user/follow/followings", {
+    params: {
+      user_id: user_id,
+    },
+  });
+}
+
+export function get_follower_count(user_id) {
+  return http.get("http://120.78.134.104:8080/user/follow/followers", {
+    params: {
+      user_id: user_id,
+    },
+  });
+}

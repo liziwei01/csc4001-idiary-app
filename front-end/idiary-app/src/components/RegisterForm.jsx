@@ -35,13 +35,25 @@ class RegisterForm extends Component {
       this.setState({ errors });
       return;
     }
+    if (response.data.data === "邮箱验证码错误") {
+      errors.verification = "verification code not correnct!";
+      this.setState({ errors });
+      return;
+    }
+    if (response.data.data === "请先验证邮箱") {
+      errors.email = "Please first verify your email!";
+      this.setState({ errors });
+      return;
+    }
     if (response.data.errmsg != "Success") {
       errors.email = "Email has be registered!";
       this.setState({ errors });
       return;
     }
+
     this.setState({ user: true });
     localStorage.setItem("token", this.state.data.email);
+
   };
   validate = () => {
     const { data } = this.state;
@@ -93,8 +105,8 @@ class RegisterForm extends Component {
     }
     if (id === "username") {
       if (value.trim() === "") return "Username is required!";
-      if (value.length < 6 || value.length > 20)
-        return "Your username should between 6 and 20 characters!";
+      if (value.length < 5 || value.length > 20)
+        return "Your username should between 5 and 20 characters!";
     }
     if (id === "answer1" && this.state.data.secretproblem === true) {
       if (value.trim() === "") return "Answer is required!";
@@ -177,7 +189,7 @@ class RegisterForm extends Component {
                   type="text"
                   id="username"
                   errors={errors.username}
-                  text="Must be 6-20 characters long."
+                  text="Must be 5-20 characters long."
                   label="fa fa-user"
                   placeholder="nickname"
                 />

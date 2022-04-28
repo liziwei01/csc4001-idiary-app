@@ -178,16 +178,16 @@ var dataList = [
 class personalDiary extends React.Component {
   state = {
     privacy: [
-      { name: "public", _id: 0 },
-      { name: "protected", _id: 1 },
-      { name: "private", _id: 2 },
+      { name: "public", _id: 0, icon: "fa fa-globe me-3" },
+      { name: "friends", _id: 1, icon: "fa fa-share-alt me-3" },
+      { name: "private", _id: 2, icon: "fa fa-user-circle me-3" },
     ],
     list: [],
     currentPage: 1,
     pageSize: 4,
     selectedPrivacy: null,
     sortColumn: { path: "sendTime", order: "asc" },
-    user_id:null,
+    user_id: null,
   };
 
   componentDidMount = async () => {
@@ -256,7 +256,7 @@ class personalDiary extends React.Component {
     return (
       <div>
         <div className="row" style={{ flexWrap: "inherit" }}>
-          <div className="col-3">
+          <div className="col-3" style={{ width: "150px" }}>
             <ListGroup
               items={this.state.privacy}
               selectedItem={this.state.selectedPrivacy}

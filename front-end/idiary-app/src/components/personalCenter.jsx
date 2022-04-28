@@ -13,6 +13,37 @@ class PersonalCenter extends Component {
     image_name: "",
     loading: false,
     user_id: null,
+    user_name: null,
+    email: null,
+    diary_count: null,
+    follow_count: null,
+    follower_count: null
+  }
+  componentDidMount = async () => {
+    const user = auth.getCurrentUser();
+    const response = await userService.getinfobyemail(user);
+    const user_id = response.data.data.user_id;
+    const user_name = response.data.data.nickname;
+    const email = user;
+    const imageUrl = response.data.data.profile;
+    const follow_count = (await userService.get_follow_count(user_id)).data.data.count;
+    const follower_count = (await userService.get_follower_count(user_id)).data.data.count;
+    this.setState({ user_id, user_name, email, imageUrl, follow_count, follower_count });
+
+    await axios({
+      url: "/api/diary/mine",
+      method: "get",
+      params: {
+        user_id: this.state.user_id,
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        this.setState({
+          diary_count: res.data.data.diaries.length
+        });
+
+      }
+    });
   }
   handleClick = () => {
     localStorage.removeItem("token");
@@ -35,7 +66,7 @@ class PersonalCenter extends Component {
     Object.keys(values).forEach((key) => {
       formData.append(key, values[key]);
     });
-    axios({
+    await axios({
       method: "post",
       url: `/api/upload/image`,
       data: formData,
@@ -47,11 +78,13 @@ class PersonalCenter extends Component {
         image_name: res.data.data.file_name,
       });
       onSuccess();
+      console.log(res)
+      console.log(this.state.image_name)
 
 
     });
 
-    axios({
+    await axios({
       method: "post",
       url: `/api/user/modifyProfile`,
       params: {
@@ -60,6 +93,7 @@ class PersonalCenter extends Component {
       },
     }).then((res) => {
       message.success("Success change profile!");
+      console.log(res)
     });
   };
   render() {
@@ -101,21 +135,23 @@ class PersonalCenter extends Component {
                       style={{ width: 100, height: 100 }}
                     />
                   ) : null}
-                  {!imageUrl ? (uploadButton) : null}
+                  {/* {!imageUrl ? (uploadButton) : null} */}
+
+
                 </Upload>
 
               </div>
             </div>
             <div class="col-md-6">
               <div class="profile-head">
-                <h5>Kshiti Ghelani</h5>
+                <h5 class="text-uppercase">{this.state.user_name}</h5>
                 <section class="section about-section gray-bg" id="about">
                   <div class="counter">
                     <div class="row">
                       <div class="col ">
                         <div class="count-data text-center">
                           <h6 class="count h2" data-to="500" data-speed="500">
-                            500
+                            {this.state.diary_count}
                           </h6>
                           <p class="m-0px font-w-600">Diaries</p>
                         </div>
@@ -123,7 +159,7 @@ class PersonalCenter extends Component {
                       <div class="col col-lg-3">
                         <div class="count-data text-center">
                           <h6 class="count h2" data-to="150" data-speed="150">
-                            150
+                            {this.state.follow_count}
                           </h6>
                           <p class="m-0px font-w-600">Follows</p>
                         </div>
@@ -131,7 +167,7 @@ class PersonalCenter extends Component {
                       <div class="col col-lg-3">
                         <div class="count-data text-center">
                           <h6 class="count h2" data-to="850" data-speed="850">
-                            850
+                            {this.state.follower_count}
                           </h6>
                           <p class="m-0px font-w-600">Followers</p>
                         </div>
@@ -150,7 +186,7 @@ class PersonalCenter extends Component {
                       aria-controls="home"
                       aria-selected="true"
                     >
-                      About
+                      User info
                     </a>
                   </li>
                   <li class="nav-item">
@@ -193,7 +229,7 @@ class PersonalCenter extends Component {
                       <label>User Id</label>
                     </div>
                     <div class="col-md-6">
-                      <p>Kshiti123</p>
+                      <p>{this.state.user_id}</p>
                     </div>
                   </div>
                   <div class="row">
@@ -201,7 +237,7 @@ class PersonalCenter extends Component {
                       <label>Name</label>
                     </div>
                     <div class="col-md-6">
-                      <p>Kshiti Ghelani</p>
+                      <p>{this.state.user_name}</p>
                     </div>
                   </div>
                   <div class="row">
@@ -209,7 +245,7 @@ class PersonalCenter extends Component {
                       <label>Email</label>
                     </div>
                     <div class="col-md-6">
-                      <p>kshitighelani@gmail.com</p>
+                      <p>{this.state.email}</p>
                     </div>
                   </div>
 

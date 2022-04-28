@@ -155,9 +155,9 @@ class Landing extends Component {
                     aria-label="Close"
                   ></button>
                 </div>
-                <video id="VisaChipCardVideo" class="video-box" controls="">
+                <video id="VisaChipCardVideo" class="video-box" controls>
                   <source
-                    src="https://www.w3schools.com/html/mov_bbb.mp4"
+                    src={require("./img/video.mp4")}
                     type="video/mp4"
                   />
                 </video>
@@ -921,6 +921,7 @@ class Landing extends Component {
                         </a>
                       </li>
                     </ul>
+                    <a href="http://beian.mit.gov.cn/">粤ICP备2022041871号</a>
                   </div>
                 </div>
               </div>

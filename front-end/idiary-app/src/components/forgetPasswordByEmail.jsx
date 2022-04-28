@@ -12,6 +12,12 @@ class ForgetPasswordByEmail extends Component {
     //server
     const data = { ...this.state.data };
     const errors = { ...this.state.errors };
+    const response = await userService.getinfobyemail(data.email);
+    if (response.data.errmsg != "Success") {
+      errors.email = "Email incorrect!";
+      this.setState({ errors });
+      return;
+    }
     if (data.verification === "1234") {
       errors.verification = "Verification code not correct";
       this.setState({ errors });

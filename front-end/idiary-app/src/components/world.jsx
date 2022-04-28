@@ -6,13 +6,18 @@ import { Button } from "antd";
 import { CheckOutlined } from "@ant-design/icons";
 import auth from "../service/authService";
 import * as userService from "../service/userService";
-
-
+import { LikeOutlined, LikeFilled, CommentOutlined } from "@ant-design/icons";
+import Pagination from "./common/pagination.jsx";
+import _ from "lodash";
+import { paginate } from "../utils/paginate";
 class WorldDiary extends Component {
   state = {
     WorldDiaryList: [],
     user_id: null,
-    user_name: null
+    user_name: null,
+    currentPage: 1,
+    pageSize: 6,
+    sortColumn: { path: "sendTime", order: "asc" },
   };
 
   componentDidMount = async () => {
@@ -45,23 +50,21 @@ class WorldDiary extends Component {
   }
 
   follow = (id) => {
-
-    axios({
-      url: "/api/user/follow/follow",
-      method: "post",
-      params: {
-        user_id: this.state.user_id,
-        following_id: id,
-      },
-    }).then((res) => {
-      console.log("post/follow/follow");
-    });
-
     const arr = this.state.WorldDiaryList.map((ele) => {
       if (ele.user_id === id) {
-        var follow = ele.followed;
-
-        return { ...ele, followed: !follow };
+        var follow = ele.has_followed;
+        axios({
+          url: "/api/user/follow/follow",
+          method: "post",
+          params: {
+            user_id: this.state.user_id,
+            following_id: id,
+            should_unfollow: follow,
+          },
+        }).then((res) => {
+          console.log("post/follow/follow");
+        });
+        return { ...ele, has_followed: !follow };
       }
       return { ...ele };
     });
@@ -72,39 +75,59 @@ class WorldDiary extends Component {
     //console.log(data)
     var follow = "follow";
     return (
-      <div className="item">
+      <div className="item container">
         <div className="topRightView">
           <div className="nameandtime">
             <div style={{ marginright: "10px" }}>
               <img className="nick-img" src={data.user_profile} />
-              <span style={{ marginLeft: "10px" }}>{data.nickname}</span>
+              <span style={{ marginLeft: "10px", fontWeight: "600", fontSize: "16px" }}>{data.nickname}</span>
 
-              <Button
-                style={{ marginLeft: "10px" }}
-                type="primary"
-                onClick={() => this.follow(data.user_id)}
-              >
-                follow
-              </Button>
-              {data.followed && <CheckOutlined />}
+              {!(data.user_id === this.state.user_id) &&
+                <button
+                  className="btn btn-sm ms-3"
+                  type="button"
+                  onClick={() => this.follow(data.user_id)}
+                  style={{ backgroundColor: "red", borderRadius: "15px" }}
+                >
+                  {data.has_followed ? <div> <i class="fa fa-check" style={{ color: "white", display: "inline-block" }}></i><p className="mb-0 ms-3" style={{ color: "white", display: "inline-block" }}>cancel</p></div> : <div><i class="fa fa-heart" aria-hidden="true" style={{ color: "white", display: "inline-block" }}></i><p className="ms-3 mb-0" style={{ color: "white", display: "inline-block" }}>follow</p></div>}
+                </button>}
+
             </div>
             {/* <div style={{marginLeft:"600px"}}>{data.sendTime}</div> */}
-            <div style={{ marginLeft: "600px" }}>
+            <div style={{ flex: 1, textAlign: "right", color: "grey" }}>
               {moment(data.db_time * 1000).format("YYYY-MM-DD HH:mm:ss")}
             </div>
           </div>
           <div>
-            <p style={{ marginTop: "10px" }}>{data.content}</p>
+            <p style={{ marginTop: "20px" }}>{data.content}</p>
             <ContentImg contentImgUrls={data.image_list || []} />
           </div>
         </div>
-      </div>
+      </div >
     );
   }
   like = (id, number) => {
     const arr = this.state.WorldDiaryList.map((ele) => {
+      var vote = ele.has_voted;
       if (ele.diary_id === id) {
-        return { ...ele, vote_count: number + 1 };
+        axios({
+          url: "/api/diary/like",
+          method: "post",
+          params: {
+            user_id: this.state.user_id,
+            diary_id: id,
+            should_unlike: vote,
+          },
+        }).then((res) => {
+
+        });
+        var result;
+        if (vote) {
+          result = number - 1;
+        } else {
+          result = number + 1;
+        }
+        return { ...ele, vote_count: result, has_voted: !vote };
       }
       return { ...ele };
     });
@@ -223,15 +246,36 @@ class WorldDiary extends Component {
       },
     }).then((res) => { });
   };
+  getPagedData = () => {
+    const {
+      pageSize,
+      currentPage,
+      sortColumn,
+      WorldDiaryList: allDiaries,
+    } = this.state;
+
+    let filtered = allDiaries;
+    const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
+
+    const diaries = paginate(sorted, currentPage, pageSize);
+
+    return { totalCount: filtered.length, data: diaries };
+  };
+
+  handlePageChange = (page) => {
+    this.setState({ currentPage: page });
+  };
 
   render() {
     //渲染列表
     const { WorldDiaryList } = this.state;
+    const { pageSize, currentPage } = this.state;
+    const { totalCount, data: diaries } = this.getPagedData();
     return (
       <div className="listRootViewStyle">
-        {WorldDiaryList.map((ele, index) => {
+        {diaries.map((ele, index) => {
           return (
-            <div key={index} style={{ marginTop: 20 }}>
+            <div key={index} style={{ marginTop: 10 }}>
               {this._renderHeadView(ele)}
               <hr className="hrStyle" />
               {/* footer */}
@@ -242,7 +286,7 @@ class WorldDiary extends Component {
                     className="liStyle"
                     onClick={() => this.like(ele.diary_id, ele.vote_count)}
                   >
-                    点赞:{ele.vote_count}
+                    {!ele.has_voted ? <LikeOutlined style={{ marginTop: "5px", marginRight: "6px" }} /> : <LikeFilled style={{ marginTop: "5px", marginRight: "6px" }} />}: {ele.vote_count}
                   </li>
 
                   <div className="shuxian"></div>
@@ -252,16 +296,9 @@ class WorldDiary extends Component {
                       this.comment(ele.diary_id, ele.comment_count)
                     }
                   >
-                    评论:{ele.comment_count}
+                    <CommentOutlined style={{ marginTop: "5px", marginRight: "6px" }} />comments : {ele.comment_count}
                   </li>
 
-                  <div className="shuxian"></div>
-                  <li
-                    className="liStyle"
-                    onClick={() => this.transferdata(ele.diary_id)}
-                  >
-                    转发:{ele.share_count}
-                  </li>
                 </ul>
 
                 {ele.isTransfer && (
@@ -284,32 +321,41 @@ class WorldDiary extends Component {
                 )}
 
                 {ele.isShowComment && (
-                  <div>
-                    <input
-                      style={{ width: "500px" }}
-                      type="text"
-                      onChange={(e) => this.intChange(e, ele.diary_id)}
-                      value={ele.inputValue}
-                    ></input>
+                  <div className="row">
+                    <div className="col-auto">
+                      <button
+                        className="btn btn-sm ms-3"
+                        onClick={() =>
+                          this.btnSure(
+                            ele.diary_id,
+                            ele.nickname,
+                            ele.comment_count
+                          )
+                        }
+                        style={{ backgroundColor: "#ffbb49", color: "white", borderRadius: "8px" }}
+                      >
+                        post
+                      </button>
+                    </div>
+                    <div className="col">
+                      <input
+                        style={{ width: "500px" }}
+                        type="text"
+                        onChange={(e) => this.intChange(e, ele.diary_id)}
+                        value={ele.inputValue}
+                        placeholder="Say something..."
+                        className="commentinput"
+                      ></input>
+                    </div>
                     <pre></pre>
-                    <button
-                      onClick={() =>
-                        this.btnSure(
-                          ele.diary_id,
-                          ele.nickname,
-                          ele.comment_count
-                        )
-                      }
-                    >
-                      评论
-                    </button>
+
                   </div>
                 )}
                 {ele.isShowComment &&
                   !(ele.comment_count === 0) &&
                   ele.comment_list.map((subEle, subIndex) => {
                     return (
-                      <div key={subIndex}>
+                      <div key={subIndex} style={{ backgroundColor: "white", padding: "10px" }}>
                         {subEle.nickname} : {subEle.content}
                       </div>
                     );
@@ -318,6 +364,12 @@ class WorldDiary extends Component {
             </div>
           );
         })}
+        <Pagination
+          itemsCount={totalCount}
+          pageSize={pageSize}
+          currentPage={currentPage}
+          onPageChange={this.handlePageChange}
+        />
       </div>
     );
   }

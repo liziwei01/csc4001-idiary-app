@@ -13,7 +13,7 @@ class Admin extends Component {
     resetuser: "",
     resetpassword: "",
     currentPage: 1,
-    pageSize: 4,
+    pageSize: 8,
     searchQuery: "",
   };
   async componentDidMount() {
@@ -51,10 +51,11 @@ class Admin extends Component {
 
   getPagedData = () => {
     const { pageSize, currentPage, searchQuery, users: allUsers } = this.state;
-
-    let filtered = allUsers;
+    const Users = allUsers.filter((m) =>
+      m.user_id > 8);
+    let filtered = Users;
     if (searchQuery)
-      filtered = allUsers.filter((m) =>
+      filtered = Users.filter((m) =>
         m.email.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
 

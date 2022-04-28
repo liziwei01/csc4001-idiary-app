@@ -2,22 +2,20 @@ import React from "react";
 
 const ListGroup = ({
   items,
-  textProperty,
-  valueProperty,
   selectedItem,
   onItemSelect,
 }) => {
   return (
-    <ul className="list-group">
+    <ul className="list-group" style={{ borderRadius: "20px", marginTop: "20px" }}>
       {items.map((item) => (
         <li
           onClick={() => onItemSelect(item)}
-          key={item[valueProperty]}
+          key={item._id}
           className={
-            item === selectedItem ? "list-group-item active" : "list-group-item"
+            item === selectedItem ? "list-group-item active clickable" : "list-group-item clickable"
           }
         >
-          {item[textProperty]}
+          <i class={item.icon} aria-hidden="true"></i>{item.name}
         </li>
       ))}
     </ul>

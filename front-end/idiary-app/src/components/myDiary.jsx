@@ -27,7 +27,8 @@ export default class MyDiary extends Component {
     const user = auth.getCurrentUser();
     const response = await userService.getinfobyemail(user);
     const user_id = response.data.data.user_id;
-    this.setState({ user_id });
+    const nickname = response.data.data.nickname;
+    this.setState({ user_id, nickname });
     console.log("personall");
     console.log(this.state.user_id)
   };
@@ -80,7 +81,7 @@ export default class MyDiary extends Component {
     // console.log(file, "==file");
     // console.log(suffix, "===suffix");
     const values = {
-      user_id: 1,
+      user_id: this.state.user_id,
       file,
     };
     const formData = new FormData();
@@ -116,22 +117,23 @@ export default class MyDiary extends Component {
   render() {
     const { imageUrl, loading } = this.state;
     const uploadButton = (
-      <div>
-        {loading ? <LoadingOutlined /> : <PlusOutlined />}
-        <div style={{ marginTop: 8 }}>Upload</div>
+      <div className="ms-3">
+        {loading ? <LoadingOutlined /> : <PlusOutlined style={{ color: "orange" }} />}
+        <div style={{ marginTop: 8, color: "orange" }}>Upload Image</div>
       </div>
     );
     return (
       <React.Fragment>
         <div className="wrap">
           <div className="says" onClick={this.all}>
-            <h4>write a new diary</h4>
+            <h4 style={{ color: "orange" }}>Write a new diary...</h4>
             <div style={{ display: "flex" }}>
               <textarea
-                style={{ width: "500px", height: "150px" }}
+                style={{}}
                 type="text"
                 onChange={this.writeChange}
                 value={this.state.writeVal}
+                className="newdiary"
               />
               <Upload
                 name="file"
@@ -157,19 +159,22 @@ export default class MyDiary extends Component {
             <div style={{ display: "flex" }}>
               <div>
                 <button
+                  className="btn btn-sm"
                   onClick={() => this.write()}
-                  style={{ marginTop: "10px" }}
+                  style={{ backgroundColor: "#FF8C00", color: "white", borderRadius: "8px", marginTop: "10px" }}
                 >
                   publish
                 </button>
               </div>
               <div style={{ margin: "10px" }}>
                 <select
+                  className="clickable"
                   value={this.state.diary_type}
                   onChange={this.handleChange}
+                  style={{ borderRadius: "10px", backgroundColor: "grey", textAlign: "center", border: "none", marginTop: "4px", color: "white" }}
                 >
                   <option value="0">Public</option>
-                  <option value="1">Protected</option>
+                  <option value="1">Friends</option>
                   <option value="2">Private</option>
                 </select>
               </div>

@@ -10,5 +10,5 @@
     width: calc(33.33%-10px);
     height: calc(33.33%-2px);
     margin: 1px;
-    border: 1px solid pink;
+    /* border: 1px solid pink; */
 }

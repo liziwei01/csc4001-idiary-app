@@ -73,7 +73,7 @@ class LoginForm extends Component {
               </figure>
             </div>
             <div className="signin-form">
-              <h2 class="form-title">Sign up</h2>
+              <h2 class="form-title">Sign in</h2>
               <form
                 onSubmit={this.handleSubmit}
                 method="POST"
